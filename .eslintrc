@@ -1,0 +1,95 @@
+{
+  "root": true,
+  "env": {
+    "node": true,
+    "browser": true
+  },
+  "extends": [
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "eslint:recommended",
+    "standard"
+  ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "rules": {
+    "arrow-parens": [
+      "error",
+      "as-needed"
+    ],
+    "curly": [
+      "error",
+      "multi-line"
+    ],
+    "no-console": [
+      "error",
+      {
+        "allow": [
+          "warn",
+          "error"
+        ]
+      }
+    ],
+    "no-restricted-globals": [
+      "error",
+      {
+        "name": "event",
+        "message": "Listener function's event parameter is missing."
+      }
+    ],
+    "padded-blocks": "off",
+    "semi": [
+      "error",
+      "always"
+    ],
+    "space-before-function-paren": [
+      "error",
+      {
+        "anonymous": "always",
+        "named": "never",
+        "asyncArrow": "always"
+      }
+    ],
+    "react/jsx-filename-extension": [
+      "error"
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/*.jsx"
+      ],
+      "rules": {
+        "react/prop-types": "off",
+        "react/jsx-curly-brace-presence": [
+          "error",
+          "never"
+        ],
+        "react/self-closing-comp": [
+          "error",
+          {
+            "html": false,
+            "component": true
+          }
+        ],
+        "react/style-prop-object": [
+          "error"
+        ],
+        "react/no-this-in-sfc": [
+          "error"
+        ]
+      }
+    },
+    {
+      "files": [
+        "**/*.html"
+      ],
+      "plugins": [
+        "eslint-plugin-html"
+      ]
+    }
+  ]
+}

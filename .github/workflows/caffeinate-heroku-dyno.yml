@@ -1,0 +1,14 @@
+name: Caffeinate Heroku Dyno on a CRON schedule
+
+on:
+  schedule:
+    - cron: '*/30 0-02,15-23 * * MON-FRI'
+jobs:
+  ping:
+    name: Ping Dyno
+    env:
+      DYNO_URL: ${{ secrets.DYNO_URL }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: cURL Request
+        run: ([ -z "$DYNO_URL" ] || curl -fsSL "$DYNO_URL")
