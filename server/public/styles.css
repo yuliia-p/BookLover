@@ -1,0 +1,64 @@
+body {
+  font-family: Merriweather, serif;
+  font-style: normal;
+}
+
+.header {
+  background-color: rgba(17, 17, 24, 1);
+  color: white;
+  padding: 0.8rem 0.5rem;
+}
+
+img {
+  width: 40%;
+}
+
+ul {
+  padding: 0 1rem;
+}
+
+.content-holder {
+  margin-left: 0.8rem;
+}
+
+.header-lover {
+  font-weight: 100;
+}
+
+.margin-top {
+  margin: 0.5rem 0 0;
+}
+
+.number-of-weeks {
+  color: rgba(118, 120, 119, 1);
+  font-size: 0.75rem;
+  margin: 0;
+  font-weight: bold;
+}
+
+.title {
+  font-size: 1rem;
+  text-decoration: underline;
+  margin: 0;
+}
+
+.author {
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-top: 0.3rem;
+}
+
+.description {
+  font-size: 0.8rem;
+  text-align: justify;
+}
+
+@media screen and (min-width: 768px) {
+  img {
+    width: 30%;
+  }
+
+  .description {
+    padding-right: 5rem;
+  }
+}
