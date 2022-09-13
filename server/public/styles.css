@@ -22,11 +22,11 @@ ul {
 }
 
 .header-lover {
-  font-weight: lighter;
+  font-weight: 100;
 }
 
 .margin-top {
-  margin: 0.5rem 0;
+  margin: 0.5rem 0 0;
 }
 
 .number-of-weeks {
@@ -43,11 +43,13 @@ ul {
 }
 
 .author {
-  font-size: 0.875rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-top: 0.3rem;
 }
 
 .description {
-  font-size: 0.8125rem;
+  font-size: 0.8rem;
   text-align: justify;
 }
 
