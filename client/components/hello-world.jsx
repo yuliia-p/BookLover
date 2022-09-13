@@ -10,7 +10,7 @@ export default class HelloWorld extends React.Component {
   }
 
   componentDidMount() {
-    const url = 'https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=oN0z6slOegD5zjvuGpGHt1uNGJS1uEGE';
+    const url = `https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=${process.env.BOOKS_API_KEY}`;
     const request = {
       method: 'GET',
       headers: {
@@ -20,8 +20,6 @@ export default class HelloWorld extends React.Component {
     fetch(url, request)
       .then(response => response.json())
       .then(data =>
-      // console.log('data.results.books', data.results.books)
-
         this.setState({
           books: data.results.books
         })
