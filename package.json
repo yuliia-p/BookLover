@@ -7,7 +7,6 @@
   "scripts": {
     "build": "NODE_ENV=production node .",
     "dev": "NODE_ENV=development nodemon .",
-    "build": "NODE_ENV=production webpack",
     "db:import": "sh database/import.sh",
     "prepare": "husky install"
   },

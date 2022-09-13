@@ -1,7 +1,7 @@
 import React from 'react';
 import BookList from '../components/books-list';
 
-export default class HelloWorld extends React.Component {
+export default class TopSellers extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
