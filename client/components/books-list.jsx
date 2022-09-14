@@ -21,7 +21,7 @@ export default function BookList(props) {
       {
 
         props.books.map(book => {
-          return <Book key={book.title} book={book} />; // changed isbn to title
+          return <Book key={book.title} book={book} />;
         })
       }
     </ul>

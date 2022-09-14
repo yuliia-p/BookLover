@@ -1,5 +1,4 @@
 import React from 'react';
-// import Home from './pages/home';
 import Navbar from './components/Navbar';
 import BookList from './components/books-list';
 
@@ -60,7 +59,6 @@ export default class App extends React.Component {
         <div className='container'>
           <BookList books={this.state.books} />
         </div>
-        {/* <Home />; */}
       </>
     );
   }

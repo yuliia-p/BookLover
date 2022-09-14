@@ -52,7 +52,7 @@ export default class Navbar extends React.Component {
     const classToShow = this.state.isClicked ? 'show' : 'hidden';
     return (
       <>
-        <div className='header'>
+        <div className='header position-sticky'>
           <h2 className='header-lover-h2'>BOOK<span className='header-lover'>LOVER</span></h2>
           <div className='dropdown-list-holder'>
             <a onClick={this.getCategories} className='dropdown' data-view='on'>NYT Best Sellers<span className='span-category'>{categoryToShow}</span></a>

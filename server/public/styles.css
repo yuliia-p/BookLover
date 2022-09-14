@@ -100,6 +100,12 @@ select {
   line-height: inherit;
 }
 
+.position-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
 @media screen and (min-width: 768px) {
   img {
     width: 30%;
@@ -116,5 +122,9 @@ select {
   .dropdown-list-holder {
     flex-basis: 70%;
     padding: 1.5rem 0 0;
+  }
+
+  .position-sticky {
+    position: static;
   }
 }
