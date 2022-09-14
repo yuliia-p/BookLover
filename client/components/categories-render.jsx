@@ -11,6 +11,6 @@ export default function MenuItems(props) {
 
 function Category(props) {
   return (
-    <option value={props.category.display_name}>{props.category.display_name}</option>
+      <option value={props.category.display_name}>{props.category.display_name}</option>
   );
 }

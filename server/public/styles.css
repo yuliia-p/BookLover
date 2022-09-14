@@ -95,7 +95,7 @@ select {
   margin: 0;
   width: 100%;
   font-family: inherit;
-  font-size: inherit;
+  font-size: smaller;
   cursor: inherit;
   line-height: inherit;
 }
@@ -114,7 +114,7 @@ select {
   }
 
   .dropdown-list-holder {
-    flex-basis: 20%;
+    flex-basis: 70%;
     padding: 1.5rem 0 0;
   }
 }
