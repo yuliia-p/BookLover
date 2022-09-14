@@ -7,7 +7,7 @@ export default class Navbar extends React.Component {
     this.state = {
       categories: [],
       isClicked: false,
-      categoryToShow: 'Hardcover Fiction'
+      categoryToShow: null
     };
     this.getCategories = this.getCategories.bind(this);
     this.handleChange = this.handleChange.bind(this);
