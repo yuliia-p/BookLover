@@ -15,16 +15,15 @@ function Book(props) {
   );
 }
 
-function BookList(props) {
+export default function BookList(props) {
   return (
     <ul>
       {
+
         props.books.map(book => {
-          return <Book key={book.isbns[0].isbn10} book={book} />; // ???
+          return <Book key={book.title} book={book} />; // changed isbn to title
         })
       }
     </ul>
   );
 }
-
-export default BookList;
