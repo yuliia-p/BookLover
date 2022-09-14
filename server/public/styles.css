@@ -23,6 +23,7 @@ h2 {
 
 .content-holder {
   margin-left: 0.8rem;
+  position: relative;
 }
 
 .header-lover {
@@ -30,7 +31,7 @@ h2 {
 }
 
 .margin-top {
-  margin: 0.5rem 0 0;
+  margin: 0.8rem 0 0;
 }
 
 .number-of-weeks {
@@ -41,6 +42,8 @@ h2 {
 }
 
 .title {
+  font-weight: bold;
+  cursor: pointer;
   font-size: 1rem;
   text-decoration: underline;
   margin: 0;
@@ -106,13 +109,35 @@ select {
   z-index: 10;
 }
 
+.more-details {
+  cursor: pointer;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
 @media screen and (min-width: 768px) {
   img {
-    width: 30%;
+    width: 40%;
+  }
+
+  .title {
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
+
+  .author {
+    font-size: 1rem;
+    font-weight: 600;
   }
 
   .description {
+    font-size: 1rem;
     padding-right: 2rem;
+  }
+
+  .number-of-weeks {
+    font-size: 1rem;
   }
 
   .header-lover-h2 {
@@ -126,5 +151,9 @@ select {
 
   .position-sticky {
     position: static;
+  }
+
+  .more-details {
+    padding-right: 2rem;
   }
 }
