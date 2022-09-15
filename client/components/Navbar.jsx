@@ -23,7 +23,7 @@ export default class Navbar extends React.Component {
     });
   }
 
-  getCategories() {
+  componentDidMount() {
     const url = `https://api.nytimes.com/svc/books/v3/lists/names.json?api-key=${process.env.BOOKS_API_KEY}`;
     const request = {
       method: 'GET',
@@ -44,6 +44,13 @@ export default class Navbar extends React.Component {
       });
   }
 
+  getCategories() {
+    this.setState({
+      categories: this.state.categories,
+      isClicked: !this.state.isClicked
+    });
+  }
+
   render() {
     let categoryToShow;
     if (this.state.categoryToShow) {
@@ -54,8 +61,11 @@ export default class Navbar extends React.Component {
       <>
         <div className='header position-sticky'>
           <h2 className='header-lover-h2'>BOOK<span className='header-lover'>LOVER</span></h2>
-          <div className='dropdown-list-holder'>
-            <a onClick={this.getCategories} className='dropdown' data-view='on'>NYT Best Sellers<span className='span-category'>{categoryToShow}</span></a>
+          <div className='dropdown-list-holder flex'>
+            <a href='#'
+              onClick={this.getCategories}
+            className='dropdown' data-view='on'>NYT Best Sellers<span className='span-category'>{categoryToShow}</span>
+            </a>
             <div className="dropdown-content">
               <select onChange={this.handleChange} className={classToShow} name="category-names" id="category">NYT Best Sellers
                 <optgroup>

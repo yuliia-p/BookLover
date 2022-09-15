@@ -2,8 +2,17 @@
   display: flex;
 }
 
+.content-holder {
+  flex-basis: 65%;
+}
+
+img {
+  flex-basis: 35%;
+}
+
 @media screen and (min-width: 768px) {
-  .header {
+  .header,
+  div.full-description {
     display: flex;
   }
 
@@ -20,7 +29,19 @@
     flex-wrap: wrap;
   }
 
-  li {
+  .a-book {
     flex-basis: 50%;
+  }
+
+  .content-holder {
+    flex-basis: 60%;
+  }
+
+  img {
+    flex-basis: 40%;
+  }
+
+  div.container.full-description {
+    padding: 3rem 10rem;
   }
 }
