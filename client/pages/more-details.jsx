@@ -19,11 +19,12 @@ export default class MoreDetails extends React.Component {
     };
     fetch(url, request)
       .then(response => response.json())
+      // keep an eye on data from google
       .then(data => {
         this.setState({
           book: data.items[0].volumeInfo
         });
-
+        // console.log('data FIRST object', data.items[0]);
       })
       .catch(error => {
         console.error('Error:', error);
