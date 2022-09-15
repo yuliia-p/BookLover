@@ -55,7 +55,9 @@ export default class Navbar extends React.Component {
         <div className='header position-sticky'>
           <h2 className='header-lover-h2'>BOOK<span className='header-lover'>LOVER</span></h2>
           <div className='dropdown-list-holder'>
-            <a onClick={this.getCategories} className='dropdown' data-view='on'>NYT Best Sellers<span className='span-category'>{categoryToShow}</span></a>
+            <a href='#'
+            onClick={this.getCategories}
+            className='dropdown' data-view='on'>NYT Best Sellers<span className='span-category'>{categoryToShow}</span></a>
             <div className="dropdown-content">
               <select onChange={this.handleChange} className={classToShow} name="category-names" id="category">NYT Best Sellers
                 <optgroup>

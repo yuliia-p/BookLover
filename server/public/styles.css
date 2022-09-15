@@ -3,6 +3,11 @@ body {
   font-style: normal;
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
+
 .header {
   background-color: rgba(17, 17, 24, 1);
   color: white;
@@ -30,6 +35,10 @@ h2 {
   font-weight: 100;
 }
 
+.no-margin {
+  margin: 0;
+}
+
 .margin-top {
   margin: 0.8rem 0 0;
 }
@@ -49,15 +58,29 @@ h2 {
   margin: 0;
 }
 
-.author {
+div.rating {
+  font-size: 1.4rem;
+}
+
+.rating {
   font-size: 0.8rem;
+}
+
+.author {
+  font-size: 0.9rem;
   font-weight: 600;
   margin-top: 0.3rem;
 }
 
-.description {
+.description,
+.genres,
+.genre-name {
   font-size: 0.8rem;
   text-align: justify;
+}
+
+.genres {
+  font-weight: 600;
 }
 
 .hidden {
@@ -71,6 +94,7 @@ h2 {
 .dropdown {
   font-weight: 100;
   cursor: pointer;
+  color: white;
 }
 
 .dropdown-content {
@@ -109,11 +133,26 @@ select {
   z-index: 10;
 }
 
-.more-details {
+.more-details-p {
+  font-weight: 600;
   cursor: pointer;
   position: absolute;
   bottom: 0;
   right: 0;
+}
+
+div.full-description {
+  text-align: center;
+  padding: 1rem;
+}
+
+.more-details-img {
+  width: 80%;
+}
+
+.title-more-details {
+  text-decoration: underline;
+  font-size: 1.7rem;
 }
 
 @media screen and (min-width: 768px) {
@@ -132,7 +171,7 @@ select {
   }
 
   .description {
-    font-size: 1rem;
+    font-size: 0.8rem;
     padding-right: 2rem;
   }
 
@@ -155,5 +194,17 @@ select {
 
   .more-details {
     padding-right: 2rem;
+  }
+
+  div.full-description {
+    text-align: inherit;
+  }
+
+  .content-holder-more-details {
+    margin-left: 2rem;
+  }
+
+  .no-padding {
+    padding: 0;
   }
 }

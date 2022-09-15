@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from './components/Navbar';
 import BookList from './components/books-list';
 import parseRoute from './lib/parse-route';
+import MoreDetails from '../client/pages/more-details';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -36,6 +37,7 @@ export default class App extends React.Component {
         route: parseRoute(window.location.hash)
       });
     });
+
   }
 
   getList(category) {
@@ -59,36 +61,29 @@ export default class App extends React.Component {
       });
   }
 
-  // getMoreDetails(title) {
-  //   const searchTitle = title.toLowercase().split(' ').join('+');
-  //   // toLowercase and ' ' to +
-  //   const url = `https://api.nytimes.com/svc/books/v3/lists/current/${searchTitle}.json?api-key=${process.env.GOOGLE_BOOKS_API_KEY}`;
-  //   const request = {
-  //     method: 'GET',
-  //     headers: {
-  //       Accept: 'application/json'
-  //     }
-  //   };
-  //   fetch(url, request)
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       this.setState({
-  //         books: data.results.books,
-  //         isClicked: !this.state.isClicked
-  //       });
-  //     })
-  //     .catch(error => {
-  //       console.error('Error:', error);
-  //     });
-  // }
+  renderPage() {
+    const { route } = this.state;
+    if (route.path === '') {
+      return (
+        <div className='container'>
+          <BookList books={this.state.books} />
+        </div>
+      );
+    }
+    if (route.path === 'details') {
+      const isbn = route.params.get('isbn');
+      const imgageUrl = route.params.get('imageurl');
+      const numberWeeks = route.params.get('n');
+      return <MoreDetails isbn={isbn} url={imgageUrl} number={numberWeeks}/>;
+    }
+  }
 
   render() {
     return (
       <>
         <Navbar onClick={this.getList}/>
-        <div className='container'>
-          <BookList books={this.state.books} />
-        </div>
+        {this.renderPage()}
+
       </>
     );
   }
