@@ -3,9 +3,8 @@ import React from 'react';
 function Book(props) {
   const imgageUrl = props.book.book_image;
   const numberWeeks = props.book.weeks_on_list;
-  if (props.book.isbns[0]) {
-    const isbn = props.book.isbns[0].isbn10;
-    return (
+  const isbn = props.book.isbns[0].isbn10;
+  return (
       <a
         href={`#details?isbn=${isbn}&imageurl=${imgageUrl}&n=${numberWeeks}`}
       className='flex margin-top a-book'>
@@ -20,11 +19,7 @@ function Book(props) {
           </div>
         </li>
       </a>
-
-    );
-  } else {
-    delete props.book.isbns[0];
-  }
+  );
 }
 
 export default function BookList(props) {
