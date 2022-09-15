@@ -59,7 +59,7 @@ h2 {
 }
 
 div.rating {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
 }
 
 .rating {
@@ -99,12 +99,6 @@ div.rating {
 
 .dropdown-content {
   position: absolute;
-  background-color: rgba(17, 17, 24, 1);
-}
-
-.category-names {
-  border-bottom-color: rgba(255, 255, 255, 0.25);
-  border-bottom-style: solid;
 }
 
 .span-category {
@@ -114,15 +108,10 @@ div.rating {
 }
 
 select {
-  appearance: none;
-  background-color: transparent;
-  color: white;
   border: none;
   padding: 0 1em 0 0;
   margin: 0;
-  width: 100%;
   font-family: inherit;
-  font-size: smaller;
   cursor: inherit;
   line-height: inherit;
 }
@@ -134,7 +123,7 @@ select {
 }
 
 .more-details-p {
-  font-weight: 600;
+  font-weight: 400;
   cursor: pointer;
   position: absolute;
   bottom: 0;
@@ -152,7 +141,13 @@ div.full-description {
 
 .title-more-details {
   text-decoration: underline;
-  font-size: 1.7rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+i {
+  margin: 0 0.3rem;
 }
 
 @media screen and (min-width: 768px) {
@@ -206,5 +201,14 @@ div.full-description {
 
   .no-padding {
     padding: 0;
+  }
+
+  i {
+    margin: 0 0.1rem;
+  }
+
+  div.rating {
+    display: flex;
+    align-items: center;
   }
 }

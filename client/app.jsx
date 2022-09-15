@@ -15,7 +15,7 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    const url = `https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=${process.env.BOOKS_API_KEY}`;
+    const url = `https://api.nytimes.com/svc/books/v3/lists/current/combined-print-and-e-book-fiction.json?api-key=${process.env.BOOKS_API_KEY}`;
     const request = {
       method: 'GET',
       headers: {
