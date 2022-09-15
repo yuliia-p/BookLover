@@ -31,11 +31,9 @@ export default function BookList(props) {
   return (
     <ul>
       {
-        props.books.map(book => {
-          return (
-            <Book key={book.title} book={book} />
-          );
-        })
+        props.books
+          .filter(book => book.isbns.length > 0)
+          .map(book => <Book key={book.title} book={book} />)
       }
     </ul>
   );
