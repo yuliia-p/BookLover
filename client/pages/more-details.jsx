@@ -24,7 +24,6 @@ export default class MoreDetails extends React.Component {
         this.setState({
           book: data.items[0].volumeInfo
         });
-        // console.log('data FIRST object', data.items[0]);
       })
       .catch(error => {
         console.error('Error:', error);
