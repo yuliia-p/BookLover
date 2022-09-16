@@ -91,7 +91,7 @@ export default class App extends React.Component {
         <>
           <Navbar onClick={this.getList} onAuthClick={showAuthModal} />
           {this.renderPage()}
-          {this.state.showLogin && <AuthModal />}
+        {this.state.showLogin && <AuthModal onAuthClick={showAuthModal}/>}
         </>
     );
   }

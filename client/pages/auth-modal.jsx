@@ -6,7 +6,7 @@ export default class AuthModal extends React.Component {
     return (
       <>
       <div className='modal'>
-          <AuthForm />
+          <AuthForm onAuthClick={this.props.onAuthClick}/>
       </div>
       </>
     );

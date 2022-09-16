@@ -73,9 +73,7 @@ export default class Navbar extends React.Component {
               </select>
             </div>
           </div>
-          <a href='#sign-up'>
             <i onClick={this.props.onAuthClick} className="fa-solid fa-circle-user"></i>
-          </a>
         </div>
       </>
     );
