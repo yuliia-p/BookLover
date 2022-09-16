@@ -35,8 +35,7 @@ export default class Navbar extends React.Component {
       .then(response => response.json())
       .then(data => {
         this.setState({
-          categories: data.results,
-          isClicked: !this.state.isClicked
+          categories: data.results
         });
       })
       .catch(error => {
@@ -66,14 +65,17 @@ export default class Navbar extends React.Component {
               onClick={this.getCategories}
             className='dropdown' data-view='on'>NYT Best Sellers<span className='span-category'>{categoryToShow}</span>
             </a>
-            <div className="dropdown-content">
-              <select onChange={this.handleChange} className={classToShow} name="category-names" id="category">NYT Best Sellers
+            <div className='dropdown-content'>
+              <select onChange={this.handleChange} className={classToShow}>
                 <optgroup>
                   <MenuItems categories={this.state.categories} />
                 </optgroup>
               </select>
             </div>
           </div>
+          <a href='#sign-up'>
+            <i onClick={this.props.onAuthClick} className="fa-solid fa-circle-user"></i>
+          </a>
         </div>
       </>
     );
