@@ -3,15 +3,18 @@ import Navbar from './components/Navbar';
 import BookList from './components/books-list';
 import parseRoute from './lib/parse-route';
 import MoreDetails from '../client/pages/more-details';
+import AuthModal from './pages/auth-modal';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       books: [],
-      route: parseRoute(window.location.hash)
+      route: parseRoute(window.location.hash),
+      showLogin: false
     };
     this.getList = this.getList.bind(this);
+    this.showAuthModal = this.showAuthModal.bind(this);
   }
 
   componentDidMount() {
@@ -37,7 +40,6 @@ export default class App extends React.Component {
         route: parseRoute(window.location.hash)
       });
     });
-
   }
 
   getList(category) {
@@ -61,12 +63,16 @@ export default class App extends React.Component {
       });
   }
 
+  showAuthModal() {
+    this.setState({ showLogin: !this.state.showLogin });
+  }
+
   renderPage() {
-    const { route } = this.state;
+    const { route, books } = this.state;
     if (route.path === '') {
       return (
         <div className='container'>
-          <BookList books={this.state.books} />
+          <BookList books={books} />
         </div>
       );
     }
@@ -79,13 +85,14 @@ export default class App extends React.Component {
   }
 
   render() {
-    return (
-      <>
-        <Navbar onClick={this.getList}/>
-        {this.renderPage()}
 
-      </>
+    const { showAuthModal } = this;
+    return (
+        <>
+          <Navbar onClick={this.getList} onAuthClick={showAuthModal} />
+          {this.renderPage()}
+          {this.state.showLogin && <AuthModal onAuthClick={showAuthModal}/>}
+        </>
     );
   }
-
 }

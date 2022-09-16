@@ -35,8 +35,7 @@ export default class Navbar extends React.Component {
       .then(response => response.json())
       .then(data => {
         this.setState({
-          categories: data.results,
-          isClicked: !this.state.isClicked
+          categories: data.results
         });
       })
       .catch(error => {
@@ -64,16 +63,15 @@ export default class Navbar extends React.Component {
           <div className='dropdown-list-holder flex'>
             <a href='#'
               onClick={this.getCategories}
-            className='dropdown' data-view='on'>NYT Best Sellers<span className='span-category'>{categoryToShow}</span>
+            className='dropdown'>NYT Best Sellers<span className='span-category'>{categoryToShow}</span>
             </a>
-            <div className="dropdown-content">
-              <select onChange={this.handleChange} className={classToShow} name="category-names" id="category">NYT Best Sellers
-                <optgroup>
-                  <MenuItems categories={this.state.categories} />
-                </optgroup>
+            <div className='dropdown-content'>
+              <select onChange={this.handleChange} className={classToShow}>
+                <MenuItems categories={this.state.categories} />
               </select>
             </div>
           </div>
+            <i onClick={this.props.onAuthClick} className="fa-solid fa-circle-user"></i>
         </div>
       </>
     );
