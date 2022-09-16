@@ -34,7 +34,6 @@ export default class AuthForm extends React.Component {
 
   render() {
     return (
-      <>
         <form onSubmit={this.handleSubmit}>
         <div className="auth-modal-content">
             <i onClick={this.props.onAuthClick} className="fa-solid fa-xmark"></i>
@@ -56,7 +55,6 @@ export default class AuthForm extends React.Component {
               </div>
           </div>
         </form>
-      </>
     );
   }
 }
