@@ -40,7 +40,6 @@ export default class App extends React.Component {
         route: parseRoute(window.location.hash)
       });
     });
-
   }
 
   getList(category) {
@@ -69,11 +68,11 @@ export default class App extends React.Component {
   }
 
   renderPage() {
-    const { route } = this.state;
+    const { route, books } = this.state;
     if (route.path === '') {
       return (
         <div className='container'>
-          <BookList books={this.state.books} />
+          <BookList books={books} />
         </div>
       );
     }
@@ -86,12 +85,13 @@ export default class App extends React.Component {
   }
 
   render() {
+
     const { showAuthModal } = this;
     return (
         <>
           <Navbar onClick={this.getList} onAuthClick={showAuthModal} />
           {this.renderPage()}
-        {this.state.showLogin && <AuthModal onAuthClick={showAuthModal}/>}
+          {this.state.showLogin && <AuthModal onAuthClick={showAuthModal}/>}
         </>
     );
   }

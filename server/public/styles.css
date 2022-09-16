@@ -290,4 +290,9 @@ input {
     border: none;
     width: 30%;
   }
+
+  .fa-circle-user {
+    margin-right: 2rem;
+    font-size: 2rem;
+  }
 }

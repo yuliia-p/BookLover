@@ -63,13 +63,11 @@ export default class Navbar extends React.Component {
           <div className='dropdown-list-holder flex'>
             <a href='#'
               onClick={this.getCategories}
-            className='dropdown' data-view='on'>NYT Best Sellers<span className='span-category'>{categoryToShow}</span>
+            className='dropdown'>NYT Best Sellers<span className='span-category'>{categoryToShow}</span>
             </a>
             <div className='dropdown-content'>
               <select onChange={this.handleChange} className={classToShow}>
-                <optgroup>
-                  <MenuItems categories={this.state.categories} />
-                </optgroup>
+                <MenuItems categories={this.state.categories} />
               </select>
             </div>
           </div>
