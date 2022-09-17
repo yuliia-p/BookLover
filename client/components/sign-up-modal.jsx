@@ -33,11 +33,12 @@ export default class SignUpModal extends React.Component {
   }
 
   render() {
+    // onChange={this.props.onComplete}
     return (
       <div className='modal'>
         <form className='SING-UP' onSubmit={this.handleSubmit}>
           <div className="auth-modal-content">
-            <i onClick={this.props.onAuthClick} className="fa-solid fa-xmark"></i>
+            <i onClick={this.props.onComplete} className="fa-solid fa-xmark"></i>
             <h1 className='no-margin '>BOOK<span className='header-lover'>LOVER</span></h1>
             <h3 className='sing-up-header'>Sign up</h3>
             <p className='no-margin sing-up-text'>Sign up to see the latest bestsellers and search your favorite authors and books.</p>
@@ -51,7 +52,7 @@ export default class SignUpModal extends React.Component {
             <input onChange={this.handleChange} type="password" placeholder="At least 8 characters" name="password" id="password" required />
 
             <div className="button-holder">
-              <button type="submit" className="auth-button" onClick={this.props.onComplete}>Sign Up</button>
+              <button type="submit" className="auth-button" >Sign Up</button>
               <p className='sing-up-text no-margin'>Already have an account?<a className='log-in-a' data-click="to-sing-in">Logn in</a></p>
             </div>
           </div>

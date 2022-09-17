@@ -8,11 +8,11 @@ export default class SignInModal extends React.Component {
       email: ''
     };
     this.handleChange = this.handleChange.bind(this);
-    this.signIn = this.signIn.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
 
   }
 
-  signIn(event) {
+  handleSubmit(event) {
     event.preventDefault();
     const req = {
       method: 'POST',
@@ -26,6 +26,7 @@ export default class SignInModal extends React.Component {
       .then(result => {
         this.props.onSignIn(result);
       });
+
   }
 
   handleChange(event) {
@@ -34,11 +35,12 @@ export default class SignInModal extends React.Component {
   }
 
   render() {
+    // onClick={this.props.onComplete} on button to hide modal wont work
     return (
       <div className='modal'>
-        <form className='SING-IN' onSubmit={this.signIn}>
+        <form className='SING-IN' onSubmit={this.handleSubmit}>
           <div className="auth-modal-content">
-            <i onClick={this.props.onAuthClick} className="fa-solid fa-xmark"></i>
+            <i onClick={this.props.onComplete} className="fa-solid fa-xmark"></i>
             <h1 className='no-margin '>BOOK<span className='header-lover'>LOVER</span></h1>
             <h3 className='log-in-header'>Log in</h3>
 
@@ -49,8 +51,8 @@ export default class SignInModal extends React.Component {
             <input onChange={this.handleChange} type="password" placeholder="" name="password" id="log-in-password" required />
 
             <div className="button-holder">
-              <button type="submit" className="auth-button" onClick={this.props.onComplete}>Log in</button>
-              <p className='sing-up-text no-margin'>Don&#39;t have an account?<a className='log-in-a' data-click="to-sing-up">Sign Up</a></p>
+              <button type="submit" className="auth-button" >Log in</button>
+              <p className='sing-up-text no-margin'>Don&#39;t have an account?<a onClick={this.props.onSignUp} className='log-in-a' data-click="to-sing-up">Sign Up</a></p>
             </div>
           </div>
         </form>

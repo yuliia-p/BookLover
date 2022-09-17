@@ -196,6 +196,8 @@ div.full-description {
 
 .log-in-a {
   font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 input {
@@ -205,6 +207,7 @@ input {
 }
 
 .auth-button {
+  cursor: pointer;
   font-family: Merriweather, serif;
   font-size: 1rem;
   text-align: center;

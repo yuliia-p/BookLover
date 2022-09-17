@@ -13,8 +13,7 @@ export default class App extends React.Component {
       books: [],
       route: parseRoute(window.location.hash),
       showModal: null,
-      user: null,
-      isOpen: false
+      user: null
     };
     this.getList = this.getList.bind(this);
     this.showhModal = this.showhModal.bind(this);
@@ -43,8 +42,7 @@ export default class App extends React.Component {
       });
     window.addEventListener('hashchange', () => {
       this.setState({
-        route: parseRoute(window.location.hash),
-        showModal: 'signIn'
+        route: parseRoute(window.location.hash)
       });
     });
   }
@@ -71,7 +69,12 @@ export default class App extends React.Component {
   }
 
   showhModal() {
-    this.setState({ isOpen: !this.state.isOpen });
+    const { showModal, user } = this.state;
+    if (showModal === null) {
+      this.setState({ showModal: 'signIn' });
+    } else if (!user) {
+      this.setState({ showModal: 'signUp' });
+    }
   }
 
   hideModal() {
@@ -110,7 +113,7 @@ export default class App extends React.Component {
           <Navbar onClick={this.getList} onAuthClick={showhModal} />
           {this.renderPage()}
           {this.state.showModal === 'signUp' && <SignUpModal onComplete={hideModal} />}
-          {this.state.showModal === 'signIn' && <SignInModal onSignIn={handleSignIn} onComplete={hideModal} />}
+          {this.state.showModal === 'signIn' && <SignInModal onSignIn={handleSignIn} onComplete={hideModal} onSignUp={showhModal}/>}
         </>
     );
   }
