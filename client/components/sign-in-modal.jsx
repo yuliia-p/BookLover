@@ -26,7 +26,7 @@ export default class SignInModal extends React.Component {
       .then(result => {
         this.props.onSignIn(result);
       });
-
+    this.props.onComplete();
   }
 
   handleChange(event) {
@@ -35,7 +35,6 @@ export default class SignInModal extends React.Component {
   }
 
   render() {
-    // onClick={this.props.onComplete} on button to hide modal wont work
     return (
       <div className='modal'>
         <form className='SING-IN' onSubmit={this.handleSubmit}>

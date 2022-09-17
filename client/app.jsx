@@ -69,10 +69,10 @@ export default class App extends React.Component {
   }
 
   showhModal() {
-    const { showModal, user } = this.state;
-    if (showModal === null) {
-      this.setState({ showModal: 'signIn' });
-    } else if (!user) {
+
+    const { showModal } = this.state;
+    this.setState({ showModal: 'signIn' });
+    if (showModal === 'signIn') {
       this.setState({ showModal: 'signUp' });
     }
   }
@@ -112,7 +112,7 @@ export default class App extends React.Component {
         <>
           <Navbar onClick={this.getList} onAuthClick={showhModal} />
           {this.renderPage()}
-          {this.state.showModal === 'signUp' && <SignUpModal onComplete={hideModal} />}
+        {this.state.showModal === 'signUp' && <SignUpModal onComplete={hideModal} onSignIn={showhModal}/>}
           {this.state.showModal === 'signIn' && <SignInModal onSignIn={handleSignIn} onComplete={hideModal} onSignUp={showhModal}/>}
         </>
     );

@@ -30,13 +30,14 @@ export default class SignUpModal extends React.Component {
       .then(res => res.json())
       .then(result => {
       });
+    this.props.onComplete();
+
   }
 
   render() {
-    // onChange={this.props.onComplete}
     return (
       <div className='modal'>
-        <form className='SING-UP' onSubmit={this.handleSubmit}>
+        <form className='SING-UP' onSubmit={this.handleSubmit} >
           <div className="auth-modal-content">
             <i onClick={this.props.onComplete} className="fa-solid fa-xmark"></i>
             <h1 className='no-margin '>BOOK<span className='header-lover'>LOVER</span></h1>
@@ -53,7 +54,7 @@ export default class SignUpModal extends React.Component {
 
             <div className="button-holder">
               <button type="submit" className="auth-button" >Sign Up</button>
-              <p className='sing-up-text no-margin'>Already have an account?<a className='log-in-a' data-click="to-sing-in">Logn in</a></p>
+              <p className='sing-up-text no-margin'>Already have an account?<a onClick={this.props.onSignIn} className='log-in-a' data-click="to-sing-in">Logn in</a></p>
             </div>
           </div>
         </form>
