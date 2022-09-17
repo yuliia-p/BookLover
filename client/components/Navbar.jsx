@@ -1,12 +1,10 @@
 import React from 'react';
-import MenuItems from '../components/categories-render';
 
 export default class Navbar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       categories: [],
-      isClicked: false,
       categoryToShow: null
     };
     this.getCategories = this.getCategories.bind(this);
@@ -19,6 +17,7 @@ export default class Navbar extends React.Component {
     this.props.onClick(encodedName);
     this.setState({
       isClicked: !this.state.isClicked,
+      showModal: false,
       categoryToShow: event.target.value
     });
   }
@@ -76,4 +75,19 @@ export default class Navbar extends React.Component {
       </>
     );
   }
+}
+
+function MenuItems(props) {
+  return (
+    props.categories.map((category, index) => {
+      return <Category key={index} category={category} />;
+    })
+
+  );
+}
+
+function Category(props) {
+  return (
+    <option value={props.category.display_name}>{props.category.display_name}</option>
+  );
 }
