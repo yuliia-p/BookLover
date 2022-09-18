@@ -87,6 +87,10 @@ div.rating {
   display: block;
 }
 
+.header-lover-h2 {
+  margin-top: 0.5rem;
+}
+
 .dropdown {
   font-weight: 100;
   cursor: pointer;
@@ -149,7 +153,7 @@ div.full-description {
 .fa-circle-user {
   position: absolute;
   right: 0.8rem;
-  top: 3.5rem;
+  top: 2.5rem;
   font-size: 2.3rem;
   color: white;
 }
@@ -215,11 +219,29 @@ input {
   background-color: rgba(17, 17, 24, 1);
   padding: 0.6rem 4rem;
   border-radius: 0.9375rem;
+  border: none;
+}
+
+.add-button {
+  cursor: pointer;
+  font-family: Merriweather, serif;
+  font-size: 0.95rem;
+  text-align: center;
+  color: white;
+  background-color: rgba(17, 17, 24, 1);
+  padding: 1rem 1.5rem;
+  border-radius: 1.5rem;
+  border: none;
 }
 
 .button-holder {
   text-align: center;
   margin: 2rem 0 0;
+}
+
+.add-button-holder {
+  text-align: end;
+  margin: 1rem;
 }
 
 .hidden {
@@ -250,13 +272,17 @@ input {
     font-size: 1rem;
   }
 
+  .my-books {
+    flex-basis: 25%;
+  }
+
   .header-lover-h2 {
-    flex-basis: 30%;
+    flex-basis: 25%;
     margin: 1rem 0 0.5rem;
   }
 
   .dropdown-list-holder {
-    flex-basis: 70%;
+    flex-basis: 40%;
     padding: 1.5rem 0 0;
   }
 
@@ -291,7 +317,6 @@ input {
   }
 
   .auth-modal-content {
-    background-color: #fefefe;
     margin: auto;
     padding: 1.1rem;
     border: none;
@@ -299,8 +324,20 @@ input {
   }
 
   .fa-circle-user {
-    margin-right: 2rem;
+    text-align: end;
     font-size: 2rem;
-    position: inherit;
+    position: absolute;
+    top: 1.8rem;
+  }
+
+  .add-button {
+    font-size: 0.8rem;
+    padding: 0.6rem 1.7rem;
+    border-radius: 0.9375rem;
+    border: none;
+  }
+
+  .add-button-holder {
+    margin-right: 10rem;
   }
 }

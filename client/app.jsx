@@ -1,10 +1,12 @@
 import React from 'react';
-import Navbar from './components/Navbar';
+import Navbar from './components/navbar';
 import BookList from './components/books-list';
 import parseRoute from './lib/parse-route';
 import MoreDetails from '../client/pages/more-details';
 import SignUpModal from './components/sign-up-modal';
 import SignInModal from './components/sign-in-modal';
+import jwtDecode from 'jwt-decode';
+import AppContext from './lib/app-context';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -45,6 +47,9 @@ export default class App extends React.Component {
         route: parseRoute(window.location.hash)
       });
     });
+    const token = window.localStorage.getItem('react-context-jwt');
+    const user = token ? jwtDecode(token) : null;
+    this.setState({ user });
   }
 
   getList(category) {
@@ -69,7 +74,6 @@ export default class App extends React.Component {
   }
 
   showhModal() {
-
     const { showModal } = this.state;
     this.setState({ showModal: 'signIn' });
     if (showModal === 'signIn') {
@@ -104,17 +108,22 @@ export default class App extends React.Component {
       const numberWeeks = route.params.get('n');
       return <MoreDetails isbn={isbn} url={imgageUrl} number={numberWeeks}/>;
     }
+    // if (route.path === 'my-books') {
+
+    // }
   }
 
   render() {
     const { showhModal, hideModal, handleSignIn } = this;
+    const { user, route } = this.state;
+    const contextValue = { user, route };
     return (
-        <>
+      <AppContext.Provider value={contextValue}>
           <Navbar onClick={this.getList} onAuthClick={showhModal} />
           {this.renderPage()}
-        {this.state.showModal === 'signUp' && <SignUpModal onComplete={hideModal} onSignIn={showhModal}/>}
+          {this.state.showModal === 'signUp' && <SignUpModal onComplete={hideModal} onSignIn={showhModal}/>}
           {this.state.showModal === 'signIn' && <SignInModal onSignIn={handleSignIn} onComplete={hideModal} onSignUp={showhModal}/>}
-        </>
+      </AppContext.Provider>
     );
   }
 }
