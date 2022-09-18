@@ -42,6 +42,6 @@ img {
   }
 
   div.container.full-description {
-    padding: 3rem 10rem;
+    padding: 3rem 10rem 0;
   }
 }

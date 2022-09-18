@@ -1,12 +1,11 @@
 import React from 'react';
-import MenuItems from '../components/categories-render';
+import AppContext from '../lib/app-context';
 
 export default class Navbar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       categories: [],
-      isClicked: false,
       categoryToShow: null
     };
     this.getCategories = this.getCategories.bind(this);
@@ -19,6 +18,7 @@ export default class Navbar extends React.Component {
     this.props.onClick(encodedName);
     this.setState({
       isClicked: !this.state.isClicked,
+      showModal: false,
       categoryToShow: event.target.value
     });
   }
@@ -51,6 +51,7 @@ export default class Navbar extends React.Component {
   }
 
   render() {
+    const { user } = this.context;
     let categoryToShow;
     if (this.state.categoryToShow) {
       categoryToShow = this.state.categoryToShow;
@@ -60,6 +61,9 @@ export default class Navbar extends React.Component {
       <>
         <div className='header position-sticky'>
           <h2 className='header-lover-h2'>BOOK<span className='header-lover'>LOVER</span></h2>
+          {
+          user !== null && <a className='dropdown my-books' href='#my-books'>My Books</a>
+          }
           <div className='dropdown-list-holder flex'>
             <a href='#'
               onClick={this.getCategories}
@@ -77,3 +81,19 @@ export default class Navbar extends React.Component {
     );
   }
 }
+
+function MenuItems(props) {
+  return (
+    props.categories.map((category, index) => {
+      return <Category key={index} category={category} />;
+    })
+
+  );
+}
+
+function Category(props) {
+  return (
+    <option value={props.category.display_name}>{props.category.display_name}</option>
+  );
+}
+Navbar.contextType = AppContext;

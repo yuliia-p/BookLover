@@ -1,9 +1,12 @@
 import React from 'react';
-import Navbar from './components/Navbar';
+import Navbar from './components/navbar';
 import BookList from './components/books-list';
 import parseRoute from './lib/parse-route';
 import MoreDetails from '../client/pages/more-details';
-import AuthModal from './pages/auth-modal';
+import SignUpModal from './components/sign-up-modal';
+import SignInModal from './components/sign-in-modal';
+import jwtDecode from 'jwt-decode';
+import AppContext from './lib/app-context';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -11,10 +14,14 @@ export default class App extends React.Component {
     this.state = {
       books: [],
       route: parseRoute(window.location.hash),
-      showLogin: false
+      showModal: null,
+      user: null
     };
     this.getList = this.getList.bind(this);
-    this.showAuthModal = this.showAuthModal.bind(this);
+    this.showhModal = this.showhModal.bind(this);
+    this.handleSignIn = this.handleSignIn.bind(this);
+    this.hideModal = this.hideModal.bind(this);
+
   }
 
   componentDidMount() {
@@ -40,6 +47,9 @@ export default class App extends React.Component {
         route: parseRoute(window.location.hash)
       });
     });
+    const token = window.localStorage.getItem('react-context-jwt');
+    const user = token ? jwtDecode(token) : null;
+    this.setState({ user });
   }
 
   getList(category) {
@@ -63,8 +73,24 @@ export default class App extends React.Component {
       });
   }
 
-  showAuthModal() {
-    this.setState({ showLogin: !this.state.showLogin });
+  showhModal() {
+    const { showModal } = this.state;
+    this.setState({ showModal: 'signIn' });
+    if (showModal === 'signIn') {
+      this.setState({ showModal: 'signUp' });
+    }
+  }
+
+  hideModal() {
+    this.setState({ showModal: null });
+  }
+
+  handleSignIn(result) {
+    const { user, token } = result;
+    window.localStorage.setItem('react-context-jwt', token);
+    this.setState({
+      user
+    });
   }
 
   renderPage() {
@@ -82,17 +108,22 @@ export default class App extends React.Component {
       const numberWeeks = route.params.get('n');
       return <MoreDetails isbn={isbn} url={imgageUrl} number={numberWeeks}/>;
     }
+    // if (route.path === 'my-books') {
+
+    // }
   }
 
   render() {
-
-    const { showAuthModal } = this;
+    const { showhModal, hideModal, handleSignIn } = this;
+    const { user, route } = this.state;
+    const contextValue = { user, route };
     return (
-        <>
-          <Navbar onClick={this.getList} onAuthClick={showAuthModal} />
+      <AppContext.Provider value={contextValue}>
+          <Navbar onClick={this.getList} onAuthClick={showhModal} />
           {this.renderPage()}
-          {this.state.showLogin && <AuthModal onAuthClick={showAuthModal}/>}
-        </>
+          {this.state.showModal === 'signUp' && <SignUpModal onComplete={hideModal} onSignIn={showhModal}/>}
+          {this.state.showModal === 'signIn' && <SignInModal onSignIn={handleSignIn} onComplete={hideModal} onSignUp={showhModal}/>}
+      </AppContext.Provider>
     );
   }
 }
