@@ -4,9 +4,10 @@ function Book(props) {
   const imgageUrl = props.book.book_image;
   const numberWeeks = props.book.weeks_on_list;
   const isbn = props.book.isbns[0].isbn10;
+  const buyLink = props.book.amazon_product_url;
   return (
       <a
-        href={`#details?isbn=${isbn}&imageurl=${imgageUrl}&n=${numberWeeks}`}
+      href={`#details?isbn=${isbn}&imageurl=${imgageUrl}&n=${numberWeeks}&buy=${buyLink}`}
       className='flex margin-top a-book'>
         <li className='flex margin-top'>
           <img src={imgageUrl} alt={props.book.title} />

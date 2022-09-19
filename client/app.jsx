@@ -7,6 +7,7 @@ import SignUpModal from './components/sign-up-modal';
 import SignInModal from './components/sign-in-modal';
 import jwtDecode from 'jwt-decode';
 import AppContext from './lib/app-context';
+import MyBooks from './pages/my-books';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -106,17 +107,18 @@ export default class App extends React.Component {
       const isbn = route.params.get('isbn');
       const imgageUrl = route.params.get('imageurl');
       const numberWeeks = route.params.get('n');
-      return <MoreDetails isbn={isbn} url={imgageUrl} number={numberWeeks}/>;
+      const buyLink = route.params.get('buy');
+      return <MoreDetails isbn={isbn} url={imgageUrl} number={numberWeeks} buyLink={buyLink}/>;
     }
-    // if (route.path === 'my-books') {
-
-    // }
+    if (this.state.user && route.path === 'my-books') {
+      return <MyBooks />;
+    }
   }
 
   render() {
     const { showhModal, hideModal, handleSignIn } = this;
     const { user, route } = this.state;
-    const contextValue = { user, route };
+    const contextValue = { user, route, showhModal };
     return (
       <AppContext.Provider value={contextValue}>
           <Navbar onClick={this.getList} onAuthClick={showhModal} />
