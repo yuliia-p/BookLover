@@ -80,6 +80,36 @@ app.post('/api/users/sign-in', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.post('/api/saved-books/', (req, res, next) => {
+  const { title, author, imageLink, description, buyLink, averageRating, isbn10, category, userId } = req.body;
+  if (!title || !author || !imageLink || !description || !averageRating || !isbn10 || !category || !userId) {
+    throw new ClientError(400, 'missing info');
+  }
+  const insertBookSql = `
+    insert into "books" ("title", "author", "imageLink", "description", "buyLink", "averageRating", "isbn10", "category")
+    values ($1, $2, $3, $4, $5, $6, $7, $8)
+    returning *
+  `;
+  const params = [title, author, imageLink, description, buyLink, averageRating, isbn10, category];
+  db.query(insertBookSql, params)
+    .then(result => {
+      const book = result.rows[0];
+      const bookId = book.bookId;
+      const insertUserBookSql = `
+    insert into "usersAddedBooks" ("userId", "bookId")
+    values ($1, $2)
+    returning *
+  `;
+      const insertUserBookParams = [userId, bookId];
+      db.query(insertUserBookSql, insertUserBookParams)
+        .then(result => {
+          const data = result.rows[0];
+          res.status(201).json(data);
+        });
+    })
+    .catch(err => next(err));
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
