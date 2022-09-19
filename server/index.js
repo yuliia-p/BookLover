@@ -101,7 +101,7 @@ app.post('/api/saved-books/', (req, res, next) => {
     returning *
   `;
       const insertUserBookParams = [userId, bookId];
-      db.query(insertUserBookSql, insertUserBookParams)
+      return db.query(insertUserBookSql, insertUserBookParams)
         .then(result => {
           const data = result.rows[0];
           res.status(201).json(data);
