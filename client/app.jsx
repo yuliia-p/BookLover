@@ -116,7 +116,7 @@ export default class App extends React.Component {
     }
     if (route.path === 'my-book-details') {
       const bookId = route.params.get('bookId');
-      return <MoreDetailsMybooks bookId={bookId}/>;
+      return <MoreDetailsMybooks bookId={bookId} />;
     }
   }
 
