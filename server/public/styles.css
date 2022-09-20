@@ -92,12 +92,14 @@ div.rating {
 }
 
 .dropdown {
+  margin: 0.8rem 0 0;
   font-weight: 100;
   cursor: pointer;
   color: white;
 }
 
 .dropdown-content {
+  margin: 0.8rem 0 0;
   position: absolute;
 }
 
@@ -282,6 +284,7 @@ input {
   }
 
   .dropdown-list-holder {
+    margin: 0.8rem 0 0;
     flex-basis: 40%;
     padding: 1.5rem 0 0;
   }
@@ -292,6 +295,10 @@ input {
   }
 
   .more-details {
+    padding-right: 2rem;
+  }
+
+  .more-details-p {
     padding-right: 2rem;
   }
 
