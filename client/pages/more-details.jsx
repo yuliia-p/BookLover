@@ -1,6 +1,6 @@
 import React from 'react';
 import AppContext from '../lib/app-context';
-import ShowRating from './show-rating';
+import ShowRating from '../components/show-rating';
 
 export default class MoreDetails extends React.Component {
   constructor(props) {
