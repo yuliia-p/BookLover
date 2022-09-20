@@ -19,7 +19,7 @@ export default class MoreDetailsMybooks extends React.Component {
 
   render() {
     const { book } = this.state;
-    const { author, averageRating, category, description, imageLink, title } = book;
+    const { author, averageRating, category, description, imageLink, title, buyLink } = book;
     return (
       <>
         <div className='container full-description'>
@@ -39,7 +39,7 @@ export default class MoreDetailsMybooks extends React.Component {
           </div>
         </div>
         <div className='add-button-holder'>
-          <button className='add-button'>GET A Copy</button>
+          <div className='a-button-holder'><a href={buyLink} className='buy-button'>GET A COPY</a></div>
         </div>
       </>
     );

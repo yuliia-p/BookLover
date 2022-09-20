@@ -48,7 +48,7 @@ export default class MoreDetails extends React.Component {
 
   handleClick() {
     const { user, showhModal } = this.context;
-    const { title, author, shortDescription, description, buyLink, averageRating, isbn10, category } = this.state.book;
+    const { title, author, shortDescription, description, averageRating, isbn10, category } = this.state.book;
     if (!user) {
       showhModal();
     } else {
@@ -59,7 +59,7 @@ export default class MoreDetails extends React.Component {
         imageLink: this.props.url,
         shortDescription,
         description,
-        buyLink,
+        buyLink: this.props.buyLink,
         averageRating,
         isbn10,
         category,
@@ -99,11 +99,11 @@ export default class MoreDetails extends React.Component {
             <p className='full-description description no-padding'>{description}</p>
             <p className='no-margin genres'>GENRES</p>
             <p className='no-margin genre-name'>{category}</p>
-            <a href={this.props.buyLink}>{this.props.buyLink}</a>
           </div>
         </div>
-        <div className='add-button-holder'>
-          <button onClick={this.handleClick} className='add-button'>WANT TO READ</button>
+        <div className='add-button-holder flex'>
+          <div className='a-button-holder'><a href={this.props.buyLink} className='buy-button'>GET A COPY</a></div>
+          <div className='buy-button-holder'><button onClick={this.handleClick} className='add-button'>WANT TO READ</button></div>
         </div>
       </>
     );
