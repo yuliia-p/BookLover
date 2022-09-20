@@ -25,13 +25,11 @@ export default class MyBooks extends React.Component {
     const { books } = this.state;
     return (
       <div className='container'>
-
           <ul>
             {
-              books.map(book => <MyBook key={book.bookId} book={book} />)
+            books.map(book => <MyBook key={book.bookId} book={book} />)
             }
           </ul>
-
       </div>
 
     );
@@ -40,13 +38,10 @@ export default class MyBooks extends React.Component {
 MyBooks.contextType = AppContext;
 
 function MyBook(props) {
-  // buyLink ?
-  // averageRating
-  // category
-  const { title, author, imageLink, shortDescription, isbn10 } = props.book;
+  const { title, author, imageLink, shortDescription, bookId } = props.book;
   return (
-    <a href={`#details?isbn=${isbn10}`} className='flex margin-top a-book'>
-      <li className='flex margin-top'>
+    <a href={`#my-book-details?bookId=${bookId}`} className='flex margin-top a-book'>
+      <li onClick={props.onClick} className='flex margin-top'>
         <img src={imageLink} alt={title} />
         <div className='content-holder'>
           <p className='title margin-top'>{title}</p>
@@ -58,3 +53,4 @@ function MyBook(props) {
     </a>
   );
 }
+// data id ?

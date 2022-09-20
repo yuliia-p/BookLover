@@ -92,6 +92,7 @@ div.rating {
 }
 
 .dropdown {
+  margin: 0.8rem 0 0;
   font-weight: 100;
   cursor: pointer;
   color: white;

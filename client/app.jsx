@@ -8,6 +8,7 @@ import SignInModal from './components/sign-in-modal';
 import jwtDecode from 'jwt-decode';
 import AppContext from './lib/app-context';
 import MyBooks from './pages/my-books';
+import MoreDetailsMybooks from './components/more-details-my-books';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -112,6 +113,10 @@ export default class App extends React.Component {
     }
     if (this.state.user && route.path === 'my-books') {
       return <MyBooks />;
+    }
+    if (route.path === 'my-book-details') {
+      const bookId = route.params.get('bookId');
+      return <MoreDetailsMybooks bookId={bookId}/>;
     }
   }
 

@@ -98,7 +98,7 @@ export default class MoreDetails extends React.Component {
             <p className='full-description description no-padding'>{description}</p>
             <p className='no-margin genres'>GENRES</p>
             <p className='no-margin genre-name'>{category}</p>
-            <p>{this.props.buyLink}</p>
+            <a href={this.props.buyLink}>{this.props.buyLink}</a>
           </div>
         </div>
         <div className='add-button-holder'>

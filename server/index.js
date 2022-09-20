@@ -98,6 +98,8 @@ app.post('/api/saved-books/', (req, res, next) => {
       const insertUserBookSql = `
     insert into "usersAddedBooks" ("userId", "bookId")
     values ($1, $2)
+    on conflict ("userId", "bookId")
+    do nothing
     returning *
   `;
       const insertUserBookParams = [userId, bookId];
@@ -126,6 +128,25 @@ app.get('/api/saved-books/:userId', (req, res, next) => {
   return db.query(sql, params)
     .then(result => {
       const data = result.rows;
+      res.status(200).json(data);
+    })
+    .catch(err => next(err));
+});
+
+app.get('/api/books/:bookId', (req, res, next) => {
+  const bookId = Number(req.params.bookId);
+  if (!bookId) {
+    throw new ClientError(401, 'invalid book id');
+  }
+  const sql = `
+    select *
+    from "books"
+    where "bookId" = $1
+  `;
+  const params = [bookId];
+  return db.query(sql, params)
+    .then(result => {
+      const data = result.rows[0];
       res.status(200).json(data);
     })
     .catch(err => next(err));
