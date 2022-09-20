@@ -283,6 +283,7 @@ input {
   }
 
   .dropdown-list-holder {
+    margin: 0.8rem 0 0;
     flex-basis: 40%;
     padding: 1.5rem 0 0;
   }
