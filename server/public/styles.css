@@ -224,14 +224,15 @@ input {
   border: none;
 }
 
-.add-button {
+.add-button,
+.buy-button {
   cursor: pointer;
   font-family: Merriweather, serif;
   font-size: 0.95rem;
   text-align: center;
   color: white;
   background-color: rgba(17, 17, 24, 1);
-  padding: 1rem 1.5rem;
+  padding: 0.8rem 1.5rem;
   border-radius: 1.5rem;
   border: none;
 }
@@ -242,8 +243,10 @@ input {
 }
 
 .add-button-holder {
-  text-align: end;
   margin: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
 }
 
 .hidden {
@@ -284,7 +287,6 @@ input {
   }
 
   .dropdown-list-holder {
-    margin: 0.8rem 0 0;
     flex-basis: 40%;
     padding: 1.5rem 0 0;
   }
@@ -337,14 +339,27 @@ input {
     top: 1.8rem;
   }
 
-  .add-button {
+  .add-button,
+  .buy-button {
     font-size: 0.8rem;
     padding: 0.6rem 1.7rem;
     border-radius: 0.9375rem;
     border: none;
   }
 
+  .buy-button {
+    padding: 0.6rem 2.4rem;
+  }
+
   .add-button-holder {
     margin-right: 10rem;
+    flex-wrap: wrap;
+    text-align: end;
+  }
+
+  .a-button-holder,
+  .buy-button-holder {
+    flex-basis: 100%;
+    margin: 1rem 0 0;
   }
 }
