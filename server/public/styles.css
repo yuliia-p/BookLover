@@ -99,6 +99,7 @@ div.rating {
 }
 
 .dropdown-content {
+  margin: 0.8rem 0 0;
   position: absolute;
 }
 
