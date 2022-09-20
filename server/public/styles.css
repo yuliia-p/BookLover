@@ -295,6 +295,10 @@ input {
     padding-right: 2rem;
   }
 
+  .more-details-p {
+    padding-right: 2rem;
+  }
+
   div.full-description {
     text-align: inherit;
   }

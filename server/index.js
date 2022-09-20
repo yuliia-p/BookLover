@@ -81,16 +81,16 @@ app.post('/api/users/sign-in', (req, res, next) => {
 });
 
 app.post('/api/saved-books/', (req, res, next) => {
-  const { title, author, imageLink, description, buyLink, averageRating, isbn10, category, userId } = req.body;
-  if (!title || !author || !imageLink || !description || !averageRating || !isbn10 || !category || !userId) {
+  const { title, author, imageLink, shortDescription, description, buyLink, averageRating, isbn10, category, userId } = req.body;
+  if (!title || !author || !imageLink || !description || !isbn10 || !category || !userId) {
     throw new ClientError(400, 'missing info');
   }
   const insertBookSql = `
-    insert into "books" ("title", "author", "imageLink", "description", "buyLink", "averageRating", "isbn10", "category")
-    values ($1, $2, $3, $4, $5, $6, $7, $8)
+    insert into "books" ("title", "author", "imageLink", "shortDescription", "description", "buyLink", "averageRating", "isbn10", "category")
+    values ($1, $2, $3, $4, $5, $6, $7, $8, $9)
     returning *
   `;
-  const params = [title, author, imageLink, description, buyLink, averageRating, isbn10, category];
+  const params = [title, author, imageLink, shortDescription, description, buyLink, averageRating, isbn10, category];
   db.query(insertBookSql, params)
     .then(result => {
       const book = result.rows[0];
@@ -106,6 +106,27 @@ app.post('/api/saved-books/', (req, res, next) => {
           const data = result.rows[0];
           res.status(201).json(data);
         });
+    })
+    .catch(err => next(err));
+});
+
+app.get('/api/saved-books/:userId', (req, res, next) => {
+  const userId = Number(req.params.userId);
+  if (!userId) {
+    throw new ClientError(401, 'invalid user id');
+  }
+  // select book id where userid $
+  const sql = `
+    select *
+    from "books"
+    join "usersAddedBooks" using ("bookId")
+    where "userId" = $1
+  `;
+  const params = [userId];
+  return db.query(sql, params)
+    .then(result => {
+      const data = result.rows;
+      res.status(200).json(data);
     })
     .catch(err => next(err));
 });

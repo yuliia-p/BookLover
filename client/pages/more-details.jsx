@@ -28,8 +28,9 @@ export default class MoreDetails extends React.Component {
           title: data.items[0].volumeInfo.title,
           author: data.items[0].volumeInfo.authors[0],
           imageLink: data.items[0].volumeInfo.imageLinks.thumbnail,
+          shortDescription: data.items[0].searchInfo.textSnippet,
           description: data.items[0].volumeInfo.description,
-          buyLink: null,
+          buyLink: data.items[0].saleInfo.buyLink, // check later for other books
           averageRating: data.items[0].volumeInfo.averageRating,
           isbn10: data.items[0].volumeInfo.industryIdentifiers[0].identifier,
           category: data.items[0].volumeInfo.categories[0]
@@ -46,7 +47,7 @@ export default class MoreDetails extends React.Component {
 
   handleClick() {
     const { user, showhModal } = this.context;
-    const { title, author, imageLink, description, buyLink, averageRating, isbn10, category } = this.state.book;
+    const { title, author, shortDescription, description, buyLink, averageRating, isbn10, category } = this.state.book;
     if (!user) {
       showhModal();
     } else {
@@ -54,7 +55,8 @@ export default class MoreDetails extends React.Component {
       const objToSend = {
         title,
         author,
-        imageLink,
+        imageLink: this.props.url,
+        shortDescription,
         description,
         buyLink,
         averageRating,
