@@ -64,11 +64,18 @@ export default class MoreDetails extends React.Component {
       } else if (!imageLinks.thumbnail) {
         bookCover = imageLinks.smallThumbnail;
       }
+      let shortDescription;
+      if (!searchInfo) {
+        shortDescription = '';
+      } else {
+        shortDescription = searchInfo.textSnippet;
+      }
+
       const objToSend = {
         title,
         authors: authors[0],
         imageLink: bookCover,
-        shortDescription: searchInfo.textSnippet,
+        shortDescription,
         description,
         buyLink: this.props.buyLink,
         averageRating,
