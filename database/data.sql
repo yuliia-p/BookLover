@@ -1,7 +1,7 @@
 insert into "users" ("username", "email", "hashedPassword")
 values ('anonymous', 'example@mail.com', '$argon2i$v=19$m=4096,t=3,p=1$h7icQD/xZr8akZsX+hNA0A$h68atJWyjvunAwNOpSpMfg9sPvoMQ6dKwoh0dJhurWA');
 
-insert into "books" ("title", "author", "imageLink", "description", "buyLink", "averageRating", "isbn10", "category")
+insert into "books" ("title", "authors", "imageLink", "description", "buyLink", "averageRating", "isbn10", "categories")
 values ('It Ends with Us',
 'Colleen Hoover',
 'http://books.google.com/books/content?id=wmnuDwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api',

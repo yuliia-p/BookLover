@@ -81,16 +81,16 @@ app.post('/api/users/sign-in', (req, res, next) => {
 });
 
 app.post('/api/saved-books/', (req, res, next) => {
-  const { title, author, imageLink, shortDescription, description, buyLink, averageRating, isbn10, category, userId } = req.body;
-  if (!title || !author || !imageLink || !description || !isbn10 || !category || !userId) {
+  const { title, authors, imageLink, shortDescription, description, buyLink, averageRating, isbn10, categories, userId } = req.body;
+  if (!title || !authors || !imageLink || !isbn10 || !userId) {
     throw new ClientError(400, 'missing info');
   }
   const insertBookSql = `
-    insert into "books" ("title", "author", "imageLink", "shortDescription", "description", "buyLink", "averageRating", "isbn10", "category")
+    insert into "books" ("title", "authors", "imageLink", "shortDescription", "description", "buyLink", "averageRating", "isbn10", "categories")
     values ($1, $2, $3, $4, $5, $6, $7, $8, $9)
     returning *
   `;
-  const params = [title, author, imageLink, shortDescription, description, buyLink, averageRating, isbn10, category];
+  const params = [title, authors, imageLink, shortDescription, description, buyLink, averageRating, isbn10, categories];
   db.query(insertBookSql, params)
     .then(result => {
       const book = result.rows[0];
@@ -98,8 +98,6 @@ app.post('/api/saved-books/', (req, res, next) => {
       const insertUserBookSql = `
     insert into "usersAddedBooks" ("userId", "bookId")
     values ($1, $2)
-    on conflict ("userId", "bookId")
-    do nothing
     returning *
   `;
       const insertUserBookParams = [userId, bookId];
