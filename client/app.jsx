@@ -9,6 +9,8 @@ import jwtDecode from 'jwt-decode';
 import AppContext from './lib/app-context';
 import MyBooks from './pages/my-books';
 import MoreDetailsMybooks from './components/more-details-my-books';
+import Search from './components/search';
+import NotFound from './pages/not-found';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -117,6 +119,18 @@ export default class App extends React.Component {
     if (route.path === 'my-book-details') {
       const bookId = route.params.get('bookId');
       return <MoreDetailsMybooks bookId={bookId}/>;
+    }
+    if (route.path === 'search') {
+      const searchValue = route.params.get('txt');
+      return <Search value={searchValue}/>;
+    }
+    if (route.path === 'search-details') {
+      const isbn = route.params.get('isbn');
+      const buyLink = route.params.get('buy-link');
+      return <MoreDetails isbn={isbn} buyLink={buyLink}/>;
+    }
+    if (route.path === 'not-found') {
+      return <NotFound />;
     }
   }
 

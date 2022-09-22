@@ -19,7 +19,7 @@ export default class MoreDetailsMybooks extends React.Component {
 
   render() {
     const { book } = this.state;
-    const { author, averageRating, category, description, imageLink, title, buyLink } = book;
+    const { author, averageRating, categories, description, imageLink, title, buyLink } = book;
     return (
       <>
         <div className='container full-description'>
@@ -34,13 +34,14 @@ export default class MoreDetailsMybooks extends React.Component {
             </div>
             <p className='full-description description no-padding'>{description}</p>
             <p className='no-margin genres'>GENRES</p>
-            <p className='no-margin genre-name'>{category}</p>
+            <p className='no-margin genre-name'>{categories}</p>
             <p>{this.props.buyLink}</p>
           </div>
         </div>
-        <div className='add-button-holder'>
+        {buyLink !== null &&
+          <div className='add-button-holder'>
           <div className='a-button-holder'><a href={buyLink} className='buy-button'>GET A COPY</a></div>
-        </div>
+        </div>}
       </>
     );
   }

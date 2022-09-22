@@ -7,13 +7,13 @@ export default class MoreDetails extends React.Component {
     super(props);
     this.state = {
       book: null,
-      addedBook: null
+      addedBook: {}
     };
     this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
-    const url = `https://www.googleapis.com/books/v1/volumes?q=isbn10-${this.props.isbn}&projection=full&key=${process.env.GOOGLE_BOOKS_API_KEY}`;
+    const url = `https://www.googleapis.com/books/v1/volumes?q=isbn${this.props.isbn}&projection=full&key=${process.env.GOOGLE_BOOKS_API_KEY}`;
     const request = {
       method: 'GET',
       headers: {
@@ -22,24 +22,31 @@ export default class MoreDetails extends React.Component {
     };
     fetch(url, request)
       .then(response => response.json())
-      // keep an eye on data from google
-      // search NOT working properly Need filter and error
       .then(data => {
-        const bookObject = {
-          title: data.items[0].volumeInfo.title,
-          author: data.items[0].volumeInfo.authors[0],
-          imageLink: data.items[0].volumeInfo.imageLinks.thumbnail,
-          shortDescription: data.items[0].searchInfo.textSnippet,
-          description: data.items[0].volumeInfo.description,
-          buyLink: data.items[0].saleInfo.buyLink, // check later for other books
-          averageRating: data.items[0].volumeInfo.averageRating,
-          isbn10: data.items[0].volumeInfo.industryIdentifiers[0].identifier,
-          category: data.items[0].volumeInfo.categories[0]
-        };
-        this.setState({
-          book: bookObject
-        });
-
+        if (data.totalItems === 0) {
+          const urlisbn10 = `https://www.googleapis.com/books/v1/volumes?q=isbn10-${this.props.isbn}&projection=full&key=${process.env.GOOGLE_BOOKS_API_KEY}`;
+          const request = {
+            method: 'GET',
+            headers: {
+              Accept: 'application/json'
+            }
+          };
+          fetch(urlisbn10, request)
+            .then(response => response.json())
+            .then(data => {
+              if (data.totalItems > 0) {
+                this.setState({
+                  book: data.items[0]
+                });
+              } else {
+                window.location.hash = 'not-found';
+              }
+            });
+        } else {
+          this.setState({
+            book: data.items[0]
+          });
+        }
       })
       .catch(error => {
         console.error('Error:', error);
@@ -48,21 +55,37 @@ export default class MoreDetails extends React.Component {
 
   handleClick() {
     const { user, showhModal } = this.context;
-    const { title, author, shortDescription, description, averageRating, isbn10, category } = this.state.book;
+    const { volumeInfo, searchInfo } = this.state.book;
+    const { title, authors, description, averageRating, categories, industryIdentifiers, imageLinks } = volumeInfo;
+    const isnb = industryIdentifiers.find(i => i.type === 'ISBN_10');
     if (!user) {
       showhModal();
     } else {
+      // join() for authors
       const token = window.localStorage.getItem('react-context-jwt');
+      let bookCover = this.props.url;
+      if (!bookCover) {
+        bookCover = imageLinks.thumbnail;
+      } else if (!imageLinks.thumbnail) {
+        bookCover = imageLinks.smallThumbnail;
+      }
+      let shortDescription;
+      if (!searchInfo) {
+        shortDescription = '';
+      } else {
+        shortDescription = searchInfo.textSnippet;
+      }
+
       const objToSend = {
         title,
-        author,
-        imageLink: this.props.url,
+        authors: authors[0],
+        imageLink: bookCover,
         shortDescription,
         description,
         buyLink: this.props.buyLink,
         averageRating,
-        isbn10,
-        category,
+        isbn10: isnb.identifier,
+        categories: categories[0],
         userId: user.userId
       };
       const req = {
@@ -83,26 +106,32 @@ export default class MoreDetails extends React.Component {
 
   render() {
     if (!this.state.book) return null;
-    const { description, averageRating, title, author, category } = this.state.book;
+    const { volumeInfo } = this.state.book;
+    const { authors, imageLinks, title, description, averageRating, categories } = volumeInfo;
+    let coverToShow = this.props.url;
+    if (!coverToShow) {
+      coverToShow = imageLinks.thumbnail;
+    }
     return (
       <>
         <div className='container full-description'>
-          <img className='more-details-img' src={this.props.url} alt='pic' />
+          <img className='more-details-img' src={coverToShow} alt='pic' />
           <div className='content-holder-more-details'>
             <p className='number-of-weeks'>{this.props.number} WEEKS ON THE LIST</p>
             <h2 className='title-more-details no-padding '>{title}</h2>
-            <p className='author'>by {author}</p>
+            <p className='author'>by {authors.join()}</p>
             <div className='rating no-margin'>
               {ShowRating(averageRating)}
               <p className='rating no-margin'>Rating: {averageRating}</p>
             </div>
             <p className='full-description description no-padding'>{description}</p>
             <p className='no-margin genres'>GENRES</p>
-            <p className='no-margin genre-name'>{category}</p>
+            <p className='no-margin genre-name'>{categories}</p>
           </div>
         </div>
         <div className='add-button-holder flex'>
-          <div className='a-button-holder'><a href={this.props.buyLink} className='buy-button'>GET A COPY</a></div>
+          {this.props.buyLink &&
+            <div className='a-button-holder'><a href={this.props.buyLink} className='buy-button'>GET A COPY</a></div>}
           <div className='buy-button-holder'><button onClick={this.handleClick} className='add-button'>WANT TO READ</button></div>
         </div>
       </>

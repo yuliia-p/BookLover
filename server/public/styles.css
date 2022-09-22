@@ -12,6 +12,12 @@ a {
   background-color: rgba(17, 17, 24, 1);
   color: white;
   padding: 0.8rem 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.my-books {
+  flex-basis: 100%;
 }
 
 img {
@@ -89,6 +95,7 @@ div.rating {
 
 .header-lover-h2 {
   margin-top: 0.5rem;
+  flex-basis: 100%;
 }
 
 .dropdown {
@@ -101,6 +108,10 @@ div.rating {
 .dropdown-content {
   margin: 0.8rem 0 0;
   position: absolute;
+}
+
+.dropdown-list-holder {
+  flex-basis: 70%;
 }
 
 .span-category {
@@ -253,6 +264,60 @@ input {
   display: none;
 }
 
+.input {
+  width: 2.3rem;
+  height: 2.3rem;
+  border: 0.15rem solid white;
+  border-radius: 50px;
+  box-sizing: border-box;
+  font-size: 1rem;
+  outline: none;
+  transition: 0.5s;
+}
+
+.box:hover input {
+  width: 23rem;
+  background: white;
+  border-radius: 0.99rem;
+}
+
+.box i {
+  position: absolute;
+  top: 6.99rem;
+  right: 0.5rem;
+  transform: translate(-50%, -50%);
+  font-size: 1.1rem;
+  color: rgba(17, 17, 24, 1);
+  transition: 0.2s;
+}
+
+.box {
+  flex-basis: 30%;
+  text-align: end;
+}
+
+.box:hover i {
+  opacity: 0;
+  z-index: -1;
+}
+
+.description-overflow {
+  display: block;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  overflow: hidden;
+  max-height: 3.5em;
+  line-height: 1.2em;
+  font-size: 0.8rem;
+}
+
+.text-input {
+  background-image: url("./images/icons8-search-50.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 1rem;
+}
+
 @media screen and (min-width: 768px) {
   img {
     width: 40%;
@@ -287,7 +352,7 @@ input {
   }
 
   .dropdown-list-holder {
-    flex-basis: 40%;
+    flex-basis: 30%;
     padding: 1.5rem 0 0;
   }
 
@@ -310,6 +375,7 @@ input {
 
   .content-holder-more-details {
     margin-left: 2rem;
+    flex-basis: 60%;
   }
 
   .no-padding {
@@ -333,10 +399,9 @@ input {
   }
 
   .fa-circle-user {
-    text-align: end;
-    font-size: 2rem;
+    font-size: 2.4rem;
     position: absolute;
-    top: 1.8rem;
+    top: 2.6rem;
   }
 
   .add-button,
@@ -361,5 +426,43 @@ input {
   .buy-button-holder {
     flex-basis: 100%;
     margin: 1rem 0 0;
+  }
+
+  .box {
+    flex-basis: 20%;
+    text-align: inherit;
+    position: relative;
+  }
+
+  .input {
+    width: 2rem;
+    height: 2rem;
+    border: 0.14rem solid white;
+    border-radius: 50px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    outline: none;
+    transition: 0.5s;
+  }
+
+  .box:hover input {
+    width: 10rem;
+    background: white;
+    border-radius: 0.9375rem;
+  }
+
+  .box i {
+    position: absolute;
+    top: 1.1rem;
+    right: 12.8rem;
+    transform: translate(-50%, -50%);
+    font-size: 1rem;
+    color: rgba(17, 17, 24, 1);
+    transition: 0.2s;
+  }
+
+  .box:hover i {
+    opacity: 0;
+    z-index: -1;
   }
 }

@@ -21,14 +21,14 @@ CREATE TABLE "public"."users" (
 CREATE TABLE "public"."books" (
 	"bookId" serial,
 	"title" TEXT NOT NULL,
-	"author" TEXT NOT NULL,
+	"authors" TEXT NOT NULL,
 	"imageLink" TEXT NOT NULL,
-  "shortDescription" TEXT,
 	"description" TEXT NOT NULL,
+  "shortDescription" TEXT,
 	"buyLink" TEXT,
 	"averageRating" numeric,
-	"isbn10" numeric NOT NULL,
-	"category" TEXT,
+	"isbn10" TEXT NOT NULL,
+	"categories" TEXT,
 	CONSTRAINT "books_pk" PRIMARY KEY ("bookId")
 ) WITH (
   OIDS=FALSE
@@ -40,14 +40,12 @@ CREATE TABLE "public"."usersAddedBooks" (
 	"userId" int NOT NULL,
 	"bookId" int NOT NULL,
   UNIQUE ("userId", "bookId"),
-	"addedAt" timestamptz(6) NOT NULL default now()
+  "addedAt" timestamptz(6) NOT NULL default now()
 ) WITH (
   OIDS=FALSE
 );
 
 
 
-
-
-ALTER TABLE "addedBooks" ADD CONSTRAINT "addedBooks_fk0" FOREIGN KEY ("userId") REFERENCES "users"("userId");
-ALTER TABLE "addedBooks" ADD CONSTRAINT "addedBooks_fk1" FOREIGN KEY ("bookId") REFERENCES "books"("bookId");
+ALTER TABLE "usersAddedBooks" ADD CONSTRAINT "usersAddedBooks_fk0" FOREIGN KEY ("userId") REFERENCES "users"("userId");
+ALTER TABLE "usersAddedBooks" ADD CONSTRAINT "usersAddedBooks_fk1" FOREIGN KEY ("bookId") REFERENCES "books"("bookId");

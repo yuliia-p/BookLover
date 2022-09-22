@@ -6,10 +6,13 @@ export default class Navbar extends React.Component {
     super(props);
     this.state = {
       categories: [],
-      categoryToShow: null
+      categoryToShow: null,
+      userInputValue: ''
     };
     this.getCategories = this.getCategories.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.hashChange = this.hashChange.bind(this);
+    this.searchInput = this.searchInput.bind(this);
   }
 
   handleChange(event) {
@@ -50,6 +53,17 @@ export default class Navbar extends React.Component {
     });
   }
 
+  hashChange(event) {
+    event.preventDefault();
+    window.location.hash = 'search?txt=' + this.state.userInputValue;
+    // this.setState({ userInputValue: '' });
+
+  }
+
+  searchInput(event) {
+    this.setState({ userInputValue: event.target.value });
+  }
+
   render() {
     const { user } = this.context;
     let categoryToShow;
@@ -74,6 +88,11 @@ export default class Navbar extends React.Component {
                 <MenuItems categories={this.state.categories} />
               </select>
             </div>
+          </div>
+          <div className="box">
+            <form className="search" onSubmit={this.hashChange}>
+              <input placeholder="" type="text" className="input text-input" name="txt" onChange={this.searchInput}/>
+            </form>
           </div>
             <i onClick={this.props.onAuthClick} className="fa-solid fa-circle-user"></i>
         </div>
