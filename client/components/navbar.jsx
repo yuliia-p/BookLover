@@ -56,7 +56,8 @@ export default class Navbar extends React.Component {
   hashChange(event) {
     event.preventDefault();
     window.location.hash = 'search?txt=' + this.state.userInputValue;
-    this.setState({ userInputValue: '' });
+    // this.setState({ userInputValue: '' });
+
   }
 
   searchInput(event) {

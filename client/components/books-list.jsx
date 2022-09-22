@@ -1,22 +1,32 @@
 import React from 'react';
 
 function Book(props) {
-  const imgageUrl = props.book.book_image;
+  const { description, title, author } = props.book;
+  const imageLink = props.book.book_image;
+  const buyLink = props.book.buy_links[0];
+  const bookObj = {
+    title,
+    authors: author,
+    imageLink,
+    shortDescription: description,
+    description,
+    buyLink: props.book.amazon_product_url,
+    isbn10: props.book.primary_isbn10
+  };
   const numberWeeks = props.book.weeks_on_list;
-  const isbn = props.book.isbns[0].isbn10;
-  const buyLink = props.book.amazon_product_url;
+
   return (
       <a
-      href={`#details?isbn=${isbn}&imageurl=${imgageUrl}&n=${numberWeeks}&buy=${buyLink}`}
+      href={`#details?isbn=${bookObj.isbn10}&imageurl=${imageLink}&n=${numberWeeks}&buy=${buyLink}`}
       className='flex margin-top a-book'>
         <li className='flex margin-top'>
-          <img src={imgageUrl} alt={props.book.title} />
+        <img src={imageLink} alt={props.book.title} />
           <div className='content-holder'>
-            <p className='number-of-weeks '>{props.book.weeks_on_list} WEEKS ON THE LIST</p>
-            <p className='title margin-top'>{props.book.title}</p>
-            <p className='author margin-top'>by {props.book.author}</p>
-            <p className='description margin-top'>{props.book.description}</p>
-            <p href={`#details?isbn=${isbn}`} className='more-details-p'>More Details...</p>
+          <p className='number-of-weeks '>{numberWeeks} WEEKS ON THE LIST</p>
+          <p className='title margin-top'>{bookObj.title}</p>
+          <p className='author margin-top'>by {bookObj.authors}</p>
+          <p className='description margin-top'>{bookObj.shortDescription}</p>
+          <p className='more-details-p'>More Details...</p>
           </div>
         </li>
       </a>

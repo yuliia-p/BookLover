@@ -34,9 +34,13 @@ export default class MoreDetails extends React.Component {
           fetch(urlisbn10, request)
             .then(response => response.json())
             .then(data => {
-              this.setState({
-                book: data.items[0]
-              });
+              if (data.totalItems > 0) {
+                this.setState({
+                  book: data.items[0]
+                });
+              } else {
+                window.location.hash = 'not-found';
+              }
             });
         } else {
           this.setState({
@@ -57,6 +61,7 @@ export default class MoreDetails extends React.Component {
     if (!user) {
       showhModal();
     } else {
+      // join() for authors
       const token = window.localStorage.getItem('react-context-jwt');
       let bookCover = this.props.url;
       if (!bookCover) {
@@ -114,7 +119,7 @@ export default class MoreDetails extends React.Component {
           <div className='content-holder-more-details'>
             <p className='number-of-weeks'>{this.props.number} WEEKS ON THE LIST</p>
             <h2 className='title-more-details no-padding '>{title}</h2>
-            <p className='author'>by {authors}</p>
+            <p className='author'>by {authors.join()}</p>
             <div className='rating no-margin'>
               {ShowRating(averageRating)}
               <p className='rating no-margin'>Rating: {averageRating}</p>
