@@ -173,7 +173,7 @@ div.full-description {
 
 .modal {
   position: fixed;
-  padding-top: 100px;
+  padding-top: 10rem;
   left: 0;
   top: 0;
   width: 100%;
@@ -233,6 +233,40 @@ input {
   padding: 0.6rem 4rem;
   border-radius: 0.9375rem;
   border: none;
+}
+
+.y-button,
+.n-button {
+  cursor: pointer;
+  font-family: Merriweather, serif;
+  font-size: 1rem;
+  text-align: center;
+  color: white;
+  background-color: rgba(17, 17, 24, 1);
+  padding: 0.6rem 1rem;
+  border-radius: 1.9375rem;
+  border: none;
+}
+
+.n-button {
+  font-weight: 600;
+  color: rgba(17, 17, 24, 1);
+  background-color: transparent;
+}
+
+.delete-header {
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 100;
+  margin-bottom: 0;
+}
+
+.y-n-holder {
+  flex-wrap: wrap;
+}
+
+.flex-basis-100 {
+  flex-basis: 100%;
 }
 
 .add-button,
@@ -487,5 +521,9 @@ input {
 
   .delete-button {
     padding: 0.6rem 3rem;
+  }
+
+  .modal {
+    padding-top: 15rem;
   }
 }
