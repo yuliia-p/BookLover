@@ -122,22 +122,22 @@ export default class MoreDetails extends React.Component {
         <div className='container full-description'>
           <img className='more-details-img' src={coverToShow} alt='pic' />
           <div className='content-holder-more-details'>
-            <p className='number-of-weeks'>{this.props.number} WEEKS ON THE LIST</p>
-            <h2 className='title-more-details no-padding '>{title}</h2>
-            <p className='author'>by {authors.join()}</p>
-            <div className='rating no-margin'>
-              {ShowRating(averageRating)}
-              <p className='rating no-margin'>Rating: {averageRating}</p>
+              <p className='number-of-weeks'>{this.props.number} WEEKS ON THE LIST</p>
+              <h2 className='title-more-details no-padding '>{title}</h2>
+              <p className='author'>by {authors.join()}</p>
+              <div className='rating no-margin'>
+                {ShowRating(averageRating)}
+                <p className='rating no-margin'>Rating: {averageRating}</p>
+              </div>
+              <p className='full-description description no-padding'>{description}</p>
+              <p className='no-margin genres'>GENRES</p>
+              <p className='no-margin genre-name'>{categories}</p>
+               <div className='my-buttons flex'>
+                  {this.props.buyLink &&
+                <div className='a-button-holder'><a href={this.props.buyLink} className='buy-button'>GET A COPY</a></div>}
+                <div className='buy-button-holder'><button onClick={this.handleClick} className='add-button'>WANT TO READ</button></div>
             </div>
-            <p className='full-description description no-padding'>{description}</p>
-            <p className='no-margin genres'>GENRES</p>
-            <p className='no-margin genre-name'>{categories}</p>
           </div>
-        </div>
-        <div className='button-holder-more-details flex margin-right'>
-          {this.props.buyLink &&
-            <div className='a-button-holder'><a href={this.props.buyLink} className='buy-button'>GET A COPY</a></div>}
-          <div className='buy-button-holder'><button onClick={this.handleClick} className='add-button'>WANT TO READ</button></div>
         </div>
       </>
     );

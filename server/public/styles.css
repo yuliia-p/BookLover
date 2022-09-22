@@ -166,7 +166,9 @@ div.full-description {
 .fa-circle-user {
   position: absolute;
   right: 0.8rem;
-  top: 2.5rem;
+
+  /* top: 2.5rem; */
+  top: 1.2rem;
   font-size: 2.3rem;
   color: white;
 }
@@ -180,7 +182,7 @@ div.full-description {
   height: 100%;
   overflow: auto;
   background-color: rgb(0 0 0);
-  background-color: rgb(0 0 0 / 60%);
+  background-color: rgba(0, 0, 0, 0.632);
 }
 
 .fa-xmark {
@@ -362,10 +364,28 @@ input {
   background-size: 1rem;
 }
 
-.my-buttons-holder {
+.my-buttons {
   justify-content: space-between;
   align-items: baseline;
-  padding: 1rem;
+}
+
+.dropdown-profile-menu {
+  background-color: rgba(17, 17, 24, 1);
+  position: fixed;
+  padding: 9rem 0.5rem 0;
+  right: 0;
+  top: 0;
+  height: 23%;
+  width: 25%;
+  overflow: auto;
+}
+
+.a-profile {
+  font-weight: 100;
+  text-align: left;
+  color: white;
+  display: block;
+  border-bottom: 0.11rem solid rgba(255, 255, 255, 0.25);
 }
 
 @media screen and (min-width: 768px) {
@@ -463,8 +483,7 @@ input {
   }
 
   .add-button-holder {
-    flex-wrap: wrap;
-    text-align: end;
+    text-align: left;
   }
 
   .button-holder-more-details {
@@ -524,13 +543,6 @@ input {
     z-index: -1;
   }
 
-  .my-buttons-holder {
-    flex-wrap: wrap;
-    text-align: end;
-    margin-right: 10rem;
-    justify-content: end;
-  }
-
   .delete-button-holder,
   .a-button-holder {
     flex-basis: 100%;
@@ -543,5 +555,15 @@ input {
 
   .modal {
     padding-top: 15rem;
+  }
+
+  .dropdown-profile-menu {
+    padding: 6rem 0.5rem 0;
+    height: 16%;
+    width: 10%;
+  }
+
+  .my-buttons {
+    flex-wrap: wrap;
   }
 }

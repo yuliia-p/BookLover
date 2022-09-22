@@ -12,6 +12,7 @@ import MoreDetailsMybooks from './components/more-details-my-books';
 import Search from './components/search';
 import NotFound from './pages/not-found';
 import DeleteModal from './components/delete-modal';
+import ProfileMenu from './components/profile-menu';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -28,6 +29,7 @@ export default class App extends React.Component {
     this.handleSignIn = this.handleSignIn.bind(this);
     this.hideModal = this.hideModal.bind(this);
     this.deteleModal = this.deteleModal.bind(this);
+    this.handleSignOut = this.handleSignOut.bind(this);
   }
 
   componentDidMount() {
@@ -80,10 +82,13 @@ export default class App extends React.Component {
   }
 
   showhModal() {
-    const { showModal } = this.state;
+    const { showModal, user } = this.state;
     this.setState({ showModal: 'signIn' });
     if (showModal === 'signIn') {
       this.setState({ showModal: 'signUp' });
+    }
+    if (user) {
+      this.setState({ showModal: 'profile-menu' });
     }
   }
 
@@ -96,6 +101,14 @@ export default class App extends React.Component {
     window.localStorage.setItem('react-context-jwt', token);
     this.setState({
       user
+    });
+  }
+
+  handleSignOut() {
+    window.localStorage.removeItem('react-context-jwt');
+    this.setState({
+      user: null,
+      showModal: null
     });
   }
 
@@ -141,7 +154,7 @@ export default class App extends React.Component {
   }
 
   render() {
-    const { showhModal, hideModal, handleSignIn, deteleModal } = this;
+    const { showhModal, hideModal, handleSignIn, deteleModal, handleSignOut } = this;
     const { user, route } = this.state;
     const contextValue = { user, route, showhModal };
     return (
@@ -150,6 +163,7 @@ export default class App extends React.Component {
           {this.renderPage()}
           {this.state.showModal === 'signUp' && <SignUpModal onComplete={hideModal} onSignIn={showhModal}/>}
           {this.state.showModal === 'signIn' && <SignInModal onSignIn={handleSignIn} onComplete={hideModal} onSignUp={showhModal}/>}
+        {this.state.showModal === 'profile-menu' && <ProfileMenu onClick={handleSignOut} onComplete={hideModal}/>}
           {this.state.deleteModal === true && <DeleteModal onClick={deteleModal}/> }
       </AppContext.Provider>
     );

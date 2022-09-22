@@ -94,7 +94,7 @@ export default class Navbar extends React.Component {
               <input placeholder="" type="text" className="input text-input" name="txt" onChange={this.searchInput}/>
             </form>
           </div>
-          <div>
+          <div className='profile-menu'>
             <i onClick={this.props.onAuthClick} className="fa-solid fa-circle-user"></i>
           </div>
         </div>

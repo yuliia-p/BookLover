@@ -36,18 +36,17 @@ export default class MoreDetailsMybooks extends React.Component {
             <p className='no-margin genres'>GENRES</p>
             <p className='no-margin genre-name'>{categories}</p>
             <p>{this.props.buyLink}</p>
+            <div className='my-buttons flex'>
+                {buyLink !== null &&
+                <div className='add-button-holder'>
+                  <div className='a-button-holder'><a href={buyLink} className='buy-button'>GET A COPY</a></div>
+                </div>}
+                <div className='delete-button-holder'>
+                  < button className="buy-button delete-button" onClick={this.props.onClick}>REMOVE</button>
+                </div>
+            </div>
           </div>
         </div>
-        <div className='my-buttons-holder flex'>
-          {buyLink !== null &&
-            <div className='add-button-holder'>
-              <div className='a-button-holder'><a href={buyLink} className='buy-button'>GET A COPY</a></div>
-            </div>}
-          <div className='delete-button-holder'>
-            <button className="buy-button delete-button" onClick={this.props.onClick}>REMOVE</button>
-          </div>
-        </div>
-
       </>
     );
   }
