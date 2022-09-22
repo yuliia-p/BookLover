@@ -6,6 +6,7 @@ const pg = require('pg');
 const jwt = require('jsonwebtoken');
 const ClientError = require('./client-error');
 const argon2 = require('argon2');
+const authorizationMiddleware = require('./authorization-middleware');
 
 const db = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
@@ -152,16 +153,20 @@ app.get('/api/books/:bookId', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.use(authorizationMiddleware);
+
 app.delete('/api/delete-books/:bookId', (req, res, next) => {
   const bookId = Number(req.params.bookId);
+  const { userId } = req.user;
   if (!bookId) {
     throw new ClientError(401, 'invalid book id');
   }
   const sql = `
     delete from "usersAddedBooks"
-    where "bookId" = $1;
+    where "bookId" = $1
+    and "userId" = $2
   `;
-  const params = [bookId];
+  const params = [bookId, userId];
   db.query(sql, params)
     .then(result => {
       const data = result.rows[0];

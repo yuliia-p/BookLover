@@ -291,6 +291,12 @@ input {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+}
+
+.button-holder-more-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
   margin: 1rem;
 }
 
@@ -313,6 +319,10 @@ input {
   width: 23rem;
   background: white;
   border-radius: 0.99rem;
+}
+
+.search {
+  margin-right: 0.3rem;
 }
 
 .box i {
@@ -383,7 +393,7 @@ input {
   }
 
   .my-books {
-    flex-basis: 25%;
+    flex-basis: 20%;
   }
 
   .header-lover-h2 {
@@ -455,6 +465,14 @@ input {
   .add-button-holder {
     flex-wrap: wrap;
     text-align: end;
+  }
+
+  .button-holder-more-details {
+    flex-wrap: wrap;
+    text-align: end;
+  }
+
+  .margin-right {
     margin-right: 10rem;
   }
 
@@ -469,7 +487,7 @@ input {
   }
 
   .box {
-    flex-basis: 20%;
+    flex-basis: 15%;
     text-align: inherit;
     position: relative;
   }

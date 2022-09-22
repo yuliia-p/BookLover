@@ -150,7 +150,7 @@ export default class App extends React.Component {
           {this.renderPage()}
           {this.state.showModal === 'signUp' && <SignUpModal onComplete={hideModal} onSignIn={showhModal}/>}
           {this.state.showModal === 'signIn' && <SignInModal onSignIn={handleSignIn} onComplete={hideModal} onSignUp={showhModal}/>}
-        {this.state.deleteModal === true && <DeleteModal onClick={deteleModal}/> }
+          {this.state.deleteModal === true && <DeleteModal onClick={deteleModal}/> }
       </AppContext.Provider>
     );
   }

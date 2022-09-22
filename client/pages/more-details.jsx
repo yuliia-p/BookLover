@@ -56,7 +56,7 @@ export default class MoreDetails extends React.Component {
   handleClick() {
     const { user, showhModal } = this.context;
     const { volumeInfo, searchInfo } = this.state.book;
-    const { title, authors, description, averageRating, categories, industryIdentifiers, imageLinks } = volumeInfo;
+    const { title, authors, description, averageRating, industryIdentifiers, imageLinks } = volumeInfo;
     const isnb = industryIdentifiers.find(i => i.type === 'ISBN_10');
     if (!user) {
       showhModal();
@@ -75,7 +75,12 @@ export default class MoreDetails extends React.Component {
       } else {
         shortDescription = searchInfo.textSnippet;
       }
-
+      let categories = this.state.book.volumeInfo.categories;
+      if (!categories) {
+        categories = '';
+      } else {
+        categories = categories[0];
+      }
       const objToSend = {
         title,
         authors: authors[0],
@@ -85,7 +90,7 @@ export default class MoreDetails extends React.Component {
         buyLink: this.props.buyLink,
         averageRating,
         isbn10: isnb.identifier,
-        categories: categories[0],
+        categories,
         userId: user.userId
       };
       const req = {
@@ -129,7 +134,7 @@ export default class MoreDetails extends React.Component {
             <p className='no-margin genre-name'>{categories}</p>
           </div>
         </div>
-        <div className='add-button-holder flex'>
+        <div className='button-holder-more-details flex margin-right'>
           {this.props.buyLink &&
             <div className='a-button-holder'><a href={this.props.buyLink} className='buy-button'>GET A COPY</a></div>}
           <div className='buy-button-holder'><button onClick={this.handleClick} className='add-button'>WANT TO READ</button></div>

@@ -4,9 +4,6 @@ import AppContext from '../lib/app-context';
 export default class DeleteModal extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      bookToDelete: {}
-    };
     this.handleClick = this.handleClick.bind(this);
   }
 
@@ -17,8 +14,7 @@ export default class DeleteModal extends React.Component {
     const req = {
       method: 'DELETE',
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: `${token}`
+        'X-Access-Token': `${token}`
       }
     };
     fetch(`/api/delete-books/${bookId}`, req)
@@ -39,11 +35,10 @@ export default class DeleteModal extends React.Component {
             <div className="button-holder y-n-holder flex">
             <div className='flex-basis-100'>
               <button type="submit" className="y-button" onClick={this.handleClick}>YES</button>
-              </div>
+            </div>
             <div className='flex-basis-100'>
               <button type="button" className="n-button" onClick={this.props.onClick} >NO</button>
             </div>
-
             </div>
           </div>
       </div>
