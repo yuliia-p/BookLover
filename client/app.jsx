@@ -11,6 +11,7 @@ import MyBooks from './pages/my-books';
 import MoreDetailsMybooks from './components/more-details-my-books';
 import Search from './components/search';
 import NotFound from './pages/not-found';
+import DeleteModal from './components/delete-modal';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -19,13 +20,14 @@ export default class App extends React.Component {
       books: [],
       route: parseRoute(window.location.hash),
       showModal: null,
-      user: null
+      user: null,
+      deleteModal: false
     };
     this.getList = this.getList.bind(this);
     this.showhModal = this.showhModal.bind(this);
     this.handleSignIn = this.handleSignIn.bind(this);
     this.hideModal = this.hideModal.bind(this);
-
+    this.deteleModal = this.deteleModal.bind(this);
   }
 
   componentDidMount() {
@@ -97,6 +99,10 @@ export default class App extends React.Component {
     });
   }
 
+  deteleModal() {
+    this.setState({ deleteModal: !this.state.deleteModal });
+  }
+
   renderPage() {
     const { route, books } = this.state;
     if (route.path === '') {
@@ -118,7 +124,7 @@ export default class App extends React.Component {
     }
     if (route.path === 'my-book-details') {
       const bookId = route.params.get('bookId');
-      return <MoreDetailsMybooks bookId={bookId}/>;
+      return <MoreDetailsMybooks bookId={bookId} onClick={this.deteleModal}/>;
     }
     if (route.path === 'search') {
       const searchValue = route.params.get('txt');
@@ -135,7 +141,7 @@ export default class App extends React.Component {
   }
 
   render() {
-    const { showhModal, hideModal, handleSignIn } = this;
+    const { showhModal, hideModal, handleSignIn, deteleModal } = this;
     const { user, route } = this.state;
     const contextValue = { user, route, showhModal };
     return (
@@ -144,6 +150,7 @@ export default class App extends React.Component {
           {this.renderPage()}
           {this.state.showModal === 'signUp' && <SignUpModal onComplete={hideModal} onSignIn={showhModal}/>}
           {this.state.showModal === 'signIn' && <SignInModal onSignIn={handleSignIn} onComplete={hideModal} onSignUp={showhModal}/>}
+          {this.state.deleteModal === true && <DeleteModal onClick={deteleModal}/> }
       </AppContext.Provider>
     );
   }

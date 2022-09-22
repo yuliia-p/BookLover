@@ -173,7 +173,7 @@ div.full-description {
 
 .modal {
   position: fixed;
-  padding-top: 100px;
+  padding-top: 10rem;
   left: 0;
   top: 0;
   width: 100%;
@@ -235,6 +235,40 @@ input {
   border: none;
 }
 
+.y-button,
+.n-button {
+  cursor: pointer;
+  font-family: Merriweather, serif;
+  font-size: 1rem;
+  text-align: center;
+  color: white;
+  background-color: rgba(17, 17, 24, 1);
+  padding: 0.6rem 1rem;
+  border-radius: 1.9375rem;
+  border: none;
+}
+
+.n-button {
+  font-weight: 600;
+  color: rgba(17, 17, 24, 1);
+  background-color: transparent;
+}
+
+.delete-header {
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 100;
+  margin-bottom: 0;
+}
+
+.y-n-holder {
+  flex-wrap: wrap;
+}
+
+.flex-basis-100 {
+  flex-basis: 100%;
+}
+
 .add-button,
 .buy-button {
   cursor: pointer;
@@ -254,10 +288,16 @@ input {
 }
 
 .add-button-holder {
-  margin: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+}
+
+.button-holder-more-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin: 1rem;
 }
 
 .hidden {
@@ -279,6 +319,10 @@ input {
   width: 23rem;
   background: white;
   border-radius: 0.99rem;
+}
+
+.search {
+  margin-right: 0.3rem;
 }
 
 .box i {
@@ -318,6 +362,12 @@ input {
   background-size: 1rem;
 }
 
+.my-buttons-holder {
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 1rem;
+}
+
 @media screen and (min-width: 768px) {
   img {
     width: 40%;
@@ -343,7 +393,7 @@ input {
   }
 
   .my-books {
-    flex-basis: 25%;
+    flex-basis: 20%;
   }
 
   .header-lover-h2 {
@@ -412,14 +462,22 @@ input {
     border: none;
   }
 
-  .buy-button {
-    padding: 0.6rem 2.4rem;
-  }
-
   .add-button-holder {
-    margin-right: 10rem;
     flex-wrap: wrap;
     text-align: end;
+  }
+
+  .button-holder-more-details {
+    flex-wrap: wrap;
+    text-align: end;
+  }
+
+  .margin-right {
+    margin-right: 10rem;
+  }
+
+  .buy-button {
+    padding: 0.6rem 2.4rem;
   }
 
   .a-button-holder,
@@ -429,7 +487,7 @@ input {
   }
 
   .box {
-    flex-basis: 20%;
+    flex-basis: 15%;
     text-align: inherit;
     position: relative;
   }
@@ -464,5 +522,26 @@ input {
   .box:hover i {
     opacity: 0;
     z-index: -1;
+  }
+
+  .my-buttons-holder {
+    flex-wrap: wrap;
+    text-align: end;
+    margin-right: 10rem;
+    justify-content: end;
+  }
+
+  .delete-button-holder,
+  .a-button-holder {
+    flex-basis: 100%;
+    margin-top: 1rem;
+  }
+
+  .delete-button {
+    padding: 0.6rem 3rem;
+  }
+
+  .modal {
+    padding-top: 15rem;
   }
 }
