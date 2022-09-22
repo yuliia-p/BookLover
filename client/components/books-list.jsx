@@ -3,18 +3,17 @@ import React from 'react';
 function Book(props) {
   const { description, title, author } = props.book;
   const imageLink = props.book.book_image;
-  const buyLink = props.book.buy_links[0];
+  const buyLink = props.book.amazon_product_url;
   const bookObj = {
     title,
     authors: author,
     imageLink,
     shortDescription: description,
     description,
-    buyLink: props.book.amazon_product_url,
+    buyLink,
     isbn10: props.book.primary_isbn10
   };
   const numberWeeks = props.book.weeks_on_list;
-
   return (
       <a
       href={`#details?isbn=${bookObj.isbn10}&imageurl=${imageLink}&n=${numberWeeks}&buy=${buyLink}`}

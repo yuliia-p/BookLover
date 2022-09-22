@@ -152,6 +152,24 @@ app.get('/api/books/:bookId', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.delete('/api/delete-books/:bookId', (req, res, next) => {
+  const bookId = Number(req.params.bookId);
+  if (!bookId) {
+    throw new ClientError(401, 'invalid book id');
+  }
+  const sql = `
+    delete from "usersAddedBooks"
+    where "bookId" = $1;
+  `;
+  const params = [bookId];
+  db.query(sql, params)
+    .then(result => {
+      const data = result.rows[0];
+      res.status(204).json(data);
+    })
+    .catch(err => next(err));
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {

@@ -38,10 +38,16 @@ export default class MoreDetailsMybooks extends React.Component {
             <p>{this.props.buyLink}</p>
           </div>
         </div>
-        {buyLink !== null &&
-          <div className='add-button-holder'>
-          <div className='a-button-holder'><a href={buyLink} className='buy-button'>GET A COPY</a></div>
-        </div>}
+        <div className='my-buttons-holder flex'>
+          {buyLink !== null &&
+            <div className='add-button-holder'>
+              <div className='a-button-holder'><a href={buyLink} className='buy-button'>GET A COPY</a></div>
+            </div>}
+          <div className='delete-button-holder'>
+            <button className="buy-button delete-button" onClick={this.props.onClick}>REMOVE</button>
+          </div>
+        </div>
+
       </>
     );
   }

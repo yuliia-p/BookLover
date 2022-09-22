@@ -254,10 +254,10 @@ input {
 }
 
 .add-button-holder {
-  margin: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+  margin: 1rem;
 }
 
 .hidden {
@@ -316,6 +316,12 @@ input {
   background-repeat: no-repeat;
   background-position: center;
   background-size: 1rem;
+}
+
+.my-buttons-holder {
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 1rem;
 }
 
 @media screen and (min-width: 768px) {
@@ -412,14 +418,14 @@ input {
     border: none;
   }
 
-  .buy-button {
-    padding: 0.6rem 2.4rem;
-  }
-
   .add-button-holder {
-    margin-right: 10rem;
     flex-wrap: wrap;
     text-align: end;
+    margin-right: 10rem;
+  }
+
+  .buy-button {
+    padding: 0.6rem 2.4rem;
   }
 
   .a-button-holder,
@@ -464,5 +470,22 @@ input {
   .box:hover i {
     opacity: 0;
     z-index: -1;
+  }
+
+  .my-buttons-holder {
+    flex-wrap: wrap;
+    text-align: end;
+    margin-right: 10rem;
+    justify-content: end;
+  }
+
+  .delete-button-holder,
+  .a-button-holder {
+    flex-basis: 100%;
+    margin-top: 1rem;
+  }
+
+  .delete-button {
+    padding: 0.6rem 3rem;
   }
 }
