@@ -291,7 +291,6 @@ input {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  margin: 1rem;
 }
 
 .hidden {
@@ -455,7 +454,6 @@ input {
   .add-button-holder {
     flex-wrap: wrap;
     text-align: end;
-    margin-right: 10rem;
   }
 
   .buy-button {
