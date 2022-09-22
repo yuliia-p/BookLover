@@ -98,6 +98,8 @@ app.post('/api/saved-books/', (req, res, next) => {
       const insertUserBookSql = `
     insert into "usersAddedBooks" ("userId", "bookId")
     values ($1, $2)
+    on conflict ("userId", "bookId")
+    do nothing
     returning *
   `;
       const insertUserBookParams = [userId, bookId];
