@@ -10,8 +10,15 @@ export default class MyBooks extends React.Component {
   }
 
   componentDidMount() {
-    const { user } = this.context;
-    fetch(`/api/saved-books/${user.userId}`, Request)
+    const token = window.localStorage.getItem('react-context-jwt');
+    const req = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Access-Token': `${token}`
+      }
+    };
+    fetch('/api/saved-books/', req)
       .then(response => response.json())
       .then(data =>
         this.setState({ books: data })

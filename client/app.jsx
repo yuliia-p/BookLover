@@ -79,6 +79,7 @@ export default class App extends React.Component {
       .catch(error => {
         console.error('Error:', error);
       });
+    window.location.hash = '?category=' + category;
   }
 
   showhModal() {
@@ -125,6 +126,15 @@ export default class App extends React.Component {
         </div>
       );
     }
+    if (route.path === 'category') {
+    //   const category = route.params.get('category');
+    //   console.log('category', category);
+      return (
+        <div className='container'>
+          <BookList books={books} />
+        </div>
+      );
+    }
     if (route.path === 'details') {
       const isbn = route.params.get('isbn');
       const imgageUrl = route.params.get('imageurl');
@@ -154,16 +164,16 @@ export default class App extends React.Component {
   }
 
   render() {
-    const { showhModal, hideModal, handleSignIn, deteleModal, handleSignOut } = this;
+    const { showhModal, hideModal, handleSignIn, deteleModal, handleSignOut, getList } = this;
     const { user, route } = this.state;
     const contextValue = { user, route, showhModal };
     return (
       <AppContext.Provider value={contextValue}>
-          <Navbar onClick={this.getList} onAuthClick={showhModal} />
+          <Navbar onClick={getList} onAuthClick={showhModal} />
           {this.renderPage()}
           {this.state.showModal === 'signUp' && <SignUpModal onComplete={hideModal} onSignIn={showhModal}/>}
           {this.state.showModal === 'signIn' && <SignInModal onSignIn={handleSignIn} onComplete={hideModal} onSignUp={showhModal}/>}
-        {this.state.showModal === 'profile-menu' && <ProfileMenu onClick={handleSignOut} onComplete={hideModal}/>}
+          {this.state.showModal === 'profile-menu' && <ProfileMenu onClick={handleSignOut} onComplete={hideModal}/>}
           {this.state.deleteModal === true && <DeleteModal onClick={deteleModal}/> }
       </AppContext.Provider>
     );

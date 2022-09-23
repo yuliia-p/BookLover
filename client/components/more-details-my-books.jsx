@@ -9,7 +9,15 @@ export default class MoreDetailsMybooks extends React.Component {
 
   componentDidMount() {
     const { bookId } = this.props;
-    fetch(`/api/books/${Number(bookId)}`, Request)
+    const token = window.localStorage.getItem('react-context-jwt');
+    const req = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Access-Token': `${token}`
+      }
+    };
+    fetch(`/api/books/${Number(bookId)}`, req)
       .then(response => response.json())
       .then(data => this.setState({ book: data }))
       .catch(error => {

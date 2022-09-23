@@ -97,7 +97,7 @@ export default class MoreDetails extends React.Component {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `${token}`
+          'X-Access-Token': `${token}`
         },
         body: JSON.stringify(objToSend)
       };
