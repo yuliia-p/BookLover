@@ -13,40 +13,60 @@ export default class MoreDetails extends React.Component {
   }
 
   componentDidMount() {
-    const url = `https://www.googleapis.com/books/v1/volumes?q=isbn${this.props.isbn}&projection=full&key=${process.env.GOOGLE_BOOKS_API_KEY}`;
-    const request = {
+    const authorToSerach = this.props.author.replaceAll(' ', '+');
+    const titleToSearch = this.props.title.replaceAll(' ', '+');
+    const url = `https://www.googleapis.com/books/v1/volumes?q=${titleToSearch}+inauthor:${authorToSerach}&projection=full&key=${process.env.GOOGLE_BOOKS_API_KEY}`;
+    const req = {
       method: 'GET',
       headers: {
         Accept: 'application/json'
       }
     };
-    fetch(url, request)
+    fetch(url, req)
       .then(response => response.json())
       .then(data => {
-        if (data.totalItems === 0) {
-          const urlisbn10 = `https://www.googleapis.com/books/v1/volumes?q=isbn10-${this.props.isbn}&projection=full&key=${process.env.GOOGLE_BOOKS_API_KEY}`;
-          const request = {
-            method: 'GET',
-            headers: {
-              Accept: 'application/json'
-            }
-          };
-          fetch(urlisbn10, request)
-            .then(response => response.json())
-            .then(data => {
-              if (data.totalItems > 0) {
-                this.setState({
-                  book: data.items[0]
-                });
-              } else {
-                window.location.hash = 'not-found';
-              }
-            });
-        } else {
-          this.setState({
-            book: data.items[0]
-          });
-        }
+        this.setState({
+          book: data.items[0]
+        });
+        //   })
+
+        // const urlisbn = `https://www.googleapis.com/books/v1/volumes?q=isbn${this.props.isbn}&projection=full&key=${process.env.GOOGLE_BOOKS_API_KEY}`;
+        // const request = {
+        //   method: 'GET',
+        //   headers: {
+        //     Accept: 'application/json'
+        //   }
+        // };
+        // fetch(urlisbn, request)
+        //   .then(response => response.json())
+        //   .then(data => {
+        //     // console.log('data isbn: ', data);
+        //     if (data.totalItems === 0) {
+        //       const urlisbn10 = `https://www.googleapis.com/books/v1/volumes?q=isbn10-${this.props.isbn}&projection=full&key=${process.env.GOOGLE_BOOKS_API_KEY}`;
+        //       const request = {
+        //         method: 'GET',
+        //         headers: {
+        //           Accept: 'application/json'
+        //         }
+        //       };
+        //       fetch(urlisbn10, request)
+        //         .then(response => response.json())
+        //         .then(data => {
+        //           // console.log('data isbn10: ', data);
+
+        //           if (data.totalItems > 0) {
+        //             this.setState({
+        //               book: data.items[0]
+        //             });
+        //           } else {
+        //             window.location.hash = 'not-found';
+        //           }
+        //         });
+        //     } else {
+        //       this.setState({
+        //         book: data.items[0]
+        //       });
+        //     }
       })
       .catch(error => {
         console.error('Error:', error);

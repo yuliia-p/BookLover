@@ -51,8 +51,6 @@ function ResultBook(props) {
   const { volumeInfo, saleInfo } = props.book;
   const { authors, imageLinks, title, description } = volumeInfo;
   const isnb = volumeInfo.industryIdentifiers.find(obj => obj.type === 'ISBN_10');
-  // averageRating, categories, description, industryIdentifiers, infoLink!!!
-  // play.google.com/store/books/details
   let buyLink;
   if (saleInfo.buyLink) {
     buyLink = encodeURIComponent(saleInfo.buyLink);
@@ -61,7 +59,7 @@ function ResultBook(props) {
   }
   return (
     <a
-      href={`#search-details?isbn=${isnb.identifier}&buy-link=${buyLink}`}
+      href={`#search-details?isbn=${isnb.identifier}&author=${authors.join()}&title=${title}&buy-link=${buyLink}`}
       className='flex margin-top a-book'>
       <li className='flex margin-top'>
         <img src={imageLinks.thumbnail} alt={title} />

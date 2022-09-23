@@ -25,10 +25,10 @@ export default class App extends React.Component {
       deleteModal: false
     };
     this.getList = this.getList.bind(this);
-    this.showhModal = this.showhModal.bind(this);
+    this.showModal = this.showModal.bind(this);
     this.handleSignIn = this.handleSignIn.bind(this);
     this.hideModal = this.hideModal.bind(this);
-    this.deteleModal = this.deteleModal.bind(this);
+    this.deleteModal = this.deleteModal.bind(this);
     this.handleSignOut = this.handleSignOut.bind(this);
   }
 
@@ -82,7 +82,7 @@ export default class App extends React.Component {
     window.location.hash = '?category=' + category;
   }
 
-  showhModal() {
+  showModal() {
     const { showModal, user } = this.state;
     this.setState({ showModal: 'signIn' });
     if (showModal === 'signIn') {
@@ -113,7 +113,7 @@ export default class App extends React.Component {
     });
   }
 
-  deteleModal() {
+  deleteModal() {
     this.setState({ deleteModal: !this.state.deleteModal });
   }
 
@@ -127,8 +127,6 @@ export default class App extends React.Component {
       );
     }
     if (route.path === 'category') {
-    //   const category = route.params.get('category');
-    //   console.log('category', category);
       return (
         <div className='container'>
           <BookList books={books} />
@@ -137,17 +135,19 @@ export default class App extends React.Component {
     }
     if (route.path === 'details') {
       const isbn = route.params.get('isbn');
+      const author = route.params.get('author');
+      const title = route.params.get('title');
       const imgageUrl = route.params.get('imageurl');
       const numberWeeks = route.params.get('n');
       const buyLink = route.params.get('buy');
-      return <MoreDetails isbn={isbn} url={imgageUrl} number={numberWeeks} buyLink={buyLink}/>;
+      return <MoreDetails isbn={isbn} author={author} title={title} url={imgageUrl} number={numberWeeks} buyLink={buyLink} />;
     }
     if (this.state.user && route.path === 'my-books') {
       return <MyBooks />;
     }
     if (route.path === 'my-book-details') {
       const bookId = route.params.get('bookId');
-      return <MoreDetailsMybooks bookId={bookId} onClick={this.deteleModal}/>;
+      return <MoreDetailsMybooks bookId={bookId} onClick={this.deleteModal}/>;
     }
     if (route.path === 'search') {
       const searchValue = route.params.get('txt');
@@ -155,8 +155,10 @@ export default class App extends React.Component {
     }
     if (route.path === 'search-details') {
       const isbn = route.params.get('isbn');
+      const author = route.params.get('author');
+      const title = route.params.get('title');
       const buyLink = route.params.get('buy-link');
-      return <MoreDetails isbn={isbn} buyLink={buyLink}/>;
+      return <MoreDetails isbn={isbn} author={author} title={title} buyLink={buyLink}/>;
     }
     if (route.path === 'not-found') {
       return <NotFound />;
@@ -164,17 +166,17 @@ export default class App extends React.Component {
   }
 
   render() {
-    const { showhModal, hideModal, handleSignIn, deteleModal, handleSignOut, getList } = this;
+    const { showModal, hideModal, handleSignIn, deleteModal, handleSignOut, getList } = this;
     const { user, route } = this.state;
-    const contextValue = { user, route, showhModal };
+    const contextValue = { user, route, showModal };
     return (
       <AppContext.Provider value={contextValue}>
-          <Navbar onClick={getList} onAuthClick={showhModal} />
+        <Navbar onClick={getList} onAuthClick={showModal} />
           {this.renderPage()}
-          {this.state.showModal === 'signUp' && <SignUpModal onComplete={hideModal} onSignIn={showhModal}/>}
-          {this.state.showModal === 'signIn' && <SignInModal onSignIn={handleSignIn} onComplete={hideModal} onSignUp={showhModal}/>}
+          {this.state.showModal === 'signUp' && <SignUpModal onComplete={hideModal} onSignIn={showModal}/>}
+          {this.state.showModal === 'signIn' && <SignInModal onSignIn={handleSignIn} onComplete={hideModal} onSignUp={showModal}/>}
           {this.state.showModal === 'profile-menu' && <ProfileMenu onClick={handleSignOut} onComplete={hideModal}/>}
-          {this.state.deleteModal === true && <DeleteModal onClick={deteleModal}/> }
+          {this.state.deleteModal === true && <DeleteModal onClick={deleteModal}/> }
       </AppContext.Provider>
     );
   }

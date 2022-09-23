@@ -1,7 +1,9 @@
 import React from 'react';
 
 function Book(props) {
+  // console.log('PROPS FROM BOOK BOOKLIST', props.book);
   const { description, title, author } = props.book;
+
   const imageLink = props.book.book_image;
   const buyLink = props.book.amazon_product_url;
   const bookObj = {
@@ -14,9 +16,10 @@ function Book(props) {
     isbn10: props.book.primary_isbn10
   };
   const numberWeeks = props.book.weeks_on_list;
+
   return (
       <a
-      href={`#details?isbn=${bookObj.isbn10}&imageurl=${imageLink}&n=${numberWeeks}&buy=${buyLink}`}
+      href={`#details?isbn=${bookObj.isbn10}&author=${author}&title=${title}&imageurl=${imageLink}&n=${numberWeeks}&buy=${buyLink}`}
       className='flex margin-top a-book'>
         <li className='flex margin-top'>
         <img src={imageLink} alt={props.book.title} />

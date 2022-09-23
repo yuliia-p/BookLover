@@ -373,10 +373,10 @@ input {
 .dropdown-profile-menu {
   background-color: rgba(17, 17, 24, 1);
   position: fixed;
-  padding: 9rem 0.5rem 0;
+  padding: 10rem 0.5rem 0;
   right: 0;
   top: 0;
-  height: 23%;
+  height: 25%;
   width: 25%;
   overflow: auto;
 }
@@ -391,7 +391,7 @@ input {
 
 @media screen and (min-width: 768px) {
   img {
-    width: 40%;
+    max-width: 30%;
   }
 
   .more-details-img {
@@ -450,7 +450,6 @@ input {
 
   .content-holder-more-details {
     margin-left: 2rem;
-    flex-basis: 60%;
   }
 
   .no-padding {
@@ -563,8 +562,8 @@ input {
   }
 
   .dropdown-profile-menu {
-    padding: 6rem 0.5rem 0;
-    height: 16%;
+    padding: 7rem 0.5rem 0;
+    height: 18%;
     width: 10%;
   }
 
