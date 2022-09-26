@@ -76,14 +76,13 @@ export default class MoreDetails extends React.Component {
   }
 
   handleClick() {
-    const { user, showhModal } = this.context;
+    const { user, showModal } = this.context;
     const { volumeInfo, searchInfo } = this.state.book;
     const { title, authors, description, averageRating, industryIdentifiers, imageLinks } = volumeInfo;
     const isnb = industryIdentifiers.find(i => i.type === 'ISBN_10');
     if (!user) {
-      showhModal();
+      showModal();
     } else {
-      // join() for authors
       const token = window.localStorage.getItem('react-context-jwt');
       let bookCover = this.props.url;
       if (!bookCover) {
@@ -101,11 +100,11 @@ export default class MoreDetails extends React.Component {
       if (!categories) {
         categories = '';
       } else {
-        categories = categories[0];
+        categories = categories.join();
       }
       const objToSend = {
         title,
-        authors: authors[0],
+        authors: authors.join(),
         imageLink: bookCover,
         shortDescription,
         description,
