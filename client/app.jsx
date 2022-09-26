@@ -1,6 +1,6 @@
 import React from 'react';
 import Navbar from './components/navbar';
-import BookList from './components/books-list';
+import Home from './pages/home';
 import parseRoute from './lib/parse-route';
 import MoreDetails from '../client/pages/more-details';
 import SignUpModal from './components/sign-up-modal';
@@ -18,7 +18,7 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      books: [],
+      // books: [],
       route: parseRoute(window.location.hash),
       showModal: null,
       user: null,
@@ -33,23 +33,23 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    const url = `https://api.nytimes.com/svc/books/v3/lists/current/combined-print-and-e-book-fiction.json?api-key=${process.env.BOOKS_API_KEY}`;
-    const request = {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json'
-      }
-    };
-    fetch(url, request)
-      .then(response => response.json())
-      .then(data =>
-        this.setState({
-          books: data.results.books
-        })
-      )
-      .catch(error => {
-        console.error('Error:', error);
-      });
+    // const url = `https://api.nytimes.com/svc/books/v3/lists/current/combined-print-and-e-book-fiction.json?api-key=${process.env.BOOKS_API_KEY}`;
+    // const request = {
+    //   method: 'GET',
+    //   headers: {
+    //     Accept: 'application/json'
+    //   }
+    // };
+    // fetch(url, request)
+    //   .then(response => response.json())
+    //   .then(data =>
+    //     this.setState({
+    //       books: data.results.books
+    //     })
+    //   )
+    //   .catch(error => {
+    //     console.error('Error:', error);
+    //   });
     window.addEventListener('hashchange', () => {
       this.setState({
         route: parseRoute(window.location.hash)
@@ -79,7 +79,6 @@ export default class App extends React.Component {
       .catch(error => {
         console.error('Error:', error);
       });
-    window.location.hash = '?category=' + category;
   }
 
   showModal() {
@@ -118,18 +117,12 @@ export default class App extends React.Component {
   }
 
   renderPage() {
-    const { route, books } = this.state;
+    const { route } = this.state;
     if (route.path === '') {
+      const category = route.params.get('category');
       return (
         <div className='container'>
-          <BookList books={books} />
-        </div>
-      );
-    }
-    if (route.path === 'category') {
-      return (
-        <div className='container'>
-          <BookList books={books} />
+          <Home category={category}/>
         </div>
       );
     }
@@ -171,7 +164,7 @@ export default class App extends React.Component {
     const contextValue = { user, route, showModal };
     return (
       <AppContext.Provider value={contextValue}>
-        <Navbar onClick={getList} onAuthClick={showModal} />
+        <Navbar getList={getList} onAuthClick={showModal} />
           {this.renderPage()}
           {this.state.showModal === 'signUp' && <SignUpModal onComplete={hideModal} onSignIn={showModal}/>}
           {this.state.showModal === 'signIn' && <SignInModal onSignIn={handleSignIn} onComplete={hideModal} onSignUp={showModal}/>}

@@ -18,12 +18,13 @@ export default class Navbar extends React.Component {
   handleChange(event) {
     const encodedObj = this.state.categories.find(o => o.display_name === event.target.value);
     const encodedName = encodedObj.list_name_encoded;
-    this.props.onClick(encodedName);
+    this.props.getList(encodedName);
     this.setState({
       isClicked: !this.state.isClicked,
       showModal: false,
       categoryToShow: event.target.value
     });
+    window.location.hash = '#?category=' + encodedName;
   }
 
   componentDidMount() {
@@ -57,7 +58,6 @@ export default class Navbar extends React.Component {
     event.preventDefault();
     window.location.hash = 'search?txt=' + this.state.userInputValue;
     this.setState({ userInputValue: '' });
-
   }
 
   searchInput(event) {
@@ -79,7 +79,7 @@ export default class Navbar extends React.Component {
               user !== null && <a className='dropdown my-books' href='#my-books'>My Books</a>
             }
             <div className='dropdown-list-holder flex'>
-              <a href="#" onClick={this.getCategories} className='dropdown'>NYT Best Sellers<span className='span-category'>{categoryToShow}</span></a>
+              <a onClick={this.getCategories} className='dropdown'>NYT Best Sellers<span className='span-category'>{categoryToShow}</span></a>
               <div className='dropdown-content'>
                 <select onChange={this.handleChange} className={classToShow}>
                   <MenuItems categories={this.state.categories} />

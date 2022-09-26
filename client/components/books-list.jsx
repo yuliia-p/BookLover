@@ -1,9 +1,7 @@
 import React from 'react';
 
 function Book(props) {
-  // console.log('PROPS FROM BOOK BOOKLIST', props.book);
   const { description, title, author } = props.book;
-
   const imageLink = props.book.book_image;
   const buyLink = props.book.amazon_product_url;
   const bookObj = {
