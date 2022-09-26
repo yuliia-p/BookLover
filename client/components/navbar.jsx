@@ -101,6 +101,7 @@ export default class Navbar extends React.Component {
 }
 
 function MenuItems(props) {
+  // console.log('props for menuItems', props);
   return (
     props.categories.map((category, index) => {
       return <Category key={index} category={category} />;

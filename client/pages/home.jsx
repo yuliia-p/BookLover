@@ -26,6 +26,7 @@ export default class Home extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    // console.log('prevProps', prevProps);
     if (this.props.category !== prevProps.category) {
       const url = `https://api.nytimes.com/svc/books/v3/lists/current/${this.props.category}.json?api-key=${process.env.BOOKS_API_KEY}`;
       const request = {
