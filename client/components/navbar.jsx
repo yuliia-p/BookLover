@@ -16,6 +16,7 @@ export default class Navbar extends React.Component {
     this.searchInput = this.searchInput.bind(this);
   }
 
+  // onChange on select element
   handleChange(event) {
     const encodedObj = this.state.categories.find(o => o.display_name === event.target.value);
     /*
@@ -29,7 +30,6 @@ export default class Navbar extends React.Component {
     const encodedName = encodedObj.list_name_encoded;
     this.setState({
       isClicked: !this.state.isClicked,
-      showModal: false,
       categoryToShow: event.target.value
     });
     window.location.hash = '#?category=' + encodedName;

@@ -34,7 +34,6 @@ function Book(props) {
 }
 
 export default function BookList(props) {
-  // console.log('BOOKLIST props', props);
   return (
 
       <ul>
