@@ -31,6 +31,30 @@ export default class Search extends React.Component {
       });
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props !== prevProps) {
+      const searchKeyWords = this.props.value.replaceAll(' ', '+');
+      const url = `https://www.googleapis.com/books/v1/volumes?q=${searchKeyWords}&maxResults=20&key=${process.env.GOOGLE_BOOKS_API_KEY}`;
+      const request = {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json'
+        }
+      };
+      fetch(url, request)
+        .then(response => response.json())
+        .then(data => {
+          const result = data.items.filter(book => book.volumeInfo.industryIdentifiers.length > 1 && book.volumeInfo.imageLinks);
+          this.setState({
+            results: result
+          });
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    }
+  }
+
   render() {
     const { results } = this.state;
     return (
@@ -49,19 +73,23 @@ Search.contextType = AppContext;
 
 function ResultBook(props) {
   const { volumeInfo, saleInfo } = props.book;
-  const { authors, imageLinks, title, description } = volumeInfo;
+  const { imageLinks, title, description } = volumeInfo;
   const isnb = volumeInfo.industryIdentifiers.find(obj => obj.type === 'ISBN_10');
-  // averageRating, categories, description, industryIdentifiers, infoLink!!!
-  // play.google.com/store/books/details
   let buyLink;
   if (saleInfo.buyLink) {
     buyLink = encodeURIComponent(saleInfo.buyLink);
   } else {
     buyLink = '';
   }
+  let authors;
+  if (!props.book.volumeInfo.authors || props.book.volumeInfo.authors.length < 0) {
+    authors = 'Unkown';
+  } else {
+    authors = props.book.volumeInfo.authors.join();
+  }
   return (
     <a
-      href={`#search-details?isbn=${isnb.identifier}&buy-link=${buyLink}`}
+      href={`#search-details?isbn=${isnb.identifier}&author=${authors}&title=${title}&buy-link=${buyLink}`}
       className='flex margin-top a-book'>
       <li className='flex margin-top'>
         <img src={imageLinks.thumbnail} alt={title} />

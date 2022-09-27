@@ -14,9 +14,10 @@ function Book(props) {
     isbn10: props.book.primary_isbn10
   };
   const numberWeeks = props.book.weeks_on_list;
+
   return (
       <a
-      href={`#details?isbn=${bookObj.isbn10}&imageurl=${imageLink}&n=${numberWeeks}&buy=${buyLink}`}
+      href={`#details?isbn=${bookObj.isbn10}&author=${author}&title=${title}&imageurl=${imageLink}&n=${numberWeeks}&buy=${buyLink}`}
       className='flex margin-top a-book'>
         <li className='flex margin-top'>
         <img src={imageLink} alt={props.book.title} />
@@ -34,12 +35,14 @@ function Book(props) {
 
 export default function BookList(props) {
   return (
-    <ul>
-      {
-        props.books
-          .filter(book => book.isbns.length > 0)
-          .map(book => <Book key={book.title} book={book} />)
-      }
-    </ul>
+
+      <ul>
+        {
+          props.books
+            .filter(book => book.isbns.length > 0)
+            .map(book => <Book key={book.title} book={book} />)
+        }
+      </ul>
+
   );
 }

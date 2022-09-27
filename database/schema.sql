@@ -27,7 +27,7 @@ CREATE TABLE "public"."books" (
   "shortDescription" TEXT,
 	"buyLink" TEXT,
 	"averageRating" numeric,
-	"isbn10" TEXT NOT NULL,
+	"isbn10" TEXT NOT NULL UNIQUE,
 	"categories" TEXT,
 	CONSTRAINT "books_pk" PRIMARY KEY ("bookId")
 ) WITH (

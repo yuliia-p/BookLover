@@ -81,8 +81,11 @@ app.post('/api/users/sign-in', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.use(authorizationMiddleware);
+
 app.post('/api/saved-books/', (req, res, next) => {
-  const { title, authors, imageLink, shortDescription, description, buyLink, averageRating, isbn10, categories, userId } = req.body;
+  const { title, authors, imageLink, shortDescription, description, buyLink, averageRating, isbn10, categories } = req.body;
+  const { userId } = req.user;
   if (!title || !authors || !imageLink || !isbn10 || !userId) {
     throw new ClientError(400, 'missing info');
   }
@@ -113,12 +116,11 @@ app.post('/api/saved-books/', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.get('/api/saved-books/:userId', (req, res, next) => {
-  const userId = Number(req.params.userId);
+app.get('/api/saved-books/', (req, res, next) => {
+  const { userId } = req.user;
   if (!userId) {
     throw new ClientError(401, 'invalid user id');
   }
-  // select book id where userid $
   const sql = `
     select *
     from "books"
@@ -152,8 +154,6 @@ app.get('/api/books/:bookId', (req, res, next) => {
     })
     .catch(err => next(err));
 });
-
-app.use(authorizationMiddleware);
 
 app.delete('/api/delete-books/:bookId', (req, res, next) => {
   const bookId = Number(req.params.bookId);

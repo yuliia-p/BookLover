@@ -1,6 +1,6 @@
 import React from 'react';
 import Navbar from './components/navbar';
-import BookList from './components/books-list';
+import Home from './pages/home';
 import parseRoute from './lib/parse-route';
 import MoreDetails from '../client/pages/more-details';
 import SignUpModal from './components/sign-up-modal';
@@ -12,42 +12,25 @@ import MoreDetailsMybooks from './components/more-details-my-books';
 import Search from './components/search';
 import NotFound from './pages/not-found';
 import DeleteModal from './components/delete-modal';
+import ProfileMenu from './components/profile-menu';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      books: [],
       route: parseRoute(window.location.hash),
       showModal: null,
       user: null,
       deleteModal: false
     };
-    this.getList = this.getList.bind(this);
-    this.showhModal = this.showhModal.bind(this);
+    this.showModal = this.showModal.bind(this);
     this.handleSignIn = this.handleSignIn.bind(this);
     this.hideModal = this.hideModal.bind(this);
-    this.deteleModal = this.deteleModal.bind(this);
+    this.deleteModal = this.deleteModal.bind(this);
+    this.handleSignOut = this.handleSignOut.bind(this);
   }
 
   componentDidMount() {
-    const url = `https://api.nytimes.com/svc/books/v3/lists/current/combined-print-and-e-book-fiction.json?api-key=${process.env.BOOKS_API_KEY}`;
-    const request = {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json'
-      }
-    };
-    fetch(url, request)
-      .then(response => response.json())
-      .then(data =>
-        this.setState({
-          books: data.results.books
-        })
-      )
-      .catch(error => {
-        console.error('Error:', error);
-      });
     window.addEventListener('hashchange', () => {
       this.setState({
         route: parseRoute(window.location.hash)
@@ -58,32 +41,14 @@ export default class App extends React.Component {
     this.setState({ user });
   }
 
-  getList(category) {
-    const url = `https://api.nytimes.com/svc/books/v3/lists/current/${category}.json?api-key=${process.env.BOOKS_API_KEY}`;
-    const request = {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json'
-      }
-    };
-    fetch(url, request)
-      .then(response => response.json())
-      .then(data => {
-        this.setState({
-          books: data.results.books,
-          isClicked: !this.state.isClicked
-        });
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
-  }
-
-  showhModal() {
-    const { showModal } = this.state;
+  showModal() {
+    const { showModal, user } = this.state;
     this.setState({ showModal: 'signIn' });
     if (showModal === 'signIn') {
       this.setState({ showModal: 'signUp' });
+    }
+    if (user) {
+      this.setState({ showModal: 'profile-menu' });
     }
   }
 
@@ -99,32 +64,43 @@ export default class App extends React.Component {
     });
   }
 
-  deteleModal() {
+  handleSignOut() {
+    window.localStorage.removeItem('react-context-jwt');
+    this.setState({
+      user: null,
+      showModal: null
+    });
+  }
+
+  deleteModal() {
     this.setState({ deleteModal: !this.state.deleteModal });
   }
 
   renderPage() {
-    const { route, books } = this.state;
+    const { route } = this.state;
     if (route.path === '') {
+      const category = route.params.get('category');
       return (
         <div className='container'>
-          <BookList books={books} />
+          <Home category={category}/>
         </div>
       );
     }
     if (route.path === 'details') {
       const isbn = route.params.get('isbn');
+      const author = route.params.get('author');
+      const title = route.params.get('title');
       const imgageUrl = route.params.get('imageurl');
       const numberWeeks = route.params.get('n');
       const buyLink = route.params.get('buy');
-      return <MoreDetails isbn={isbn} url={imgageUrl} number={numberWeeks} buyLink={buyLink}/>;
+      return <MoreDetails isbn={isbn} author={author} title={title} url={imgageUrl} number={numberWeeks} buyLink={buyLink} />;
     }
     if (this.state.user && route.path === 'my-books') {
       return <MyBooks />;
     }
     if (route.path === 'my-book-details') {
       const bookId = route.params.get('bookId');
-      return <MoreDetailsMybooks bookId={bookId} onClick={this.deteleModal}/>;
+      return <MoreDetailsMybooks bookId={bookId} onClick={this.deleteModal}/>;
     }
     if (route.path === 'search') {
       const searchValue = route.params.get('txt');
@@ -132,8 +108,10 @@ export default class App extends React.Component {
     }
     if (route.path === 'search-details') {
       const isbn = route.params.get('isbn');
+      const author = route.params.get('author');
+      const title = route.params.get('title');
       const buyLink = route.params.get('buy-link');
-      return <MoreDetails isbn={isbn} buyLink={buyLink}/>;
+      return <MoreDetails isbn={isbn} author={author} title={title} buyLink={buyLink}/>;
     }
     if (route.path === 'not-found') {
       return <NotFound />;
@@ -141,16 +119,17 @@ export default class App extends React.Component {
   }
 
   render() {
-    const { showhModal, hideModal, handleSignIn, deteleModal } = this;
+    const { showModal, hideModal, handleSignIn, deleteModal, handleSignOut } = this;
     const { user, route } = this.state;
-    const contextValue = { user, route, showhModal };
+    const contextValue = { user, route, showModal };
     return (
       <AppContext.Provider value={contextValue}>
-          <Navbar onClick={this.getList} onAuthClick={showhModal} />
+        <Navbar onAuthClick={showModal} />
           {this.renderPage()}
-          {this.state.showModal === 'signUp' && <SignUpModal onComplete={hideModal} onSignIn={showhModal}/>}
-          {this.state.showModal === 'signIn' && <SignInModal onSignIn={handleSignIn} onComplete={hideModal} onSignUp={showhModal}/>}
-          {this.state.deleteModal === true && <DeleteModal onClick={deteleModal}/> }
+          {this.state.showModal === 'signUp' && <SignUpModal onComplete={hideModal} onSignIn={showModal}/>}
+          {this.state.showModal === 'signIn' && <SignInModal onSignIn={handleSignIn} onComplete={hideModal} onSignUp={showModal}/>}
+          {this.state.showModal === 'profile-menu' && <ProfileMenu onClick={handleSignOut} onComplete={hideModal}/>}
+          {this.state.deleteModal === true && <DeleteModal onClick={deleteModal}/> }
       </AppContext.Provider>
     );
   }

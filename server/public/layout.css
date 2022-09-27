@@ -34,14 +34,18 @@ img {
   }
 
   .content-holder {
-    flex-basis: 60%;
+    flex-basis: 70%;
   }
 
   img {
-    flex-basis: 40%;
+    flex-basis: 30%;
+  }
+
+  .content-holder-more-details {
+    flex-basis: 70%;
   }
 
   div.container.full-description {
-    padding: 3rem 10rem 0;
+    padding: 3rem 20rem 0;
   }
 }
