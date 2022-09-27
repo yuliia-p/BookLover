@@ -23,7 +23,6 @@ export default class App extends React.Component {
       user: null,
       deleteModal: false
     };
-    this.getList = this.getList.bind(this);
     this.showModal = this.showModal.bind(this);
     this.handleSignIn = this.handleSignIn.bind(this);
     this.hideModal = this.hideModal.bind(this);
@@ -40,26 +39,6 @@ export default class App extends React.Component {
     const token = window.localStorage.getItem('react-context-jwt');
     const user = token ? jwtDecode(token) : null;
     this.setState({ user });
-  }
-
-  getList(category) {
-    const url = `https://api.nytimes.com/svc/books/v3/lists/current/${category}.json?api-key=${process.env.BOOKS_API_KEY}`;
-    const request = {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json'
-      }
-    };
-    fetch(url, request)
-      .then(response => response.json())
-      .then(data => {
-        this.setState({
-          isClicked: !this.state.isClicked
-        });
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
   }
 
   showModal() {
@@ -140,12 +119,12 @@ export default class App extends React.Component {
   }
 
   render() {
-    const { showModal, hideModal, handleSignIn, deleteModal, handleSignOut, getList } = this;
+    const { showModal, hideModal, handleSignIn, deleteModal, handleSignOut } = this;
     const { user, route } = this.state;
     const contextValue = { user, route, showModal };
     return (
       <AppContext.Provider value={contextValue}>
-        <Navbar getList={getList} onAuthClick={showModal} />
+        <Navbar onAuthClick={showModal} />
           {this.renderPage()}
           {this.state.showModal === 'signUp' && <SignUpModal onComplete={hideModal} onSignIn={showModal}/>}
           {this.state.showModal === 'signIn' && <SignInModal onSignIn={handleSignIn} onComplete={hideModal} onSignUp={showModal}/>}
