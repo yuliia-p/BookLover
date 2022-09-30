@@ -17,3 +17,8 @@ ___
 ### This application was build querying two different APIs
 - [NYTimes The Books API](https://developer.nytimes.com/docs/books-product/1/overview) used for query bestsellers by category
 - [Google Books APIs](https://developers.google.com/books/docs/overview) used for full description and search feature 
+
+### Preview 
+<p align="middle">
+  <img src="Preview.gif" width="500">
+</p>
