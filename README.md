@@ -48,12 +48,11 @@ ____
 1. Clone the repository.
 ```shell
     git clone https://github.com/yuliia-p/BookLover
-    cd sgt-react
+    cd BookLover
  ```
 2. Install all dependencies with NPM.
 ```shell
     npm install
 ```
 3. Copy the .env.example into .env with your own API keys and database url
-``` cp .env.example .env
-```
+`cp .env.example .env`
