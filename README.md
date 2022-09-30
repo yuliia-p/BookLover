@@ -53,5 +53,7 @@ ____
 2. Install all dependencies with NPM.
 ```shell
     npm install
-    ```
- 
+```
+3. Copy the .env.example into .env with your own API keys and database url
+``` cp .env.example .env
+```
