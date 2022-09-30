@@ -64,6 +64,10 @@ h2 {
   margin: 0;
 }
 
+.title:hover {
+  color: rgba(118, 120, 119, 1);
+}
+
 div.rating {
   font-size: 1.2rem;
 }
@@ -106,6 +110,10 @@ div.rating {
   color: white;
 }
 
+.dropdown:hover {
+  text-decoration: underline;
+}
+
 .dropdown-content {
   margin: 0.8rem 0 0;
   position: absolute;
@@ -142,6 +150,10 @@ select {
   position: absolute;
   bottom: 0;
   right: 0;
+}
+
+.more-details-p:hover {
+  color: rgba(118, 120, 119, 1);
 }
 
 div.full-description {
@@ -368,6 +380,7 @@ input {
 .my-buttons {
   justify-content: space-between;
   align-items: baseline;
+  margin-top: 1rem;
 }
 
 .dropdown-profile-menu {
@@ -389,7 +402,60 @@ input {
   border-bottom: 0.11rem solid rgba(255, 255, 255, 0.25);
 }
 
-@media screen and (min-width: 768px) {
+.lds-facebook {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.lds-facebook div {
+  display: inline-block;
+  position: absolute;
+  left: 8px;
+  width: 16px;
+  background: rgba(17, 17, 24, 1);
+  animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+
+.lds-facebook div:nth-child(1) {
+  left: 8px;
+  animation-delay: -0.24s;
+}
+
+.lds-facebook div:nth-child(2) {
+  left: 32px;
+  animation-delay: -0.12s;
+}
+
+.lds-facebook div:nth-child(3) {
+  left: 56px;
+  animation-delay: 0;
+}
+
+@keyframes lds-facebook {
+  0% {
+    top: 8px;
+    height: 64px;
+  }
+
+  50%,
+  100% {
+    top: 24px;
+    height: 32px;
+  }
+}
+
+.center {
+  text-align: center;
+  margin-top: 15rem;
+}
+
+.not-found-a {
+  text-decoration: underline;
+}
+
+@media screen and (min-width: 1280px) {
   img {
     max-width: 30%;
   }
@@ -563,7 +629,7 @@ input {
 
   .dropdown-profile-menu {
     padding: 7rem 0.5rem 0;
-    height: 18%;
+    height: 19%;
     width: 10%;
   }
 

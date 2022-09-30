@@ -4,13 +4,13 @@ export default function NotFound(props) {
   return (
     <div>
       <div className="row">
-        <div className="col text-center mb-5">
+        <div className="center">
           <h3>
             Uh oh, we could not find the Book you were looking for!
+            <p>
+              <a href="#">Return to <span className='not-found-a'>Main page</span></a>
+            </p>
           </h3>
-          <p className="text-muted">
-            <a href="#">Return to Main page</a>
-          </p>
         </div>
       </div>
     </div>

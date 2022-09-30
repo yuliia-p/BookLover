@@ -1,15 +1,19 @@
 import React from 'react';
 import AppContext from '../lib/app-context';
+import LoadingSpinner from '../components/loading-spinner';
 
 export default class Search extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      results: []
+      results: [],
+      isLoading: false
+
     };
   }
 
   componentDidMount() {
+    this.setState({ isLoading: true });
     const searchKeyWords = this.props.value.replaceAll(' ', '+');
     const url = `https://www.googleapis.com/books/v1/volumes?q=${searchKeyWords}&projection=full&key=${process.env.GOOGLE_BOOKS_API_KEY}`;
     const request = {
@@ -23,7 +27,8 @@ export default class Search extends React.Component {
       .then(data => {
         const result = data.items.filter(book => book.volumeInfo.industryIdentifiers.length > 1 && book.volumeInfo.imageLinks);
         this.setState({
-          results: result
+          results: result,
+          isLoading: false
         });
       })
       .catch(error => {
@@ -56,15 +61,20 @@ export default class Search extends React.Component {
   }
 
   render() {
-    const { results } = this.state;
+    const { results, isLoading } = this.state;
     return (
-      <div className='container'>
-        <ul>
-          {
+      <>
+      { isLoading
+        ? <LoadingSpinner />
+        : <div className='container'>
+          <ul>
+            {
               results.map(book => <ResultBook key={book.id} book={book} />)
-          }
-        </ul>
-      </div>
+            }
+          </ul>
+        </div>
+      }
+      </>
     );
   }
 }

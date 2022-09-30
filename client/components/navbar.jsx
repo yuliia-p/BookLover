@@ -16,17 +16,8 @@ export default class Navbar extends React.Component {
     this.searchInput = this.searchInput.bind(this);
   }
 
-  // onChange on select element
   handleChange(event) {
     const encodedObj = this.state.categories.find(o => o.display_name === event.target.value);
-    /*
-    display_name: "E-Book Fiction"
-    list_name: "E-Book Fiction"
-    list_name_encoded: "e-book-fiction"
-    newest_published_date: "2017-01-29"
-    oldest_published_date: "2011-02-13"
-    updated: "WEEKLY"
-    */
     const encodedName = encodedObj.list_name_encoded;
     this.setState({
       isClicked: !this.state.isClicked,
