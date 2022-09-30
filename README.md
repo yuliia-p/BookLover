@@ -39,7 +39,19 @@ ____
 
 ## Development
 
-#### System Requirements
+### System Requirements
 - Node.js 10 or higher
 - NPM 6 or higher
 - PostgreSQL
+
+### Getting Started 
+1. Clone the repository.
+```shell
+    git clone https://github.com/yuliia-p/BookLover
+    cd sgt-react
+ ```
+2. Install all dependencies with NPM.
+```shell
+    npm install
+    ```
+ 
