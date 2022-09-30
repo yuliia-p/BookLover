@@ -42,10 +42,11 @@ img {
   }
 
   .content-holder-more-details {
-    flex-basis: 70%;
+    flex-basis: 65%;
   }
 
   div.container.full-description {
-    padding: 3rem 20rem 0;
+    flex-wrap: wrap;
+    padding: 3rem 16rem;
   }
 }
