@@ -27,5 +27,10 @@ ___
 <p align="middle">
   <img src="bl-preview.gif" width="800">
 </p>
+<p align="middle">
+  <img src="sign-up-previw.png" width="500">
+  <img src="log-in-preview.png" width="500">
+  
+</p>
 
 ### Try the application live [here](http://book-lover-app.yuliia.net/)
