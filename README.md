@@ -42,7 +42,6 @@ ____
 
 ### System Requirements
 - Node.js 10 or higher
-- NPM 6 or higher
 - PostgreSQL
 
 ### Getting Started 
@@ -67,15 +66,11 @@ createdb databaseName
 ```
 npm run db:import
 ```
-6. Database can be viewed with pgweb GUI tool at http://localhost:8081
-```
-pgweb --db=databaseName
-```
-7. Build main.js script with npm.
+6. Build main.js script with npm.
 ```
 npm run build
 ```
-8. Start the application. You can view the app by opening [http://localhost:3000](http://localhost:3000/) in your browser.
+7. Start the application. You can view the app by opening [http://localhost:3000](http://localhost:3000/) in your browser.
 ```
 npm run dev
 ```
