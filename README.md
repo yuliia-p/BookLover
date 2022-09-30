@@ -28,8 +28,8 @@ ___
   <img src="bl-preview.gif" width="800">
 </p>
 <p align="middle">
-  <img src="sign-up-previw.png" width="500">
-  <img src="log-in-preview.png" width="500">
+  <img src="sign-up-previw.png" width="300">
+  <img src="log-in-preview.png" width="300">
   
 </p>
 
