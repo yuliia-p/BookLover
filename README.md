@@ -12,6 +12,7 @@ ___
 
 ### Technologies Used
 - React.js
+- PostgreSQL
 - Webpack
 - Node.js
 - HTML5
@@ -34,3 +35,11 @@ ___
 </p>
 
 ### Try the application live [here](http://book-lover-app.yuliia.net/)
+____
+
+## Development
+
+#### System Requirements
+- Node.js 10 or higher
+- NPM 6 or higher
+- PostgreSQL
