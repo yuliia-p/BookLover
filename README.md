@@ -20,5 +20,5 @@ ___
 
 ### Preview 
 <p align="middle">
-  <img src="Preview.gif" width="500">
+  <img src="bl-preview.gif" width="500">
 </p>
