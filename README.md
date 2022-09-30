@@ -35,9 +35,10 @@ ___
 </p>
 
 ### Try the application live [here](http://book-lover-app.yuliia.net/)
+
 ____
 
-## Development
+# Development
 
 ### System Requirements
 - Node.js 10 or higher
