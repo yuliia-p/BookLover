@@ -46,15 +46,37 @@ ____
 
 ### Getting Started 
 1. Clone the repository.
-```shell
-    git clone https://github.com/yuliia-p/BookLover
+```
+shell
+git clone https://github.com/yuliia-p/BookLover
     cd BookLover
  ```
 2. Install all dependencies with NPM.
-```shell
-    npm install
+```
+shell
+npm install
 ```
 3. Copy the .env.example into .env with your own API keys and database url
 ```
 cp .env.example .env
+```
+4. Create a new database with PostgreSQL
+```
+createdb databaseName
+```
+5. Import the example database to PostgreSQL
+```
+npm run db:import
+```
+6. Database can be viewed with pgweb GUI tool at http://localhost:8081
+```
+pgweb --db=databaseName
+```
+7. Build main.js script with npm.
+```
+npm run build
+```
+8. Start the application. You can view the app by opening [http://localhost:3000](http://localhost:3000/) in your browser.
+```
+npm run dev
 ```
