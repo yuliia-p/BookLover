@@ -170,6 +170,7 @@ export default class MoreDetails extends React.Component {
                 <div className='buy-button-holder'><button onClick={this.handleClick} className='add-button'>WANT TO READ</button></div>
             </div>
           </div>
+          <div className='border'></div>
         </div>
 
       </>

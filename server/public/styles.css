@@ -179,8 +179,6 @@ div.full-description {
 .fa-circle-user {
   position: absolute;
   right: 0.8rem;
-
-  /* top: 2.5rem; */
   top: 1.2rem;
   font-size: 2.3rem;
   color: white;
@@ -635,5 +633,11 @@ input {
 
   .my-buttons {
     flex-wrap: wrap;
+  }
+
+  .border {
+    padding: 2rem 0;
+    flex-basis: 100%;
+    border-bottom: 0.18rem solid rgba(17, 17, 24, 1);
   }
 }

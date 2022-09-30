@@ -54,6 +54,7 @@ export default class MoreDetailsMybooks extends React.Component {
                 </div>
             </div>
           </div>
+          <div className='border'></div>
         </div>
       </>
     );
