@@ -1,18 +1,21 @@
 import React from 'react';
 import AppContext from '../lib/app-context';
 import ShowRating from '../components/show-rating';
+import LoadingSpinner from '../components/loading-spinner';
 
 export default class MoreDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       book: null,
-      addedBook: {}
+      addedBook: {},
+      isLoading: false
     };
     this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
+    this.setState({ isLoading: true });
     const authorToSerach = this.props.author.replaceAll(' ', '+');
     const titleToSearch = this.props.title.replaceAll(' ', '+');
     if (authorToSerach && titleToSearch) {
@@ -27,11 +30,13 @@ export default class MoreDetails extends React.Component {
         .then(response => response.json())
         .then(data => {
           this.setState({
-            book: data.items[0]
+            book: data.items[0],
+            isLoading: false
           });
         })
         .catch(error => {
           console.error('Error:', error);
+          this.setState({ isLoading: false });
         });
     } else {
       const urlisbn = `https://www.googleapis.com/books/v1/volumes?q=isbn${this.props.isbn}&projection=full&key=${process.env.GOOGLE_BOOKS_API_KEY}`;
@@ -57,7 +62,8 @@ export default class MoreDetails extends React.Component {
               .then(data => {
                 if (data.totalItems > 0) {
                   this.setState({
-                    book: data.items[0]
+                    book: data.items[0],
+                    isLoading: false
                   });
                 } else {
                   window.location.hash = 'not-found';
@@ -65,12 +71,14 @@ export default class MoreDetails extends React.Component {
               });
           } else {
             this.setState({
-              book: data.items[0]
+              book: data.items[0],
+              isLoading: false
             });
           }
         })
         .catch(error => {
           console.error('Error:', error);
+          this.setState({ isLoading: false });
         });
     }
   }
@@ -81,6 +89,7 @@ export default class MoreDetails extends React.Component {
     const { title, authors, description, averageRating, industryIdentifiers, imageLinks } = volumeInfo;
     const isnb = industryIdentifiers.find(i => i.type === 'ISBN_10');
     if (!user) {
+      window.location.hash = '';
       showModal();
     } else {
       const token = window.localStorage.getItem('react-context-jwt');
@@ -126,12 +135,12 @@ export default class MoreDetails extends React.Component {
         .catch(error => {
           console.error('Error:', error);
         });
+      window.location.hash = 'my-books';
     }
-    window.location.hash = 'my-books';
   }
 
   render() {
-    if (!this.state.book) return null;
+    if (!this.state.book) return <LoadingSpinner />;
     const { volumeInfo } = this.state.book;
     const { authors, imageLinks, title, description, averageRating, categories } = volumeInfo;
     let coverToShow = this.props.url;
@@ -143,7 +152,9 @@ export default class MoreDetails extends React.Component {
         <div className='container full-description'>
           <img className='more-details-img' src={coverToShow} alt='pic' />
           <div className='content-holder-more-details'>
-              <p className='number-of-weeks'>{this.props.number} WEEKS ON THE LIST</p>
+               { this.props.number &&
+                <p className='number-of-weeks'>{this.props.number} WEEKS ON THE LIST</p>
+                }
               <h2 className='title-more-details no-padding '>{title}</h2>
               <p className='author'>by {authors.join()}</p>
               <div className='rating no-margin'>
@@ -160,6 +171,7 @@ export default class MoreDetails extends React.Component {
             </div>
           </div>
         </div>
+
       </>
     );
   }

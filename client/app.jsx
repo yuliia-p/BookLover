@@ -21,7 +21,8 @@ export default class App extends React.Component {
       route: parseRoute(window.location.hash),
       showModal: null,
       user: null,
-      deleteModal: false
+      deleteModal: false,
+      isLoading: false
     };
     this.showModal = this.showModal.bind(this);
     this.handleSignIn = this.handleSignIn.bind(this);
@@ -104,6 +105,9 @@ export default class App extends React.Component {
     }
     if (route.path === 'search') {
       const searchValue = route.params.get('txt');
+      if (searchValue === '') {
+        return <NotFound />;
+      }
       return <Search value={searchValue}/>;
     }
     if (route.path === 'search-details') {
@@ -113,9 +117,7 @@ export default class App extends React.Component {
       const buyLink = route.params.get('buy-link');
       return <MoreDetails isbn={isbn} author={author} title={title} buyLink={buyLink}/>;
     }
-    if (route.path === 'not-found') {
-      return <NotFound />;
-    }
+    return <NotFound />;
   }
 
   render() {
