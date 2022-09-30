@@ -89,7 +89,6 @@ export default class MoreDetails extends React.Component {
     const { title, authors, description, averageRating, industryIdentifiers, imageLinks } = volumeInfo;
     const isnb = industryIdentifiers.find(i => i.type === 'ISBN_10');
     if (!user) {
-      window.location.hash = '';
       showModal();
     } else {
       const token = window.localStorage.getItem('react-context-jwt');
