@@ -23,7 +23,7 @@ CREATE TABLE "public"."books" (
 	"title" TEXT NOT NULL,
 	"authors" TEXT NOT NULL,
 	"imageLink" TEXT NOT NULL,
-	"description" TEXT NOT NULL,
+	"description" TEXT,
   "shortDescription" TEXT,
 	"buyLink" TEXT,
 	"averageRating" numeric,
