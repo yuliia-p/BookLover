@@ -627,7 +627,7 @@ input {
 
   .dropdown-profile-menu {
     padding: 7rem 0.5rem 0;
-    height: 19%;
+    height: 20%;
     width: 10%;
   }
 
@@ -638,6 +638,6 @@ input {
   .border {
     padding: 2rem 0;
     flex-basis: 100%;
-    border-bottom: 0.18rem solid rgba(17, 17, 24, 1);
+    border-bottom: 0.16rem solid rgba(17, 17, 24, 1);
   }
 }
