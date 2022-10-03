@@ -1,5 +1,5 @@
 # BookLover
-A web application for people who enjoys reading. 
+A web application for people who enjoy reading. 
 I wanted to combine search for books with recommendations from NYTimes Best Sellers.
 
 ### Using this application, user can:
