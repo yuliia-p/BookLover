@@ -204,11 +204,11 @@ div.full-description {
 .auth-modal-content {
   position: relative;
   background-color: #fefefe;
-  border-radius: 0.9375rem;
+  border-radius: 0.95rem;
   margin: 3rem auto;
   padding: 1.1rem;
   border: none;
-  width: 80%;
+  max-width: 80%;
   text-align: left;
 }
 
@@ -453,7 +453,7 @@ input {
   text-decoration: underline;
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: 756px) {
   img {
     max-width: 30%;
   }
@@ -533,7 +533,7 @@ input {
     margin: auto;
     padding: 1.1rem;
     border: none;
-    width: 30%;
+    max-width: 30%;
   }
 
   .fa-circle-user {
@@ -639,5 +639,9 @@ input {
     padding: 2rem 0;
     flex-basis: 100%;
     border-bottom: 0.16rem solid rgba(17, 17, 24, 1);
+  }
+
+  .search {
+    text-align: end;
   }
 }

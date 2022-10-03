@@ -59,7 +59,10 @@ export default class Navbar extends React.Component {
   hashChange(event) {
     event.preventDefault();
     window.location.hash = 'search?txt=' + this.state.userInputValue;
-    this.setState({ userInputValue: '' });
+    this.setState({
+      userInputValue: ''
+      // userInputValue: this.state.userInputValue
+    });
   }
 
   render() {
@@ -87,7 +90,7 @@ export default class Navbar extends React.Component {
             </div>
             <div className="box">
               <form className="search" onSubmit={hashChange}>
-                <input placeholder="" type="text" className="input text-input" name="txt" onChange={searchInput} />
+              <input placeholder="" type="text" className="input text-input" value={this.state.userInputValue} onChange={searchInput} required />
               </form>
             </div>
             <div className='profile-menu'>

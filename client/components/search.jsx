@@ -24,13 +24,10 @@ export default class Search extends React.Component {
     fetch(url, request)
       .then(response => response.json())
       .then(data => {
-        // console.log('search data', data);
-        // not going further with some req
-        const result = data.items.filter(book => book.volumeInfo.industryIdentifiers.length > 1 && book.volumeInfo.imageLinks);
-        // console.log('result objs for set state', result);
+        const result = data.items.filter(book => book.volumeInfo.industryIdentifiers && book.volumeInfo.industryIdentifiers.length > 1 && book.volumeInfo.imageLinks);
         this.setState({
-          isLoading: false,
-          results: result
+          results: result,
+          isLoading: false
         });
       })
       .catch(error => {

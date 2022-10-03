@@ -29,6 +29,8 @@ export default class MoreDetails extends React.Component {
       fetch(url, req)
         .then(response => response.json())
         .then(data => {
+          // const result = data.items.filter(book => book.volumeInfo.title === this.props.title && );
+          // console.log('result more details', result);
           this.setState({
             book: data.items[0],
             isLoading: false
