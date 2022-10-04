@@ -105,9 +105,6 @@ export default class App extends React.Component {
     }
     if (route.path === 'search') {
       const searchValue = route.params.get('txt');
-      if (searchValue === '') {
-        return <NotFound />;
-      }
       return <Search value={searchValue}/>;
     }
     if (route.path === 'search-details') {

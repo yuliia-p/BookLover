@@ -8,7 +8,6 @@ export default class Search extends React.Component {
     this.state = {
       results: [],
       isLoading: false
-
     };
   }
 
@@ -25,7 +24,7 @@ export default class Search extends React.Component {
     fetch(url, request)
       .then(response => response.json())
       .then(data => {
-        const result = data.items.filter(book => book.volumeInfo.industryIdentifiers.length > 1 && book.volumeInfo.imageLinks);
+        const result = data.items.filter(book => book.volumeInfo.industryIdentifiers && book.volumeInfo.industryIdentifiers.length > 1 && book.volumeInfo.imageLinks);
         this.setState({
           results: result,
           isLoading: false
@@ -51,7 +50,8 @@ export default class Search extends React.Component {
         .then(data => {
           const result = data.items.filter(book => book.volumeInfo.industryIdentifiers.length > 1 && book.volumeInfo.imageLinks);
           this.setState({
-            results: result
+            results: result,
+            isLoading: false
           });
         })
         .catch(error => {

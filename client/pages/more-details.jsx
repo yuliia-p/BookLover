@@ -29,6 +29,8 @@ export default class MoreDetails extends React.Component {
       fetch(url, req)
         .then(response => response.json())
         .then(data => {
+          // const result = data.items.filter(book => book.volumeInfo.title === this.props.title && );
+          // console.log('result more details', result);
           this.setState({
             book: data.items[0],
             isLoading: false
@@ -92,10 +94,12 @@ export default class MoreDetails extends React.Component {
       showModal();
     } else {
       const token = window.localStorage.getItem('react-context-jwt');
-      let bookCover = this.props.url;
-      if (!bookCover) {
+      let bookCover;
+      if (this.props.url) {
+        bookCover = this.props.url;
+      } else if (!this.props.url) {
         bookCover = imageLinks.thumbnail;
-      } else if (!imageLinks.thumbnail) {
+      } else {
         bookCover = imageLinks.smallThumbnail;
       }
       let shortDescription;
