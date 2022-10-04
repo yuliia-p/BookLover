@@ -29,8 +29,6 @@ export default class MoreDetails extends React.Component {
       fetch(url, req)
         .then(response => response.json())
         .then(data => {
-          // const result = data.items.filter(book => book.volumeInfo.title === this.props.title && );
-          // console.log('result more details', result);
           this.setState({
             book: data.items[0],
             isLoading: false
@@ -88,7 +86,7 @@ export default class MoreDetails extends React.Component {
   handleClick() {
     const { user, showModal } = this.context;
     const { volumeInfo, searchInfo } = this.state.book;
-    const { title, authors, description, averageRating, industryIdentifiers, imageLinks } = volumeInfo;
+    const { title, description, averageRating, industryIdentifiers, imageLinks } = volumeInfo;
     const isnb = industryIdentifiers.find(i => i.type === 'ISBN_10');
     if (!user) {
       showModal();
@@ -116,7 +114,7 @@ export default class MoreDetails extends React.Component {
       }
       const objToSend = {
         title,
-        authors: authors.join(),
+        authors: this.props.author,
         imageLink: bookCover,
         shortDescription,
         description,
@@ -145,7 +143,7 @@ export default class MoreDetails extends React.Component {
   render() {
     if (!this.state.book) return <LoadingSpinner />;
     const { volumeInfo } = this.state.book;
-    const { authors, imageLinks, title, description, averageRating, categories } = volumeInfo;
+    const { imageLinks, title, description, averageRating, categories } = volumeInfo;
     let coverToShow = this.props.url;
     if (!coverToShow) {
       coverToShow = imageLinks.thumbnail;
@@ -159,7 +157,7 @@ export default class MoreDetails extends React.Component {
                 <p className='number-of-weeks'>{this.props.number} WEEKS ON THE LIST</p>
                 }
               <h2 className='title-more-details no-padding '>{title}</h2>
-              <p className='author'>by {authors.join()}</p>
+              <p className='author'>by {this.props.author}</p>
               <div className='rating no-margin'>
                 {ShowRating(averageRating)}
                 <p className='rating no-margin'>Rating: {averageRating}</p>
