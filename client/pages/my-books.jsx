@@ -20,9 +20,9 @@ export default class MyBooks extends React.Component {
     };
     fetch('/api/saved-books/', req)
       .then(response => response.json())
-      .then(data =>
-        this.setState({ books: data })
-      )
+      .then(data => {
+        this.setState({ books: data });
+      })
       .catch(error => {
         console.error('Error:', error);
       });
