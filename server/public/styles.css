@@ -329,7 +329,7 @@ input {
 }
 
 .box:hover input {
-  width: 23rem;
+  width: 25rem;
   background: white;
   border-radius: 0.99rem;
 }
@@ -513,7 +513,7 @@ input {
   }
 
   .content-holder-more-details {
-    margin-left: 2rem;
+    margin-left: 1rem;
   }
 
   .no-padding {
@@ -533,7 +533,7 @@ input {
     margin: auto;
     padding: 1.1rem;
     border: none;
-    max-width: 30%;
+    max-width: 25%;
   }
 
   .fa-circle-user {

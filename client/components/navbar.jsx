@@ -61,7 +61,6 @@ export default class Navbar extends React.Component {
     window.location.hash = 'search?txt=' + this.state.userInputValue;
     this.setState({
       userInputValue: ''
-      // userInputValue: this.state.userInputValue
     });
   }
 
@@ -94,7 +93,7 @@ export default class Navbar extends React.Component {
               </form>
             </div>
             <div className='profile-menu'>
-              <i onClick={this.props.onAuthClick} className="fa-solid fa-circle-user"></i>
+            <i onClick={this.props.onAuthClick} className="fa-solid fa-circle-user"></i>
             </div>
           </div>
       </>
