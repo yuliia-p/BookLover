@@ -14,7 +14,7 @@ export default class Search extends React.Component {
   componentDidMount() {
     this.setState({ isLoading: true });
     const searchKeyWords = this.props.value.replaceAll(' ', '+');
-    const url = `https://www.googleapis.com/books/v1/volumes?q=${searchKeyWords}&projection=full&key=${process.env.GOOGLE_BOOKS_API_KEY}`;
+    const url = `https://www.googleapis.com/books/v1/volumes?q=${searchKeyWords}&maxResults=20&projection=full&key=${process.env.GOOGLE_BOOKS_API_KEY}`;
     const request = {
       method: 'GET',
       headers: {
@@ -39,7 +39,7 @@ export default class Search extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props !== prevProps) {
       const searchKeyWords = this.props.value.replaceAll(' ', '+');
-      const url = `https://www.googleapis.com/books/v1/volumes?q=${searchKeyWords}&maxResults=20&key=${process.env.GOOGLE_BOOKS_API_KEY}`;
+      const url = `https://www.googleapis.com/books/v1/volumes?q=${searchKeyWords}&maxResults=20&projection=full&key=${process.env.GOOGLE_BOOKS_API_KEY}`;
       const request = {
         method: 'GET',
         headers: {

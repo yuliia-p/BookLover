@@ -17,14 +17,20 @@ export default class MoreDetails extends React.Component {
 
   componentDidMount() {
     this.setState({ isLoading: true });
-    // console.log('this.props.title', this.props.author);
-    const authorToSerach = this.props.author.slice(3).replaceAll(' ', '+');
+    // console.log('this.props.author', this.props.author);
+    let authorToSerach;
+    if (this.props.author !== 'Magazine' || this.props.author !== 'Unkown') {
+      // console.log('say hi');
+      authorToSerach = this.props.author.slice(3).replaceAll(' ', '+');
+    } else {
+      authorToSerach = this.props.author;
+    }
     const titleToSearch = this.props.title.replaceAll("'", '+').replaceAll(' ', '+');
     // console.log('titleToSearch', titleToSearch);
     // console.log('authorToSerach', authorToSerach);
     // ASK TIM
     // multyple authors
-    if (authorToSerach === 'Unkown' || authorToSerach.includes(',')) {
+    if (authorToSerach === 'Unkown' || authorToSerach === 'Magazine' || authorToSerach.includes(',')) {
       const url = `https://www.googleapis.com/books/v1/volumes?q=${titleToSearch}&projection=full&key=${process.env.GOOGLE_BOOKS_API_KEY}`;
       const req = {
         method: 'GET',
@@ -35,6 +41,7 @@ export default class MoreDetails extends React.Component {
       fetch(url, req)
         .then(response => response.json())
         .then(data => {
+          // console.log(data);
           this.setState({
             book: data.items[0],
             isLoading: false
