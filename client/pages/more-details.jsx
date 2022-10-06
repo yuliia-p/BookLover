@@ -2,6 +2,7 @@ import React from 'react';
 import AppContext from '../lib/app-context';
 import ShowRating from '../components/show-rating';
 import LoadingSpinner from '../components/loading-spinner';
+// import NotFound from './not-found';
 
 export default class MoreDetails extends React.Component {
   constructor(props) {
@@ -16,10 +17,15 @@ export default class MoreDetails extends React.Component {
 
   componentDidMount() {
     this.setState({ isLoading: true });
-    const authorToSerach = this.props.author.replaceAll(' ', '+');
-    const titleToSearch = this.props.title.replaceAll(' ', '+');
-    if (authorToSerach && titleToSearch) {
-      const url = `https://www.googleapis.com/books/v1/volumes?q=${titleToSearch}+inauthor:${authorToSerach}&projection=full&key=${process.env.GOOGLE_BOOKS_API_KEY}`;
+    // console.log('this.props.title', this.props.author);
+    const authorToSerach = this.props.author.slice(3).replaceAll(' ', '+');
+    const titleToSearch = this.props.title.replaceAll("'", '+').replaceAll(' ', '+');
+    // console.log('titleToSearch', titleToSearch);
+    // console.log('authorToSerach', authorToSerach);
+    // ASK TIM
+    // multyple authors
+    if (authorToSerach === 'Unkown' || authorToSerach.includes(',')) {
+      const url = `https://www.googleapis.com/books/v1/volumes?q=${titleToSearch}&projection=full&key=${process.env.GOOGLE_BOOKS_API_KEY}`;
       const req = {
         method: 'GET',
         headers: {
@@ -33,6 +39,35 @@ export default class MoreDetails extends React.Component {
             book: data.items[0],
             isLoading: false
           });
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          this.setState({ isLoading: false });
+        });
+    }
+    if (authorToSerach && titleToSearch) {
+      const url = `https://www.googleapis.com/books/v1/volumes?q=${titleToSearch}+inauthor:${authorToSerach}&projection=full&key=${process.env.GOOGLE_BOOKS_API_KEY}`;
+      const req = {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json'
+        }
+      };
+      fetch(url, req)
+        .then(response => response.json())
+        .then(data => {
+          // SHOW TO TIM
+          if (data.totalItems === 0) {
+            this.setState({
+              book: data.totalItems,
+              isLoading: false
+            });
+          } else {
+            this.setState({
+              book: data.items[0],
+              isLoading: false
+            });
+          }
         })
         .catch(error => {
           console.error('Error:', error);
@@ -133,15 +168,20 @@ export default class MoreDetails extends React.Component {
         body: JSON.stringify(objToSend)
       };
       fetch('/api/saved-books/', req)
+        .then(window.location.hash = 'my-books')
         .catch(error => {
           console.error('Error:', error);
         });
-      window.location.hash = 'my-books';
     }
   }
 
   render() {
+    // ASK TO TIM
+    // if book not found => Loading
+
+    // if (this.state.book === 0) return <NotFound />;
     if (!this.state.book) return <LoadingSpinner />;
+
     const { volumeInfo } = this.state.book;
     const { imageLinks, title, description, averageRating, categories } = volumeInfo;
     let coverToShow = this.props.url;
@@ -157,7 +197,7 @@ export default class MoreDetails extends React.Component {
                 <p className='number-of-weeks'>{this.props.number} WEEKS ON THE LIST</p>
                 }
               <h2 className='title-more-details no-padding '>{title}</h2>
-              <p className='author'>by {this.props.author}</p>
+              <p className='author'>{this.props.author}</p>
               <div className='rating no-margin'>
                 {ShowRating(averageRating)}
                 <p className='rating no-margin'>Rating: {averageRating}</p>
