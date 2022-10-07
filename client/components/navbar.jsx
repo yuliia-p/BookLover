@@ -8,12 +8,14 @@ export default class Navbar extends React.Component {
       categories: [],
       categoryToShow: null,
       isClicked: false,
-      userInputValue: ''
+      userInputValue: '',
+      searchIsClicked: false
     };
     this.getCategoriesClick = this.getCategoriesClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.hashChange = this.hashChange.bind(this);
     this.searchInput = this.searchInput.bind(this);
+    this.searchClick = this.searchClick.bind(this);
   }
 
   handleChange(event) {
@@ -52,6 +54,10 @@ export default class Navbar extends React.Component {
     });
   }
 
+  searchClick(event) {
+    this.setState({ searchIsClicked: !this.state.searchIsClicked });
+  }
+
   searchInput(event) {
     this.setState({ userInputValue: event.target.value });
   }
@@ -60,18 +66,20 @@ export default class Navbar extends React.Component {
     event.preventDefault();
     window.location.hash = 'search?txt=' + this.state.userInputValue;
     this.setState({
-      userInputValue: ''
+      userInputValue: '',
+      searchIsClicked: false
     });
   }
 
   render() {
     const { user } = this.context;
-    const { getCategoriesClick, searchInput, hashChange, handleChange } = this;
+    const { getCategoriesClick, searchInput, hashChange, handleChange, searchClick } = this;
     let categoryToShow;
     if (this.state.categoryToShow) {
       categoryToShow = this.state.categoryToShow;
     }
     const classToShow = this.state.isClicked ? 'show' : 'hidden';
+    const classToShowInput = this.state.searchIsClicked ? 'show' : 'hidden';
     return (
       <>
           <div className='header position-sticky'>
@@ -88,12 +96,13 @@ export default class Navbar extends React.Component {
               </div>
             </div>
             <div className="box">
-              <form className="search" onSubmit={hashChange}>
-              <input placeholder="" type="text" className="input text-input" value={this.state.userInputValue} onChange={searchInput} required />
+              <form className="search flex" onSubmit={hashChange}>
+              <input placeholder="Search" type="text" className={`input ${classToShowInput}`} value={this.state.userInputValue} onChange={searchInput} required />
+              <button className="search-submit" type="submit"><i onClick={searchClick} className="fas fa-search"></i></button>
               </form>
             </div>
-            <div className='profile-menu'>
-            <i onClick={this.props.onAuthClick} className="fa-solid fa-circle-user"></i>
+            <div className='profile-menu user-div'>
+              <i onClick={this.props.onAuthClick} className="fa-solid fa-circle-user"></i>
             </div>
           </div>
       </>
@@ -102,6 +111,7 @@ export default class Navbar extends React.Component {
 }
 
 function MenuItems(props) {
+  if (!props) return;
   return (
     props.categories.map((category, index) => {
       return <Category key={index} category={category} />;

@@ -20,7 +20,7 @@ function Book(props) {
       href={`#details?isbn=${bookObj.isbn10}&author=${author}&title=${title}&imageurl=${imageLink}&n=${numberWeeks}&buy=${buyLink}`}
       className='flex margin-top a-book'>
         <li className='flex margin-top'>
-        <img src={imageLink} alt={props.book.title} />
+        <img className='book-list-img' src={imageLink} alt={props.book.title} />
           <div className='content-holder'>
           <p className='number-of-weeks '>{numberWeeks} WEEKS ON THE LIST</p>
           <p className='title margin-top'>{bookObj.title}</p>

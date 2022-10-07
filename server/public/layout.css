@@ -6,18 +6,18 @@
   flex-basis: 65%;
 }
 
-img {
-  flex-basis: 35%;
-}
-
 @media screen and (min-width: 768px) {
-  .header,
+  .header {
+    display: flex;
+  }
+
   div.full-description {
     display: flex;
   }
 
   .container {
-    padding: 0 15rem;
+    max-width: 60%;
+    margin: auto;
   }
 
   h2 {
@@ -37,16 +37,8 @@ img {
     flex-basis: 70%;
   }
 
-  img {
-    flex-basis: 30%;
-  }
-
-  .content-holder-more-details {
-    flex-basis: 65%;
-  }
-
   div.container.full-description {
-    flex-wrap: wrap;
-    padding: 3rem 16rem;
+    max-width: 80%;
+    margin: auto;
   }
 }

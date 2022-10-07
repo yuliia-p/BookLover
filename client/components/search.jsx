@@ -100,11 +100,11 @@ function GetISBN(book) {
 function GetAuthor(book) {
   let authors;
   if (book.authors) {
-    authors = `by ${book.authors.join(', ')}`;
+    authors = book.authors.join(', ');
   } else if (!book.authors && book.printType === 'MAGAZINE') {
     authors = 'Magazine';
   } else {
-    authors = 'by Unkown';
+    authors = 'Unkown';
   }
   return authors;
 }
@@ -127,7 +127,7 @@ function ResultBook(props) {
         <img src={imageLinks.thumbnail} alt={title} />
         <div className='content-holder'>
           <p className='title margin-top'>{title}</p>
-          <p className='author margin-top'>{GetAuthor(volumeInfo)}</p>
+          <p className='author margin-top'>by {GetAuthor(volumeInfo)}</p>
           <p className='description-overflow margin-top'>{description}</p>
           <p href="#search-details" className='more-details-p'>More Details...</p>
         </div>
