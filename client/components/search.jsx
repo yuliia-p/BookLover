@@ -124,7 +124,7 @@ function ResultBook(props) {
       href={`#search-details?isbn=${GetISBN(volumeInfo)}&author=${GetAuthor(volumeInfo)}&title=${title}&buy-link=${buyLink}`}
       className='flex margin-top a-book'>
       <li className='flex margin-top'>
-        <img src={imageLinks.thumbnail} alt={title} />
+        <img className='book-list-img' src={imageLinks.thumbnail} alt={title} />
         <div className='content-holder'>
           <p className='title margin-top'>{title}</p>
           <p className='author margin-top'>by {GetAuthor(volumeInfo)}</p>

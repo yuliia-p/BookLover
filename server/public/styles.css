@@ -352,6 +352,7 @@ input {
   max-height: 3.5em;
   line-height: 1.2em;
   font-size: 0.8rem;
+  padding-right: 2rem;
 }
 
 .my-buttons {
@@ -366,8 +367,8 @@ input {
   padding: 10rem 0.5rem 0;
   right: 0;
   top: 0;
-  height: 25%;
-  width: 25%;
+  height: 13.3rem;
+  width: 6rem;
   overflow: auto;
 }
 
@@ -533,7 +534,7 @@ input {
 
   .fa-circle-user {
     font-size: 2.4rem;
-    top: 2rem;
+    margin-right: 1rem;
   }
 
   .add-button,
