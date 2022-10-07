@@ -468,7 +468,7 @@ input {
   }
 
   .description {
-    font-size: 0.7rem;
+    font-size: 0.5rem;
     padding-right: 2rem;
   }
 
@@ -560,7 +560,7 @@ input {
   }
 
   .profile-menu {
-    flex-basis: 15%;
+    flex-basis: 10%;
     text-align: end;
   }
 
@@ -599,6 +599,10 @@ input {
 }
 
 @media (min-width: 1024px) {
+  .description {
+    font-size: 0.7rem;
+  }
+
   .search-submit {
     flex-basis: 100%;
   }
