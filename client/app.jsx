@@ -51,6 +51,9 @@ export default class App extends React.Component {
     if (user) {
       this.setState({ showModal: 'profile-menu' });
     }
+    if (user && this.state.showModal === 'profile-menu') {
+      this.setState({ showModal: null });
+    }
   }
 
   hideModal() {

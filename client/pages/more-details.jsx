@@ -2,6 +2,7 @@ import React from 'react';
 import AppContext from '../lib/app-context';
 import ShowRating from '../components/show-rating';
 import LoadingSpinner from '../components/loading-spinner';
+import NotFound from './not-found';
 
 export default class MoreDetails extends React.Component {
   constructor(props) {
@@ -9,77 +10,120 @@ export default class MoreDetails extends React.Component {
     this.state = {
       book: null,
       addedBook: {},
-      isLoading: false
+      isLoading: true,
+      isNotFound: false
     };
     this.handleClick = this.handleClick.bind(this);
   }
 
-  componentDidMount() {
-    this.setState({ isLoading: true });
-    const authorToSerach = this.props.author.replaceAll(' ', '+');
-    const titleToSearch = this.props.title.replaceAll(' ', '+');
-    if (authorToSerach && titleToSearch) {
-      const url = `https://www.googleapis.com/books/v1/volumes?q=${titleToSearch}+inauthor:${authorToSerach}&projection=full&key=${process.env.GOOGLE_BOOKS_API_KEY}`;
-      const req = {
-        method: 'GET',
-        headers: {
-          Accept: 'application/json'
-        }
-      };
-      fetch(url, req)
-        .then(response => response.json())
-        .then(data => {
+  getBookByTitle(title) {
+    const url = `https://www.googleapis.com/books/v1/volumes?q=${title}&projection=full&key=${process.env.GOOGLE_BOOKS_API_KEY}`;
+    const req = {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json'
+      }
+    };
+    fetch(url, req)
+      .then(response => response.json())
+      .then(data => {
+        // filter here? ASK TIM
+        // console.log(data);
+        this.setState({
+          book: data.items[0],
+          isLoading: false
+        });
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        this.setState({ isLoading: false });
+      });
+  }
+
+  getBookByISBN() {
+    const urlisbn = `https://www.googleapis.com/books/v1/volumes?q=isbn${this.props.isbn}&projection=full&key=${process.env.GOOGLE_BOOKS_API_KEY}`;
+    const request = {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json'
+      }
+    };
+    fetch(urlisbn, request)
+      .then(response => response.json())
+      .then(data => {
+        if (data.totalItems === 0) {
+          const urlisbn10 = `https://www.googleapis.com/books/v1/volumes?q=isbn10-${this.props.isbn}&projection=full&key=${process.env.GOOGLE_BOOKS_API_KEY}`;
+          const request = {
+            method: 'GET',
+            headers: {
+              Accept: 'application/json'
+            }
+          };
+          fetch(urlisbn10, request)
+            .then(response => response.json())
+            .then(data => {
+              if (data.totalItems > 0) {
+                this.setState({
+                  book: data.items[0],
+                  isLoading: false
+                });
+              } else {
+                this.setState({ isNotFound: true });
+              }
+            });
+        } else {
           this.setState({
             book: data.items[0],
             isLoading: false
           });
-        })
-        .catch(error => {
-          console.error('Error:', error);
-          this.setState({ isLoading: false });
-        });
-    } else {
-      const urlisbn = `https://www.googleapis.com/books/v1/volumes?q=isbn${this.props.isbn}&projection=full&key=${process.env.GOOGLE_BOOKS_API_KEY}`;
-      const request = {
-        method: 'GET',
-        headers: {
-          Accept: 'application/json'
         }
-      };
-      fetch(urlisbn, request)
-        .then(response => response.json())
-        .then(data => {
-          if (data.totalItems === 0) {
-            const urlisbn10 = `https://www.googleapis.com/books/v1/volumes?q=isbn10-${this.props.isbn}&projection=full&key=${process.env.GOOGLE_BOOKS_API_KEY}`;
-            const request = {
-              method: 'GET',
-              headers: {
-                Accept: 'application/json'
-              }
-            };
-            fetch(urlisbn10, request)
-              .then(response => response.json())
-              .then(data => {
-                if (data.totalItems > 0) {
-                  this.setState({
-                    book: data.items[0],
-                    isLoading: false
-                  });
-                } else {
-                  window.location.hash = 'not-found';
-                }
-              });
-          } else {
-            this.setState({
-              book: data.items[0],
-              isLoading: false
-            });
-          }
-        })
-        .catch(error => {
-          console.error('Error:', error);
-          this.setState({ isLoading: false });
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        this.setState({ isLoading: false });
+      });
+  }
+
+  getBookByAthorAndTitile(title, author) {
+    const url = `https://www.googleapis.com/books/v1/volumes?q=${title}+inauthor:${author}&projection=full&key=${process.env.GOOGLE_BOOKS_API_KEY}`;
+    const req = {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json'
+      }
+    };
+    fetch(url, req)
+      .then(response => response.json())
+      .then(data => {
+        this.setState({
+          book: data.items[0],
+          isLoading: false
         });
+      }
+      );
+  }
+
+  componentDidMount() {
+    this.setState({ isLoading: true });
+    const titleToSearch = this.props.title.replaceAll("'", '+').replaceAll(' ', '+');
+    let authorToSerach;
+    if (this.props.author !== 'Magazine' || this.props.author !== 'Unkown') {
+      authorToSerach = this.props.author.replace(/^by /, '').replaceAll(' ', '+');
+    } else {
+      authorToSerach = this.props.author;
+    }
+
+    if (authorToSerach === 'Unkown' || authorToSerach === 'Magazine' || authorToSerach.includes(',')) {
+      this.getBookByTitle(titleToSearch);
+    } else if (authorToSerach && titleToSearch) {
+      this.getBookByAthorAndTitile(titleToSearch, authorToSerach);
+    } else if (!authorToSerach || !titleToSearch) {
+      this.getBookByISBN();
+    } else {
+      this.setState({
+        isLoading: false,
+        isNotFound: true
+      });
     }
   }
 
@@ -133,15 +177,18 @@ export default class MoreDetails extends React.Component {
         body: JSON.stringify(objToSend)
       };
       fetch('/api/saved-books/', req)
+        .then(window.location.hash = 'my-books')
         .catch(error => {
           console.error('Error:', error);
         });
-      window.location.hash = 'my-books';
     }
   }
 
   render() {
-    if (!this.state.book) return <LoadingSpinner />;
+    if (!this.state.book) return;
+    if (this.state.isLoading) return <LoadingSpinner />;
+    if (this.state.isNotFound) return <NotFound />;
+
     const { volumeInfo } = this.state.book;
     const { imageLinks, title, description, averageRating, categories } = volumeInfo;
     let coverToShow = this.props.url;
@@ -171,7 +218,6 @@ export default class MoreDetails extends React.Component {
                 <div className='buy-button-holder'><button onClick={this.handleClick} className='add-button'>WANT TO READ</button></div>
             </div>
           </div>
-          <div className='border'></div>
         </div>
 
       </>

@@ -55,7 +55,7 @@ function MyBook(props) {
   return (
     <a href={`#my-book-details?bookId=${bookId}`} className='flex margin-top a-book'>
       <li onClick={props.onClick} className='flex margin-top'>
-        <img src={imageLink} alt={title} />
+        <img className='book-list-img' src={imageLink} alt={title} />
         <div className='content-holder'>
           <p className='title margin-top'>{title}</p>
           <p className='author margin-top'>by {authors}</p>

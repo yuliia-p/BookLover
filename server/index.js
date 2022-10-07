@@ -126,6 +126,7 @@ app.get('/api/saved-books/', (req, res, next) => {
     from "books"
     join "usersAddedBooks" using ("bookId")
     where "userId" = $1
+    order by "addedAt" desc
   `;
   const params = [userId];
   return db.query(sql, params)
