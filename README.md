@@ -31,7 +31,7 @@ ___
 <p align="middle">
   <img src="server/public/images/bl-preview.gif">
   <img src="log-in-preview.png" width="200">
-  <img src="details-preview.png" width="200">
+  <img src="">
 </p>
 
 ### Try the application live [here](http://book-lover-app.yuliia.net/)
