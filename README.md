@@ -29,9 +29,9 @@ ___
   <img src="server/public/images/book-lover-preview.gif" width="800">
 </p>
 <p align="middle">
-  <img src="server/public/images/sign-up-preview.png" width="500">
-  <img src="server/public/images/details.png" width="500">
-  <img src="server/public/images/log-in.png" width="500">
+  <img src="server/public/images/sign-up-preview.png" width="200">
+  <img src="server/public/images/details.png" width="200">
+  <img src="server/public/images/log-in.png" width="200">
 </p>
 
 
