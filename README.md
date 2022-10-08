@@ -29,7 +29,7 @@ ___
   <img src="bl-preview.gif" width="800">
 </p>
 <p align="middle">
-  <img src="server/public/images/bl-preview.gif">
+  <img src="server/public/images/book-lover-preview.gif">
   <img src="log-in-preview.png" width="200">
   <img src="">
 </p>
