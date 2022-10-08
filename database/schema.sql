@@ -29,6 +29,7 @@ CREATE TABLE "public"."books" (
 	"averageRating" numeric,
 	"isbn10" TEXT NOT NULL UNIQUE,
 	"categories" TEXT,
+  "weeks" TEXT,
 	CONSTRAINT "books_pk" PRIMARY KEY ("bookId")
 ) WITH (
   OIDS=FALSE

@@ -45,7 +45,7 @@ export default class MyBooks extends React.Component {
 MyBooks.contextType = AppContext;
 
 function MyBook(props) {
-  const { title, authors, imageLink, shortDescription, bookId, description } = props.book;
+  const { title, authors, imageLink, shortDescription, bookId, description, weeks } = props.book;
   let cutDescription;
   if (shortDescription === '') {
     cutDescription = description.split(' ', 24).join().replaceAll(',', ' ');
@@ -57,7 +57,8 @@ function MyBook(props) {
       <li onClick={props.onClick} className='flex margin-top'>
         <img className='book-list-img' src={imageLink} alt={title} />
         <div className='content-holder'>
-          <p className='title margin-top'>{title}</p>
+          <p className='number-of-weeks'>{weeks} WEEKS ON THE LIST</p>
+          <p className='title margin-top'>{title.toUpperCase()}</p>
           <p className='author margin-top'>by {authors}</p>
           <p className='description margin-top'>{cutDescription}</p>
           <p className='more-details-p'>More Details...</p>

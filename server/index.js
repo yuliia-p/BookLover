@@ -84,17 +84,17 @@ app.post('/api/users/sign-in', (req, res, next) => {
 app.use(authorizationMiddleware);
 
 app.post('/api/saved-books/', (req, res, next) => {
-  const { title, authors, imageLink, shortDescription, description, buyLink, averageRating, isbn10, categories } = req.body;
+  const { title, authors, imageLink, shortDescription, description, buyLink, averageRating, isbn10, categories, weeks } = req.body;
   const { userId } = req.user;
   if (!title || !authors || !imageLink || !isbn10 || !userId) {
     throw new ClientError(400, 'missing info');
   }
   const insertBookSql = `
-    insert into "books" ("title", "authors", "imageLink", "shortDescription", "description", "buyLink", "averageRating", "isbn10", "categories")
-    values ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+    insert into "books" ("title", "authors", "imageLink", "shortDescription", "description", "buyLink", "averageRating", "isbn10", "categories", "weeks")
+    values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
     returning *
   `;
-  const params = [title, authors, imageLink, shortDescription, description, buyLink, averageRating, isbn10, categories];
+  const params = [title, authors, imageLink, shortDescription, description, buyLink, averageRating, isbn10, categories, weeks];
   db.query(insertBookSql, params)
     .then(result => {
       const book = result.rows[0];

@@ -1,7 +1,7 @@
 insert into "users" ("username", "email", "hashedPassword")
 values ('anonymous', 'example@mail.com', '$argon2i$v=19$m=4096,t=3,p=1$h7icQD/xZr8akZsX+hNA0A$h68atJWyjvunAwNOpSpMfg9sPvoMQ6dKwoh0dJhurWA');
 
-insert into "books" ("title", "authors", "imageLink", "description", "buyLink", "averageRating", "isbn10", "categories")
+insert into "books" ("title", "authors", "imageLink", "description", "buyLink", "averageRating", "isbn10", "categories", "weeks")
 values ('Daughter of the Deep',
 'Rick Riordan',
 'http://books.google.com/books/content?id=wmnuDwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api',
@@ -9,7 +9,8 @@ values ('Daughter of the Deep',
 'https://www.amazon.com/dp/1368077927',
 '4',
 '1368077943',
-'Fiction');
+'Fiction',
+'6');
 
 insert into "usersAddedBooks" ("userId", "bookId")
 values ('1', '1')
