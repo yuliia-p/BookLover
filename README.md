@@ -30,8 +30,9 @@ ___
 </p>
 <p align="middle">
   <img src="server/public/images/book-lover-preview.gif">
-  <img src="log-in-preview.png" width="200">
-  <img src="">
+  <img src="server/public/images/sign-up-preview.png" width="200">
+  <img src="server/public/images/details.png">
+  <img src="server/public/images/log-in.png">
 </p>
 
 ### Try the application live [here](http://book-lover-app.yuliia.net/)
