@@ -10,7 +10,7 @@ export default class DeleteModal extends React.Component {
   handleClick() {
     const { route } = this.context;
     const bookId = Number(route.params.get('bookId'));
-    const token = window.localStorage.getItem('react-context-jwt');
+    const token = window.localStorage.getItem('book-lover-jwt');
     const req = {
       method: 'DELETE',
       headers: {
