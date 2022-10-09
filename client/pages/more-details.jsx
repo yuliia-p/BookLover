@@ -171,7 +171,7 @@ export default class MoreDetails extends React.Component {
     if (!user) {
       showModal();
     } else {
-      const token = window.localStorage.getItem('react-context-jwt');
+      const token = window.localStorage.getItem('book-lover-jwt');
       const req = {
         method: 'POST',
         headers: {

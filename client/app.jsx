@@ -37,7 +37,7 @@ export default class App extends React.Component {
         route: parseRoute(window.location.hash)
       });
     });
-    const token = window.localStorage.getItem('react-context-jwt');
+    const token = window.localStorage.getItem('book-lover-jwt');
     const user = token ? jwtDecode(token) : null;
     this.setState({ user });
   }
@@ -51,7 +51,7 @@ export default class App extends React.Component {
     if (user) {
       this.setState({ showModal: 'profile-menu' });
     }
-    if (user && this.state.showModal === 'profile-menu') {
+    if (user && showModal === 'profile-menu') {
       this.setState({ showModal: null });
     }
   }
@@ -62,14 +62,14 @@ export default class App extends React.Component {
 
   handleSignIn(result) {
     const { user, token } = result;
-    window.localStorage.setItem('react-context-jwt', token);
+    window.localStorage.setItem('book-lover-jwt', token);
     this.setState({
       user
     });
   }
 
   handleSignOut() {
-    window.localStorage.removeItem('react-context-jwt');
+    window.localStorage.removeItem('book-lover-jwt');
     this.setState({
       user: null,
       showModal: null
