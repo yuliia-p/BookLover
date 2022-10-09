@@ -10,7 +10,7 @@ export default class MyBooks extends React.Component {
   }
 
   componentDidMount() {
-    const token = window.localStorage.getItem('react-context-jwt');
+    const token = window.localStorage.getItem('book-lover-jwt');
     const req = {
       method: 'GET',
       headers: {
