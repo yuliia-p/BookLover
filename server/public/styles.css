@@ -177,9 +177,6 @@ div.full-description {
 }
 
 .fa-circle-user {
-  /* position: absolute;
-  right: 0.8rem;
-  top: 2.2rem; */
   font-size: 2.3rem;
   color: white;
 }
@@ -444,8 +441,10 @@ input {
   }
 
   .more-details-img {
-    height: 23.394rem;
-    width: auto;
+    /* height: 23.394rem;
+    width: 15rem; */
+    height: 31.25rem;
+    width: 20.563rem;
   }
 
   .book-list-img {
@@ -608,8 +607,8 @@ input {
   }
 
   .more-details-img {
-    height: 33.394rem;
-    width: auto;
+    height: 31.25rem;
+    width: 20.563rem;
   }
 
   .book-list-img {

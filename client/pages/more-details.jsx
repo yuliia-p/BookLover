@@ -27,8 +27,9 @@ export default class MoreDetails extends React.Component {
     fetch(url, req)
       .then(response => response.json())
       .then(data => {
+        const resultByTitle = data.items.filter(book => book.volumeInfo.title === this.props.title && book.volumeInfo.imageLinks);
         this.setState({
-          book: data.items[0],
+          book: resultByTitle[0],
           isLoading: false
         });
       })
@@ -93,12 +94,42 @@ export default class MoreDetails extends React.Component {
     fetch(url, req)
       .then(response => response.json())
       .then(data => {
-        this.setState({
-          book: data.items[0],
-          isLoading: false
-        });
+        if (data.items[0].id) {
+          const urlById = `https://www.googleapis.com/books/v1/volumes/${data.items[0].id}?key=${process.env.GOOGLE_BOOKS_API_KEY}`;
+          const reqById = {
+            method: 'GET',
+            headers: {
+              Accept: 'application/json'
+            }
+          };
+          fetch(urlById, reqById)
+            .then(response => response.json())
+            .then(dataById => {
+              if (!dataById.volumeInfo.imageLinks) {
+                this.getBookByTitle(dataById.volumeInfo.title);
+              } else {
+                this.setState({
+                  book: dataById,
+                  isLoading: false
+                });
+              }
+            })
+            .catch(error => {
+              console.error('Error:', error);
+              this.setState({ isLoading: false });
+            });
+        } else {
+          this.setState({
+            book: data.items[0],
+            isLoading: false
+          });
+        }
       }
-      );
+      )
+      .catch(error => {
+        console.error('Error:', error);
+        this.setState({ isLoading: false });
+      });
   }
 
   componentDidMount() {
@@ -129,12 +160,14 @@ export default class MoreDetails extends React.Component {
     const { user } = this.context;
     const { volumeInfo, searchInfo } = this.state.book;
     const { title, description, averageRating, industryIdentifiers, imageLinks } = volumeInfo;
+    const cleanDescription = description.replaceAll('<p>', ' ').replaceAll('</p>', ' ').replaceAll('<b>', ' ').replaceAll('<br></i></b><br>', ' ').replaceAll('<br>', ' ').replaceAll('<i>', ' ').replaceAll('</i>', ' ').replaceAll('</b>', ' ');
+
     const isnb = industryIdentifiers.find(i => i.type === 'ISBN_10');
     let bookCover;
     if (url) {
       bookCover = url;
     } else if (!url) {
-      bookCover = imageLinks.thumbnail;
+      bookCover = imageLinks.small || imageLinks.thumbnail;
     } else {
       bookCover = imageLinks.smallThumbnail;
     }
@@ -155,7 +188,7 @@ export default class MoreDetails extends React.Component {
       authors: author,
       imageLink: bookCover,
       shortDescription,
-      description,
+      description: cleanDescription,
       buyLink,
       averageRating,
       isbn10: isnb.identifier,
@@ -194,11 +227,24 @@ export default class MoreDetails extends React.Component {
     if (this.state.isNotFound) return <NotFound />;
 
     const { volumeInfo } = this.state.book;
+    // saleInfo
+
     const { imageLinks, title, description, averageRating, categories } = volumeInfo;
+    const cleanDescription = description.replaceAll('<p>', ' ').replaceAll('</p>', ' ').replaceAll('<b>', ' ').replaceAll('<br></i></b><br>', ' ').replaceAll('<br>', ' ').replaceAll('<i>', ' ').replaceAll('</i>', ' ').replaceAll('</b>', ' ');
+
     let coverToShow = this.props.url;
     if (!coverToShow) {
-      coverToShow = imageLinks.thumbnail;
+      coverToShow = imageLinks.small || imageLinks.thumbnail;
     }
+    // else if (!imageLinks.medium) {
+    //   coverToShow = imageLinks.thumbnail;
+    // }
+    // let buyLink = this.props.buyLink;
+    // if (!buyLink) {
+    //   buyLink = saleInfo.buyLink;
+    // } else {
+    //   buyLink = null;
+    // }
     return (
       <>
         <div className='container full-description'>
@@ -213,7 +259,7 @@ export default class MoreDetails extends React.Component {
                 {ShowRating(averageRating)}
                 <p className='rating no-margin'>Rating: {averageRating}</p>
               </div>
-              <p className='full-description description no-padding'>{description}</p>
+              <p className='full-description description no-padding'>{cleanDescription}</p>
               <p className='no-margin genres'>GENRES</p>
               <p className='no-margin genre-name'>{categories}</p>
                <div className='my-buttons flex'>
@@ -230,5 +276,3 @@ export default class MoreDetails extends React.Component {
 }
 
 MoreDetails.contextType = AppContext;
-
-// function
