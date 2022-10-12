@@ -46,10 +46,10 @@ export default class SignUpModal extends React.Component {
             <input onChange={this.handleChange} type="text" placeholder="Name" name="username" id="username" required />
 
             <label htmlFor="email"><p className='auth-margin'>Email address</p></label>
-            <input onChange={this.handleChange} type="text" placeholder="exapmle@email.com" name="email" id="email" required />
+            <input onChange={this.handleChange} type="email" placeholder="example@email.com" name="email" id="email" required />
 
             <label htmlFor="password"><p className='auth-margin'>Create password</p></label>
-            <input onChange={this.handleChange} type="password" placeholder="At least 8 characters" name="password" id="password" required />
+            <input onChange={this.handleChange} type="password" placeholder="At least 8 characters" name="password" id="password" required minLength={8}/>
 
             <div className="button-holder">
               <button type="submit" className="auth-button" >Sign Up</button>
