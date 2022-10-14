@@ -4,9 +4,7 @@ import AppContext from '../lib/app-context';
 export default class MyBooks extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      books: []
-    };
+    this.state = { books: [] };
   }
 
   componentDidMount() {
@@ -31,13 +29,13 @@ export default class MyBooks extends React.Component {
   render() {
     const { books } = this.state;
     return (
-      <div className='container'>
-          <ul>
-            {
-            books.map(book => <MyBook key={book.bookId} book={book} />)
-            }
-          </ul>
-      </div>
+            <div className='container'>
+              <ul>
+                {
+                  books.map(book => <MyBook key={book.bookId} book={book} />)
+                }
+              </ul>
+             </div>
 
     );
   }
