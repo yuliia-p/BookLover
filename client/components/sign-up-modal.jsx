@@ -31,6 +31,7 @@ export default class SignUpModal extends React.Component {
       .then(result => {
       });
     this.props.onComplete();
+    this.props.onSignIn();
   }
 
   render() {

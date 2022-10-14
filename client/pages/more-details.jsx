@@ -162,7 +162,7 @@ export default class MoreDetails extends React.Component {
     const { title, description, averageRating, industryIdentifiers, imageLinks } = volumeInfo;
     const cleanDescription = description.replaceAll('<p>', ' ').replaceAll('</p>', ' ').replaceAll('<b>', ' ').replaceAll('<br></i></b><br>', ' ').replaceAll('<br>', ' ').replaceAll('<i>', ' ').replaceAll('</i>', ' ').replaceAll('</b>', ' ');
 
-    const isnb = industryIdentifiers.find(i => i.type === 'ISBN_10');
+    const isbn = industryIdentifiers.find(i => i.type === 'ISBN_10');
     let bookCover;
     if (url) {
       bookCover = url;
@@ -173,7 +173,7 @@ export default class MoreDetails extends React.Component {
     }
     let shortDescription;
     if (!searchInfo) {
-      shortDescription = description.split(' ', 24).join().replaceAll(',', ' ');
+      shortDescription = cleanDescription.split(' ', 24).join().replaceAll(',', ' ');
     } else {
       shortDescription = searchInfo.textSnippet;
     }
@@ -191,7 +191,7 @@ export default class MoreDetails extends React.Component {
       description: cleanDescription,
       buyLink,
       averageRating,
-      isbn10: isnb.identifier,
+      isbn10: isbn.identifier,
       categories,
       weeks: number,
       userId: user.userId

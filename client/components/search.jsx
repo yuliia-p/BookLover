@@ -83,18 +83,18 @@ export default class Search extends React.Component {
 Search.contextType = AppContext;
 
 function GetISBN(book) {
-  let isnb;
+  let isbn;
   if (book.industryIdentifiers) {
-    const isnb10 = book.industryIdentifiers.find(obj => obj.type === 'ISBN_10' || 'OTHER');
-    if (isnb10.type === 'ISBN_10') {
-      isnb = isnb10.identifier;
+    const isbn10 = book.industryIdentifiers.find(obj => obj.type === 'ISBN_10' || 'OTHER');
+    if (isbn10.type === 'ISBN_10') {
+      isbn = isbn10.identifier;
     } else {
-      isnb = null;
+      isbn = null;
     }
   } else if (!book.industryIdentifiers || book.industryIdentifiers.length === 1) {
-    isnb = null;
+    isbn = null;
   }
-  return isnb;
+  return isbn;
 }
 
 function GetAuthor(book) {
