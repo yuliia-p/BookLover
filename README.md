@@ -15,9 +15,10 @@ ___
 - PostgreSQL
 - Webpack
 - Node.js
+- Express
+- Babel
 - HTML5
 - CSS3
-
 ___ 
 
 ### This application was build querying two different APIs
