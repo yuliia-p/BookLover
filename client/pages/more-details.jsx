@@ -227,8 +227,6 @@ export default class MoreDetails extends React.Component {
     if (this.state.isNotFound) return <NotFound />;
 
     const { volumeInfo } = this.state.book;
-    // saleInfo
-
     const { imageLinks, title, description, averageRating, categories } = volumeInfo;
     const cleanDescription = description.replaceAll('<p>', ' ').replaceAll('</p>', ' ').replaceAll('<b>', ' ').replaceAll('<br></i></b><br>', ' ').replaceAll('<br>', ' ').replaceAll('<i>', ' ').replaceAll('</i>', ' ').replaceAll('</b>', ' ');
 
@@ -236,15 +234,6 @@ export default class MoreDetails extends React.Component {
     if (!coverToShow) {
       coverToShow = imageLinks.small || imageLinks.thumbnail;
     }
-    // else if (!imageLinks.medium) {
-    //   coverToShow = imageLinks.thumbnail;
-    // }
-    // let buyLink = this.props.buyLink;
-    // if (!buyLink) {
-    //   buyLink = saleInfo.buyLink;
-    // } else {
-    //   buyLink = null;
-    // }
     return (
       <>
         <div className='container full-description'>

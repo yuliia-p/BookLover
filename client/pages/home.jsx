@@ -1,6 +1,7 @@
 import React from 'react';
 import BookList from '../components/books-list';
 import LoadingSpinner from '../components/loading-spinner';
+// import BookCarousel from '../components/book-carousel';
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -49,6 +50,7 @@ export default class Home extends React.Component {
     return (
       <>
         {isLoading ? <LoadingSpinner /> : <BookList books={books} />}
+        {/* {isLoading ? <LoadingSpinner /> : <BookCarousel books={books} />} */}
       </>
     );
   }

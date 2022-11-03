@@ -619,4 +619,15 @@ input {
   .input {
     width: auto;
   }
+
+  .fa-chevron-left,
+  .fa-chevron-right {
+    font-size: 3rem;
+  }
+
+  .flex-carousel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 }
