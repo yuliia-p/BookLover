@@ -105,6 +105,16 @@ export default class Navbar extends React.Component {
               <i onClick={this.props.onAuthClick} className="fa-solid fa-circle-user"></i>
             </div>
           </div>
+        <div className='navbar-div container'>
+          <h1 className='navbar-h1' >The New York Times Best Sellers</h1>
+          <h4 className='navbar-h4'>Authoritatively ranked lists of books sold in the United States, sorted by format and genre.</h4>
+          <div className='flex'>
+            <p>FICTION</p>
+            <p>NONFICTION</p>
+            <p>CHILDREN’S</p>
+            <p>MONTHLY LISTS MONTHLY LISTS</p>
+          </div>
+        </div>
       </>
     );
   }

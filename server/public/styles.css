@@ -430,6 +430,21 @@ input {
   animation-delay: 0;
 }
 
+.navbar-h1 {
+  font-size: 1.8rem;
+  font-weight: 100;
+  margin: 1rem 0 0;
+  padding: 0 1rem;
+}
+
+.navbar-h4 {
+  color: rgba(118, 120, 119, 1);
+  font-weight: 100;
+  font-size: 0.95rem;
+  padding: 0 1rem;
+  margin: 1rem 0 0;
+}
+
 @media screen and (min-width: 740px) {
   .header {
     padding: 0;
@@ -595,6 +610,21 @@ input {
   .input {
     width: 80%;
   }
+
+  .navbar-h1 {
+    font-size: 1.7rem;
+    font-weight: 100;
+    margin: 1rem 0;
+    padding: 0;
+  }
+
+  .navbar-h4 {
+    padding: 0 0 1rem;
+  }
+
+  .navbar-div {
+    border-bottom: solid 0.18rem black;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -618,5 +648,10 @@ input {
 
   .input {
     width: auto;
+  }
+
+  .navbar-h1 {
+    font-size: 2.2rem;
+    font-weight: 100;
   }
 }
