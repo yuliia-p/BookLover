@@ -59,7 +59,7 @@ function MyBook(props) {
           <p className='title margin-top'>{title.toUpperCase()}</p>
           <p className='author margin-top'>by {authors}</p>
           <p className='description margin-top'>{cutDescription}</p>
-          <p className='more-details-p'>More Details...</p>
+          <p className='more-details-p'>More Details</p>
         </div>
       </li>
     </a>

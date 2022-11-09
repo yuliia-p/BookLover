@@ -42,3 +42,10 @@
     margin: auto;
   }
 }
+
+@media (min-width: 1024px) {
+  div.container.full-description {
+    max-width: 60%;
+    margin: auto;
+  }
+}
