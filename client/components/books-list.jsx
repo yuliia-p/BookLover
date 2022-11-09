@@ -26,7 +26,7 @@ function Book(props) {
           <p className='title margin-top'>{bookObj.title}</p>
           <p className='author margin-top'>by {bookObj.authors}</p>
           <p className='description margin-top'>{bookObj.shortDescription}</p>
-          <p className='more-details-p'>More Details...</p>
+          {/* <p className='more-details-p'>More Details...</p> */}
           </div>
         </li>
       </a>

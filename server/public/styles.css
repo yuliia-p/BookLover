@@ -598,6 +598,11 @@ input {
 }
 
 @media (min-width: 1024px) {
+  .book-list-img {
+    height: 16.601rem;
+    max-width: 11.9rem;
+  }
+
   .description {
     font-size: 0.7rem;
   }
@@ -608,12 +613,7 @@ input {
 
   .more-details-img {
     height: 31.25rem;
-    width: 20.563rem;
-  }
-
-  .book-list-img {
-    height: 14.601rem;
-    max-width: 10rem;
+    width: 21.563rem;
   }
 
   .input {
