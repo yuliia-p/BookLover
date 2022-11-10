@@ -119,10 +119,6 @@ export default class Navbar extends React.Component {
             <p data-value='hardcover-nonfiction' className='navbar-p' onClick={handleChangeList}>NONFICTION</p>
             <p data-value='childrens-middle-grade' className='navbar-p' onClick={handleChangeList}>CHILDREN’S</p>
             <p data-value='education' className='navbar-p' onClick={handleChangeList}>EDUCATION</p>
-            {/* <select onChange={handleChange} className='select-monthly-list navbar-p'>
-              <option value="MONTHLY" className='option-monthly-list'>MONTHLY LISTS</option>
-              <MenuItems categories={this.state.categories} />
-            </select> */}
           </div>
         </div>
       </>
