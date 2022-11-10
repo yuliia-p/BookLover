@@ -16,10 +16,12 @@ export default class Navbar extends React.Component {
     this.hashChange = this.hashChange.bind(this);
     this.searchInput = this.searchInput.bind(this);
     this.searchClick = this.searchClick.bind(this);
+    this.handleChangeList = this.handleChangeList.bind(this);
   }
 
   handleChange(event) {
     const encodedObj = this.state.categories.find(o => o.display_name === event.target.value);
+    // console.log(event.target.value);
     const encodedName = encodedObj.list_name_encoded;
     this.setState({
       isClicked: !this.state.isClicked,
@@ -48,6 +50,10 @@ export default class Navbar extends React.Component {
       });
   }
 
+  handleChangeList(event) {
+    window.location.hash = '#?category=' + event.target.dataset.value;
+  }
+
   getCategoriesClick() {
     this.setState({
       isClicked: !this.state.isClicked
@@ -73,7 +79,7 @@ export default class Navbar extends React.Component {
 
   render() {
     const { user } = this.context;
-    const { getCategoriesClick, searchInput, hashChange, handleChange, searchClick } = this;
+    const { getCategoriesClick, searchInput, hashChange, handleChange, searchClick, handleChangeList } = this;
     let categoryToShow;
     if (this.state.categoryToShow) {
       categoryToShow = this.state.categoryToShow;
@@ -88,9 +94,9 @@ export default class Navbar extends React.Component {
               user !== null && <a className='dropdown my-books' href='#my-books'>My Books</a>
             }
             <div className='dropdown-list-holder flex'>
-              <a onClick={getCategoriesClick} className='dropdown'>NYT Best Sellers<span className='span-category'>{categoryToShow}</span></a>
+            <a onClick={getCategoriesClick} className='dropdown'>Monthly Lists<span className='span-category'>{categoryToShow}</span></a>
               <div className='dropdown-content'>
-                <select onChange={handleChange} className={classToShow}>
+                <select onChange={handleChange} className={`${classToShow} select-list`} >
                   <MenuItems categories={this.state.categories} />
                 </select>
               </div>
@@ -105,6 +111,16 @@ export default class Navbar extends React.Component {
               <i onClick={this.props.onAuthClick} className="fa-solid fa-circle-user"></i>
             </div>
           </div>
+        <div className='navbar-div container'>
+          <h1 className='navbar-h1' >The New York Times Best Sellers</h1>
+          <h4 className='navbar-h4'>Authoritatively ranked lists of books sold in the United States, sorted by format and genre.</h4>
+          <div className='flex flex-navbar'>
+            <p data-value='combined-print-and-e-book-fiction' className='navbar-p' onClick={handleChangeList}>FICTION</p>
+            <p data-value='hardcover-nonfiction' className='navbar-p' onClick={handleChangeList}>NONFICTION</p>
+            <p data-value='childrens-middle-grade' className='navbar-p' onClick={handleChangeList}>CHILDREN’S</p>
+            <p data-value='education' className='navbar-p' onClick={handleChangeList}>EDUCATION</p>
+          </div>
+        </div>
       </>
     );
   }

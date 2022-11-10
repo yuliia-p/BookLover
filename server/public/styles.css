@@ -130,7 +130,7 @@ div.rating {
   font-size: smaller;
 }
 
-select {
+.select-list {
   border: none;
   padding: 0.1rem 0.3rem;
   border-radius: 0.99rem;
@@ -430,7 +430,58 @@ input {
   animation-delay: 0;
 }
 
+.navbar-h1 {
+  font-size: 1.8rem;
+  font-weight: 100;
+  margin: 1rem 0 0;
+  padding: 0 1rem;
+}
+
+.navbar-h4 {
+  color: rgba(118, 120, 119, 1);
+  font-weight: 100;
+  padding: 0 1rem;
+  margin: 0.5rem 0 0;
+  font-size: 0.8rem;
+}
+
+.select-monthly-list {
+  border: none;
+  font-family: inherit;
+}
+
+.flex-navbar {
+  padding: 0 1rem;
+}
+
+.navbar-p {
+  color: rgb(75, 75, 75);
+  font-weight: 100;
+  font-size: 0.85rem;
+  margin: 0.5rem 0 0;
+  margin-left: 0.5rem;
+  text-decoration: underline;
+}
+
+.navbar-p:hover {
+  cursor: pointer;
+  color: black;
+}
+
 @media screen and (min-width: 740px) {
+  .flex-navbar {
+    flex-wrap: nowrap;
+    padding: 0;
+  }
+
+  .navbar-p {
+    margin: 0 0.5rem 0.5rem 0;
+
+    /* color: rgba(118, 120, 119, 1);
+    font-weight: 100;
+    font-size: 0.95rem; */
+  }
+
   .header {
     padding: 0;
     align-items: baseline;
@@ -595,6 +646,22 @@ input {
   .input {
     width: 80%;
   }
+
+  .navbar-h1 {
+    font-size: 1.7rem;
+    font-weight: 100;
+    margin: 1rem 0 0;
+    padding: 0;
+  }
+
+  .navbar-h4 {
+    padding: 0 0 1rem;
+    margin: 0;
+  }
+
+  .navbar-div {
+    border-bottom: solid 0.15rem rgb(75, 75, 75);
+  }
 }
 
 @media (min-width: 1024px) {
@@ -618,5 +685,10 @@ input {
 
   .input {
     width: auto;
+  }
+
+  .navbar-h1 {
+    font-size: 2.2rem;
+    font-weight: 100;
   }
 }
