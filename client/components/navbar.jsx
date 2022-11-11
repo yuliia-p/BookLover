@@ -51,7 +51,7 @@ export default class Navbar extends React.Component {
   }
 
   handleChangeList(event) {
-    window.location.hash = '#?category=' + event.target.dataset.value;
+    window.location.hash = '#?category=' + event.target.value;
   }
 
   getCategoriesClick() {
@@ -112,13 +112,36 @@ export default class Navbar extends React.Component {
             </div>
           </div>
         <div className='navbar-div container'>
-          <h1 className='navbar-h1' >The New York Times Best Sellers</h1>
+          {
+          !this.state.categoryToShow ? <h1 className='navbar-h1' >The New York Times Best Sellers</h1> : <h1 className='navbar-h1'>{categoryToShow}</h1>
+        }
+
           <h4 className='navbar-h4'>Authoritatively ranked lists of books sold in the United States, sorted by format and genre.</h4>
           <div className='flex flex-navbar'>
-            <p data-value='combined-print-and-e-book-fiction' className='navbar-p' onClick={handleChangeList}>FICTION</p>
-            <p data-value='hardcover-nonfiction' className='navbar-p' onClick={handleChangeList}>NONFICTION</p>
-            <p data-value='childrens-middle-grade' className='navbar-p' onClick={handleChangeList}>CHILDREN’S</p>
-            <p data-value='education' className='navbar-p' onClick={handleChangeList}>EDUCATION</p>
+            <select name="FICTION" className='navbar-select' onChange={handleChangeList} defaultValue='default' style={{ width: '4.1875rem' }}>
+                <option className='option-navbar' value="default" disabled>FICTION</option>
+                <option className='option-navbar' value="combined-print-and-e-book-fiction">Combined Print and E-Book Fiction</option>
+                <option className='option-navbar' value="hardcover-fiction">Hardcover Fiction</option>
+                <option className='option-navbar' value="trade-fiction-paperback">Paperback Trade Fiction</option>
+            </select>
+            <select className='navbar-select' onChange={handleChangeList} defaultValue='default' style={{ width: '5.85rem' }}>
+              <option className='option-navbar' value="default" disabled >NONFICTION</option>
+              <option className='option-navbar' value="combined-print-and-e-book-nonfiction">Combined Print and E-Book Nonfiction</option>
+              <option className='option-navbar' value="hardcover-nonfiction">Hardcover Nonfiction</option>
+              <option className='option-navbar' value="paperback-nonfiction">Paperback Nonfiction</option>
+              <option className='option-navbar' value="e-book-nonfiction">E-Book Nonfiction</option>
+            </select>
+            <select className='navbar-select' onChange={handleChangeList} defaultValue='default' style={{ width: '5.8rem' }}>
+              <option className='option-navbar' value="default" disabled >CHILDREN’S</option>
+              <option className='option-navbar' value="childrens-middle-grade">Children’s Middle Grade</option>
+              <option className='option-navbar' value="picture-books">Children’s Picture Books</option>
+              <option className='option-navbar' value="series-books">Children’s Series</option>
+              <option className='option-navbar' value="young-adult">Young Adult</option>
+            </select>
+            <select className='navbar-select' onChange={handleChangeList} defaultValue='default' style={{ width: '7.2rem' }}>
+              <option className='option-navbar' value="default" disabled >MONTHLY LISTS</option>
+              <MenuItems categories={this.state.categories} />
+            </select>
           </div>
         </div>
       </>

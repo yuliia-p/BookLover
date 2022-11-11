@@ -431,7 +431,7 @@ input {
 }
 
 .navbar-h1 {
-  font-size: 1.8rem;
+  font-size: 1.35rem;
   font-weight: 100;
   margin: 1rem 0 0;
   padding: 0 1rem;
@@ -454,13 +454,14 @@ input {
   padding: 0 1rem;
 }
 
-.navbar-p {
-  color: rgb(75, 75, 75);
-  font-weight: 100;
-  font-size: 0.85rem;
-  margin: 0.5rem 0 0;
-  margin-left: 0.5rem;
-  text-decoration: underline;
+.navbar-select {
+  color: #333;
+  font-size: 0.6875rem;
+  font-weight: 400;
+  font-family: inherit;
+  border: none;
+  width: 6.6rem;
+  padding: 0.5rem 0;
 }
 
 .navbar-p:hover {
@@ -470,8 +471,12 @@ input {
 
 @media screen and (min-width: 740px) {
   .flex-navbar {
-    flex-wrap: nowrap;
     padding: 0;
+    border-top: 1px solid #ccc;
+  }
+
+  .navbar-select {
+    width: 7rem;
   }
 
   .navbar-p {
