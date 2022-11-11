@@ -51,6 +51,7 @@ export default class Navbar extends React.Component {
   }
 
   handleChangeList(event) {
+
     const displayNameObj = this.state.categories.find(o => o.list_name_encoded === event.target.value);
     const displayName = displayNameObj.display_name;
     // console.log('displayNameObj', displayNameObj);
