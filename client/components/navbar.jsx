@@ -12,23 +12,23 @@ export default class Navbar extends React.Component {
       searchIsClicked: false
     };
     this.getCategoriesClick = this.getCategoriesClick.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    // this.handleChange = this.handleChange.bind(this);
     this.hashChange = this.hashChange.bind(this);
     this.searchInput = this.searchInput.bind(this);
     this.searchClick = this.searchClick.bind(this);
     this.handleChangeList = this.handleChangeList.bind(this);
   }
 
-  handleChange(event) {
-    const encodedObj = this.state.categories.find(o => o.display_name === event.target.value);
-    // console.log(event.target.value);
-    const encodedName = encodedObj.list_name_encoded;
-    this.setState({
-      isClicked: !this.state.isClicked,
-      categoryToShow: event.target.value
-    });
-    window.location.hash = '#?category=' + encodedName;
-  }
+  // handleChange(event) {
+  //   const encodedObj = this.state.categories.find(o => o.display_name === event.target.value);
+  //   // console.log(event.target.value);
+  //   const encodedName = encodedObj.list_name_encoded;
+  //   this.setState({
+  //     isClicked: !this.state.isClicked,
+  //     categoryToShow: event.target.value
+  //   });
+  //   window.location.hash = '#?category=' + encodedName;
+  // }
 
   componentDidMount() {
     const url = `https://api.nytimes.com/svc/books/v3/lists/names.json?api-key=${process.env.BOOKS_API_KEY}`;
@@ -51,6 +51,13 @@ export default class Navbar extends React.Component {
   }
 
   handleChangeList(event) {
+    const displayNameObj = this.state.categories.find(o => o.list_name_encoded === event.target.value);
+    const displayName = displayNameObj.display_name;
+    // console.log('displayNameObj', displayNameObj);
+    // console.log('event.target.value', event.target.value);
+    // console.log('this.state.categories', this.state.categories);
+
+    this.setState({ categoryToShow: displayName });
     window.location.hash = '#?category=' + event.target.value;
   }
 
@@ -113,9 +120,9 @@ export default class Navbar extends React.Component {
           </div>
         <div className='navbar-div container'>
           {
-          !this.state.categoryToShow ? <h1 className='navbar-h1' >The New York Times Best Sellers</h1> : <h1 className='navbar-h1'>{categoryToShow}</h1>
-        }
-
+            categoryToShow ? <h1 className='navbar-h1' >{categoryToShow}</h1> : <h1 className='navbar-h1' >The New York Times Best Sellers</h1>
+          }
+          {/* <h1 className='navbar-h1' >The New York Times Best Sellers<span className='span-category'>{categoryToShow}</span></h1> */}
           <h4 className='navbar-h4'>Authoritatively ranked lists of books sold in the United States, sorted by format and genre.</h4>
           <div className='flex flex-navbar'>
             <select name="FICTION" className='navbar-select' onChange={handleChangeList} defaultValue='default' style={{ width: '4.1875rem' }}>
@@ -163,4 +170,5 @@ function Category(props) {
     <option value={props.category.display_name}>{props.category.display_name}</option>
   );
 }
+
 Navbar.contextType = AppContext;
