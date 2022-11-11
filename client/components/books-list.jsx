@@ -24,7 +24,7 @@ function Book(props) {
           <div className='content-holder'>
           <p className='number-of-weeks '>{numberWeeks} WEEKS ON THE LIST</p>
           <p className='title margin-top'>{bookObj.title}</p>
-          <p className='author margin-top'>by {bookObj.authors}</p>
+          <p className='author margin-top'><span style={{ fontWeight: '100' }}>by</span> {bookObj.authors}</p>
           <p className='description margin-top'>{bookObj.shortDescription}</p>
           {/* <p className='more-details-p'>More Details...</p> */}
           </div>
