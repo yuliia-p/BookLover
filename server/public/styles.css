@@ -524,7 +524,6 @@ input {
 
   .description {
     font-size: 0.5rem;
-    padding-right: 2rem;
   }
 
   .number-of-weeks {
@@ -650,6 +649,7 @@ input {
 
   .input {
     width: 80%;
+    border: none;
   }
 
   .navbar-h1 {
@@ -670,6 +670,25 @@ input {
 }
 
 @media (min-width: 1024px) {
+  div.full-description {
+    padding: 1rem 0;
+  }
+
+  ul {
+    justify-content: space-between;
+  }
+
+  li {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .content-holder {
+    margin: 1rem 0 0;
+    text-align: center;
+  }
+
   .book-list-img {
     height: 16.601rem;
     max-width: 11.9rem;
@@ -677,6 +696,15 @@ input {
 
   .description {
     font-size: 0.7rem;
+    margin: 0.8rem 0 0;
+    padding: 0 1rem;
+    text-align: center;
+  }
+
+  .full-description {
+    margin: 0.8rem 0;
+    padding: 0;
+    text-align: justify;
   }
 
   .search-submit {
