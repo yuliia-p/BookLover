@@ -244,7 +244,7 @@ export default class MoreDetails extends React.Component {
                 <p className='number-of-weeks'>{this.props.number} WEEKS ON THE LIST</p>
                 }
               <h2 className='title-more-details no-padding '>{title}</h2>
-              <p className='author'>by {this.props.author}</p>
+            <p className='author'><span style={{ fontWeight: '100' }}>by </span>{this.props.author}</p>
               <div className='rating no-margin'>
                 {ShowRating(averageRating)}
                 <p className='rating no-margin'>Rating: {averageRating}</p>
