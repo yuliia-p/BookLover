@@ -674,6 +674,11 @@ input {
     padding: 1rem 0;
   }
 
+  .description-overflow {
+    padding: 0;
+    font-size: 0.65rem;
+  }
+
   ul {
     justify-content: space-between;
   }
