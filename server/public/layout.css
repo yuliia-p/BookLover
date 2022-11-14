@@ -15,11 +15,6 @@
     display: flex;
   }
 
-  .container {
-    max-width: 60%;
-    margin: auto;
-  }
-
   h2 {
     padding-left: 1rem;
   }
@@ -41,6 +36,12 @@
     max-width: 80%;
     margin: auto;
   }
+
+  .navbar-div,
+  .container {
+    max-width: 80%;
+    margin: auto;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -56,8 +57,13 @@
     flex-basis: 100%;
   }
 
-  div.container.full-description {
+  .container {
     max-width: 60%;
+    margin: auto;
+  }
+
+  div.container.full-description {
+    max-width: 80%;
     margin: auto;
   }
 }

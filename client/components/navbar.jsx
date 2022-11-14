@@ -8,9 +8,9 @@ export default class Navbar extends React.Component {
       categories: [],
       categoryToShow: null,
       userInputValue: '',
-      searchIsClicked: false
+      searchIsClicked: false,
+      isClicked: false
     };
-    // this.getCategoriesClick = this.getCategoriesClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.hashChange = this.hashChange.bind(this);
     this.searchInput = this.searchInput.bind(this);
@@ -22,7 +22,8 @@ export default class Navbar extends React.Component {
     const encodedObj = this.state.categories.find(o => o.display_name === event.target.value);
     const encodedName = encodedObj.list_name_encoded;
     this.setState({
-      categoryToShow: event.target.value
+      categoryToShow: event.target.value,
+      isClicked: true
     });
     window.location.hash = '#?category=' + encodedName;
   }
@@ -50,7 +51,7 @@ export default class Navbar extends React.Component {
   handleChangeList(event) {
     const displayNameObj = this.state.categories.find(o => o.list_name_encoded === event.target.value);
     const displayName = displayNameObj.display_name;
-    this.setState({ categoryToShow: displayName });
+    this.setState({ categoryToShow: displayName, isClicked: true });
     window.location.hash = '#?category=' + event.target.value;
   }
 
@@ -96,7 +97,7 @@ export default class Navbar extends React.Component {
               <i onClick={this.props.onAuthClick} className="fa-solid fa-circle-user"></i>
             </div>
           </div>
-        <div className='navbar-div container'>
+        <div className='navbar-div'>
           {
             categoryToShow ? <h1 className='navbar-h1' >{categoryToShow}</h1> : <h1 className='navbar-h1' >The New York Times Best Sellers</h1>
           }

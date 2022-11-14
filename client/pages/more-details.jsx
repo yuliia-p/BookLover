@@ -32,6 +32,9 @@ export default class MoreDetails extends React.Component {
           book: resultByTitle[0],
           isLoading: false
         });
+        if (!resultByTitle[0]) {
+          this.getBookByAthorAndTitile();
+        }
       })
       .catch(error => {
         console.error('Error:', error);
@@ -137,7 +140,7 @@ export default class MoreDetails extends React.Component {
     const titleToSearch = this.props.title.replaceAll("'", '').replaceAll(' ', '+');
     let authorToSerach;
     if (this.props.author !== 'Magazine' || this.props.author !== 'Unkown') {
-      authorToSerach = this.props.author.replace(/^and /, '').replace(/^by /, '').replaceAll(' ', '+');
+      authorToSerach = this.props.author.replace('and ', '').replace(/^and /, '').replace(/^by /, '').replaceAll(' ', '+');
     } else {
       authorToSerach = this.props.author;
     }
