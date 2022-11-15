@@ -9,12 +9,13 @@ a {
 }
 
 .header {
-  background-color: rgba(17, 17, 24, 1);
-  color: white;
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
   padding: 0.8rem 0.5rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  border-bottom: solid #333;
 }
 
 .my-books {
@@ -101,42 +102,43 @@ div.rating {
 
 .header-lover-h2 {
   flex-basis: 100%;
-  color: white;
+  color: rgb(0, 0, 0);
 }
 
+/*
 .dropdown {
   font-weight: 100;
   cursor: pointer;
-  color: white;
-}
+  color: rgb(0, 0, 0);
+} */
 
-.dropdown:hover {
+/* .dropdown:hover {
   text-decoration: underline;
-}
+} */
 
-.dropdown-content {
+/* .dropdown-content {
   margin: 0.19rem 0 0;
   position: absolute;
-}
+} */
 
-.dropdown-list-holder {
+/* .dropdown-list-holder {
   flex-basis: 100%;
   margin-top: 0.6rem;
-}
+} */
 
-.span-category {
+/* .span-category {
   text-decoration: underline;
   margin-left: 0.5rem;
   font-size: smaller;
-}
+} */
 
-.select-list {
+/* .select-list {
   border: none;
   padding: 0.1rem 0.3rem;
   border-radius: 0.99rem;
   font-family: inherit;
   cursor: inherit;
-}
+} */
 
 .position-sticky {
   position: sticky;
@@ -178,7 +180,7 @@ div.full-description {
 
 .fa-circle-user {
   font-size: 2.3rem;
-  color: white;
+  color: rgb(0, 0, 0);
 }
 
 .modal {
@@ -329,11 +331,11 @@ input {
 
 .fa-search {
   font-size: 1.2rem;
-  color: white;
+  color: rgb(0, 0, 0);
 }
 
 .search-submit {
-  background-color: rgba(17, 17, 24, 1);
+  background-color: rgb(255, 255, 255);
   border: none;
 }
 
@@ -589,6 +591,7 @@ input {
   .fa-circle-user {
     font-size: 2.4rem;
     margin-right: 1rem;
+    color: black;
   }
 
   .add-button,
@@ -649,7 +652,7 @@ input {
 
   .input {
     width: 80%;
-    border: none;
+    border: solid;
   }
 
   .navbar-h1 {
