@@ -76,10 +76,7 @@ export default class Home extends React.Component {
     return (
       <>
         {isLoading ? <LoadingSpinner /> : <BookList books={books} />}
-        {/* <p>Combined Print and E-Book Nonfiction</p>
-        {isLoading ? <LoadingSpinner /> : <BookList books={nonFictionBooks} />} */}
       </>
     );
   }
 }
-// Combined Print & E-Book Fiction
