@@ -9,10 +9,19 @@ export default class AllBooks extends React.Component {
       books: [],
       isLoading: false
     };
-    // this.loadBooks = this.loadBooks.bind(this);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.category !== prevProps.category) {
+      this.loadBooks();
+    }
   }
 
   componentDidMount() {
+    this.loadBooks();
+  }
+
+  loadBooks() {
     this.setState({ isLoading: true });
     const category = this.props.category;
     const url = `https://api.nytimes.com/svc/books/v3/lists/current/${category}.json?api-key=${process.env.BOOKS_API_KEY}`;
