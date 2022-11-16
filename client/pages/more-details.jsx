@@ -97,6 +97,9 @@ export default class MoreDetails extends React.Component {
     fetch(url, req)
       .then(response => response.json())
       .then(data => {
+        if (data.totalItems === 0) {
+          this.getBookByTitle();
+        }
         if (data.items[0].id) {
           const urlById = `https://www.googleapis.com/books/v1/volumes/${data.items[0].id}?key=${process.env.GOOGLE_BOOKS_API_KEY}`;
           const reqById = {

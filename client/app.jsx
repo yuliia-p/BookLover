@@ -13,6 +13,7 @@ import Search from './components/search';
 import NotFound from './pages/not-found';
 import DeleteModal from './components/delete-modal';
 import ProfileMenu from './components/profile-menu';
+import AllBooks from './pages/all-books-list';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -83,13 +84,22 @@ export default class App extends React.Component {
   renderPage() {
     const { route } = this.state;
     if (route.path === '') {
-      const category = route.params.get('category');
+      // const category = route.params.get('category');
       return (
         <div className='container'>
-          <Home category={category}/>
+          <Home />
         </div>
       );
     }
+    if (route.path === 'list') {
+      const category = route.params.get('category');
+      return (
+        <div className='container'>
+          <AllBooks category={category} />
+        </div>
+      );
+    }
+
     if (route.path === 'details') {
       const isbn = route.params.get('isbn');
       const author = route.params.get('author');

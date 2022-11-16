@@ -8,8 +8,8 @@ export default class Navbar extends React.Component {
       categories: [],
       categoryToShow: null,
       userInputValue: '',
-      searchIsClicked: false,
-      isClicked: false
+      searchIsClicked: false
+      // isClicked: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.hashChange = this.hashChange.bind(this);
@@ -22,10 +22,10 @@ export default class Navbar extends React.Component {
     const encodedObj = this.state.categories.find(o => o.display_name === event.target.value);
     const encodedName = encodedObj.list_name_encoded;
     this.setState({
-      categoryToShow: event.target.value,
-      isClicked: true
+      categoryToShow: event.target.value
+      // isClicked: true
     });
-    window.location.hash = '#?category=' + encodedName;
+    window.location.hash = '#list?category=' + encodedName;
   }
 
   componentDidMount() {
@@ -51,8 +51,11 @@ export default class Navbar extends React.Component {
   handleChangeList(event) {
     const displayNameObj = this.state.categories.find(o => o.list_name_encoded === event.target.value);
     const displayName = displayNameObj.display_name;
-    this.setState({ categoryToShow: displayName, isClicked: true });
-    window.location.hash = '#?category=' + event.target.value;
+    this.setState({
+      categoryToShow: displayName
+      // isClicked: true
+    });
+    window.location.hash = '#list?category=' + event.target.value;
   }
 
   searchClick(event) {
