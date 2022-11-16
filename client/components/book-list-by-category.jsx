@@ -1,73 +1,72 @@
-// import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
-// function Book(props) {
-//   const { description, title, author } = props.book;
-//   const imageLink = props.book.book_image;
-//   const buyLink = props.book.amazon_product_url;
-//   const bookObj = {
-//     title,
-//     authors: author,
-//     imageLink,
-//     shortDescription: description,
-//     description,
-//     buyLink,
-//     isbn10: props.book.primary_isbn10
-//   };
-//   const numberWeeks = props.book.weeks_on_list;
+export default function BookCarousel(props) {
+  const { children, show } = props;
 
-//   return (
-//     <a
-//       href={`#details?isbn=${bookObj.isbn10}&author=${author}&title=${title}&imageurl=${imageLink}&n=${numberWeeks}&buy=${buyLink}`}
-//       className='flex margin-top a-book'>
-//       <li className='flex margin-top'>
-//         <img className='book-list-img' src={imageLink} alt={props.book.title} />
-//         <div className='content-holder'>
-//           <p className='number-of-weeks '>{numberWeeks} WEEKS ON THE LIST</p>
-//           <p className='title margin-top'>{bookObj.title}</p>
-//           <p className='author margin-top'><span style={{ fontWeight: '100' }}>by</span> {bookObj.authors}</p>
-//           <p className='description margin-top'>{bookObj.shortDescription}</p>
-//         </div>
-//       </li>
-//     </a>
-//   );
-// }
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [length, setLength] = useState(children.length);
+  const [touchPosition, setTouchPosition] = useState(null);
 
-// export default function BookListByCategory(props) {
-//   console.log('BookListByCategory(props)', props);
-//   const [currentIndex, setCurrentIndex] = useState(0);
-//   const [length, setLength] = useState(props.books.length);
+  const handleTouchStart = e => {
+    const touchDown = e.touches[0].clientX;
+    setTouchPosition(touchDown);
+  };
 
-//   const { books, show } = props;
+  const handleTouchMove = e => {
+    const touchDown = touchPosition;
+    if (touchDown === null) {
+      return;
+    }
+    const currentTouch = e.touches[0].clientX;
+    const diff = touchDown - currentTouch;
+    if (diff > 5) {
+      next();
+    }
+    if (diff < -5) {
+      prev();
+    }
+    setTouchPosition(null);
+  };
 
-//   useEffect(() => {
-//     setLength(books.length);
-//   }, [books]);
+  useEffect(() => {
+    setLength(children.props.books.length);
+  }, [children]);
 
-//   const next = () => {
-//     if (currentIndex < (length - show)) {
-//       setCurrentIndex(prevState => prevState + 1);
-//     }
-//   };
+  const prev = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(prevState => prevState - 1);
+    }
+  };
 
-//   const prev = () => {
-//     if (currentIndex > 0) {
-//       setCurrentIndex(prevState => prevState - 1);
-//     }
-//   };
-//   // const book = props.books[index];
-//   return (
-//     <>
-//       <i onClick={prev} className="fa fa-thin fa-arrow-left"></i>
-//       <ul className={`carousel-content show-${show}`}
-//           style={{ transform: `translateX(-${currentIndex * (100 / show)}%)` }}>
-//         {
-//           books.map(book => <Book key={book.title} book={book} />)
-//         }
-//       </ul>
-//       {currentIndex < (length - show) &&
-//         <i onClick={next} className="fa fa-thin fa-arrow-right"></i>
-//       }
+  const next = () => {
+    if (currentIndex < (length - show)) {
+      setCurrentIndex(prevState => prevState + 1);
+    }
+  };
 
-//     </>
-//   );
-// }
+  return (
+    <div className="carousel-container">
+      <div
+        className="carousel-wrapper">
+        {
+          currentIndex > 0 &&
+          <i onClick={prev} className="fa fa-chevron-left"></i>
+        }
+        <div className="carousel-content-wrapper"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}>
+          <div
+            className={`carousel-content show-${show}`}
+            style={{ transform: `translateX(-${currentIndex * (100 / show)}%)` }}
+          >
+            {children}
+          </div>
+        </div>
+        {
+          currentIndex < (length - show) &&
+          <i onClick={next} className="fa fa-chevron-right"></i>
+        }
+      </div>
+    </div>
+  );
+}

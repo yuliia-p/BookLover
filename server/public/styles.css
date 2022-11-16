@@ -37,7 +37,6 @@ h2 {
 
 .content-holder {
   margin-left: 0.8rem;
-  position: relative;
 }
 
 .header-lover {
@@ -104,41 +103,6 @@ div.rating {
   flex-basis: 100%;
   color: rgb(0, 0, 0);
 }
-
-/*
-.dropdown {
-  font-weight: 100;
-  cursor: pointer;
-  color: rgb(0, 0, 0);
-} */
-
-/* .dropdown:hover {
-  text-decoration: underline;
-} */
-
-/* .dropdown-content {
-  margin: 0.19rem 0 0;
-  position: absolute;
-} */
-
-/* .dropdown-list-holder {
-  flex-basis: 100%;
-  margin-top: 0.6rem;
-} */
-
-/* .span-category {
-  text-decoration: underline;
-  margin-left: 0.5rem;
-  font-size: smaller;
-} */
-
-/* .select-list {
-  border: none;
-  padding: 0.1rem 0.3rem;
-  border-radius: 0.99rem;
-  font-family: inherit;
-  cursor: inherit;
-} */
 
 .position-sticky {
   position: sticky;
@@ -471,7 +435,92 @@ input {
   color: black;
 }
 
-@media screen and (min-width: 740px) {
+.carousel-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.carousel-wrapper {
+  display: flex;
+  width: 100%;
+  position: relative;
+}
+
+.carousel-content-wrapper {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-content {
+  display: flex;
+  transition: all 250ms linear;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.carousel-content::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-content > * {
+  width: 100%;
+  flex-shrink: 0;
+  flex-grow: 1;
+}
+
+.carousel-content.show-2 > * {
+  width: 50%;
+}
+
+.carousel-content.show-3 > * {
+  width: calc(100% / 3);
+}
+
+.carousel-content.show-4 > * {
+  width: calc(100% / 4);
+}
+
+.carousel-content.show-5 > * {
+  width: calc(100% / 5);
+}
+
+.category-p {
+  font-size: 0.8rem;
+  text-decoration: underline;
+  margin: 1rem 0 0;
+}
+
+.mobile-view {
+  display: contents;
+}
+
+.desktop-view {
+  display: none;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .fa-chevron-right,
+  .fa-chevron-left {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .content-holder {
+    margin: 0 0.8rem;
+    text-align: center;
+  }
+
+  .desktop-view {
+    display: contents;
+  }
+
+  .mobile-view {
+    display: none;
+  }
+
   .flex-navbar {
     padding: 0;
     border-top: 1px solid #ccc;
@@ -515,12 +564,12 @@ input {
   }
 
   .title {
-    font-size: 1rem;
+    font-size: 0.75rem;
     cursor: pointer;
   }
 
   .author {
-    font-size: 0.8rem;
+    font-size: 0.65rem;
     font-weight: 600;
   }
 
@@ -529,7 +578,7 @@ input {
   }
 
   .number-of-weeks {
-    font-size: 0.8rem;
+    font-size: 0.65rem;
   }
 
   .my-books {
@@ -670,9 +719,38 @@ input {
   .navbar-div {
     border-bottom: solid 0.15rem rgb(75, 75, 75);
   }
+
+  .fa-chevron-left,
+  .fa-chevron-right {
+    font-size: 1.5rem;
+    position: absolute;
+    z-index: 1;
+    top: 35%;
+    transform: translateY(-50%);
+  }
+
+  .fa-chevron-left {
+    left: 0;
+  }
+
+  .fa-chevron-right {
+    right: 0;
+  }
 }
 
 @media (min-width: 1024px) {
+  .author {
+    font-size: 0.95rem;
+  }
+
+  .title {
+    font-size: 1rem;
+  }
+
+  .number-of-weeks {
+    font-size: 0.8rem;
+  }
+
   div.full-description {
     padding: 1rem 0;
   }
@@ -686,14 +764,7 @@ input {
     justify-content: space-between;
   }
 
-  li {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
   .content-holder {
-    margin: 1rem 0 0;
     text-align: center;
   }
 
@@ -705,7 +776,7 @@ input {
   .description {
     font-size: 0.7rem;
     margin: 0.8rem 0 0;
-    padding: 0 1rem;
+    padding: 0;
     text-align: center;
   }
 
