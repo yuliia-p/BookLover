@@ -16,6 +16,10 @@
 } */
 
 @media screen and (min-width: 700px) {
+  .column-third {
+    flex-basis: calc(100% / 3);
+  }
+
   .header {
     display: flex;
   }
