@@ -84,7 +84,6 @@ export default class App extends React.Component {
   renderPage() {
     const { route } = this.state;
     if (route.path === '') {
-      // const category = route.params.get('category');
       return (
         <div className='container'>
           <Home />
