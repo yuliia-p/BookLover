@@ -20,7 +20,6 @@ export default class Home extends React.Component {
     this.loadNonFictionBooks();
     this.loadFictionBooks();
     this.loadChildrensBooks();
-
   }
 
   componentDidUpdate(prevProps) {
@@ -130,19 +129,22 @@ export default class Home extends React.Component {
         {isLoading
           ? <LoadingSpinner />
           : <div className='desktop-view'>
-            <a href='#list?category=combined-print-and-e-book-fiction' className='category-p'>Combined Print and E-Book Fiction</a>
+            <a href='#list?category=combined-print-and-e-book-fiction' className='category-a'>
+              Combined Print and E-Book Fiction<span><i className="fa fa-solid fa-angle-right"></i></span></a>
             <div style={{ maxWidth: 1200, marginLeft: 'auto', marginRight: 'auto' }}>
               <BookCarousel show={5}>
                 <BookListCarousel books={fictionBooks}/>
               </BookCarousel>
             </div>
-            <a href='#list?category=combined-print-and-e-book-nonfiction' className='category-p'>Combined Print and E-Book Nonfiction</a>
+            <a href='#list?category=combined-print-and-e-book-nonfiction' className='category-a'>
+              Combined Print and E-Book Nonfiction<span><i className="fa fa-solid fa-angle-right"></i></span></a>
             <div style={{ maxWidth: 1200, marginLeft: 'auto', marginRight: 'auto' }}>
               <BookCarousel show={5}>
                 <BookListCarousel books={nonFictionBooks} />
               </BookCarousel>
             </div>
-            <a className='category-p'>Children’s Middle Grade</a>
+            <a className='category-a'>
+              Children’s Middle Grade<span><i className="fa fa-solid fa-angle-right"></i></span></a>
             <div style={{ maxWidth: 1200, marginLeft: 'auto', marginRight: 'auto' }}>
               <BookCarousel show={5}>
                 <BookListCarousel books={childrensBooks} />

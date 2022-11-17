@@ -74,6 +74,7 @@
   .container {
     max-width: 80%;
     margin: auto;
+    margin-top: 1rem;
   }
 
   div.container.full-description {
