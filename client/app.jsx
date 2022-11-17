@@ -14,6 +14,7 @@ import NotFound from './pages/not-found';
 import DeleteModal from './components/delete-modal';
 import ProfileMenu from './components/profile-menu';
 import AllBooks from './pages/all-books-list';
+import Footer from './components/footer';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -141,6 +142,9 @@ export default class App extends React.Component {
           {this.state.showModal === 'signIn' && <SignInModal onSignIn={handleSignIn} onComplete={hideModal} onSignUp={showModal}/>}
           {this.state.showModal === 'profile-menu' && <ProfileMenu onClick={handleSignOut} onComplete={hideModal}/>}
           {this.state.deleteModal === true && <DeleteModal onClick={deleteModal}/> }
+        <div className='container'>
+          <Footer />
+        </div>
       </AppContext.Provider>
     );
   }

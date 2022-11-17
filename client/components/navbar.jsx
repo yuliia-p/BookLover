@@ -9,10 +9,6 @@ export default class Navbar extends React.Component {
       categoryToShow: null,
       userInputValue: '',
       searchIsClicked: false
-      // fictionValue: '',
-      // nonFictionValue: '',
-      // childrensValue: '',
-      // monthlyListsValue: ''
     };
     this.hashChange = this.hashChange.bind(this);
     this.searchInput = this.searchInput.bind(this);
