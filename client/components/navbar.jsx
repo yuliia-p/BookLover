@@ -8,25 +8,31 @@ export default class Navbar extends React.Component {
       categories: [],
       categoryToShow: null,
       userInputValue: '',
-      searchIsClicked: false
-      // isClicked: false
+      searchIsClicked: false,
+      fictionValue: '',
+      nonFictionValue: '',
+      childrensValue: '',
+      monthlyListsValue: ''
     };
-    this.handleChange = this.handleChange.bind(this);
+    // this.handleChange = this.handleChange.bind(this);
     this.hashChange = this.hashChange.bind(this);
     this.searchInput = this.searchInput.bind(this);
     this.searchClick = this.searchClick.bind(this);
-    this.handleChangeList = this.handleChangeList.bind(this);
+    // this.handleChangeList = this.handleChangeList.bind(this);
+    this.handleFictionChange = this.handleFictionChange.bind(this);
+    this.handleNonFictionChange = this.handleNonFictionChange.bind(this);
+    this.handleChildrensChange = this.handleChildrensChange.bind(this);
+    this.handleMonthlyListsChange = this.handleMonthlyListsChange.bind(this);
   }
 
-  handleChange(event) {
-    const encodedObj = this.state.categories.find(o => o.display_name === event.target.value);
-    const encodedName = encodedObj.list_name_encoded;
-    this.setState({
-      categoryToShow: event.target.value
-      // isClicked: true
-    });
-    window.location.hash = '#list?category=' + encodedName;
-  }
+  // handleChange(event) {
+  //   const encodedObj = this.state.categories.find(o => o.display_name === event.target.value);
+  //   const encodedName = encodedObj.list_name_encoded;
+  //   this.setState({
+  //     categoryToShow: event.target.value
+  //   });
+  //   window.location.hash = '#list?category=' + encodedName;
+  // }
 
   componentDidMount() {
     const url = `https://api.nytimes.com/svc/books/v3/lists/names.json?api-key=${process.env.BOOKS_API_KEY}`;
@@ -48,15 +54,54 @@ export default class Navbar extends React.Component {
       });
   }
 
-  handleChangeList(event) {
+  handleFictionChange(event) {
     const displayNameObj = this.state.categories.find(o => o.list_name_encoded === event.target.value);
     const displayName = displayNameObj.display_name;
     this.setState({
-      categoryToShow: displayName
-      // isClicked: true
+      categoryToShow: displayName,
+      fictionValue: event.target.value
+    });
+    window.location.hash = '#list?category=' + event.target.value;
+
+  }
+
+  handleNonFictionChange(event) {
+    const displayNameObj = this.state.categories.find(o => o.list_name_encoded === event.target.value);
+    const displayName = displayNameObj.display_name;
+    this.setState({
+      categoryToShow: displayName,
+      nonfictionValue: event.target.value
     });
     window.location.hash = '#list?category=' + event.target.value;
   }
+
+  handleChildrensChange(event) {
+    const displayNameObj = this.state.categories.find(o => o.list_name_encoded === event.target.value);
+    const displayName = displayNameObj.display_name;
+    this.setState({
+      categoryToShow: displayName,
+      childrensValue: event.target.value
+    });
+    window.location.hash = '#list?category=' + event.target.value;
+  }
+
+  handleMonthlyListsChange(event) {
+    const encodedObj = this.state.categories.find(o => o.display_name === event.target.value);
+    const encodedName = encodedObj.list_name_encoded;
+    this.setState({
+      categoryToShow: event.target.value,
+      monthlyListsValue: event.target.value
+    });
+    window.location.hash = '#list?category=' + encodedName;
+  }
+  // handleChangeList(event) {
+  //   const displayNameObj = this.state.categories.find(o => o.list_name_encoded === event.target.value);
+  //   const displayName = displayNameObj.display_name;
+  //   this.setState({
+  //     categoryToShow: displayName
+  //   });
+  //   window.location.hash = '#list?category=' + event.target.value;
+  // }
 
   searchClick(event) {
     this.setState({ searchIsClicked: !this.state.searchIsClicked });
@@ -77,7 +122,8 @@ export default class Navbar extends React.Component {
 
   render() {
     const { user } = this.context;
-    const { searchInput, hashChange, handleChange, searchClick, handleChangeList } = this;
+    const { searchInput, hashChange, searchClick, handleFictionChange, handleNonFictionChange, handleChildrensChange, handleMonthlyListsChange } = this;
+    const { fictionValue, nonFictionValue, childrensValue, monthlyListsValue, categories } = this.state;
     let categoryToShow;
     if (this.state.categoryToShow) {
       categoryToShow = this.state.categoryToShow;
@@ -105,32 +151,34 @@ export default class Navbar extends React.Component {
             categoryToShow ? <h1 className='navbar-h1' >{categoryToShow}</h1> : <h1 className='navbar-h1' >The New York Times Best Sellers</h1>
           }
           <h4 className='navbar-h4'>Authoritatively ranked lists of books sold in the United States, sorted by format and genre.</h4>
-          <div className='flex flex-navbar'>
-            <select name="FICTION" className='navbar-select' onChange={handleChangeList} defaultValue='default' style={{ width: '4.1875rem' }}>
-                <option className='option-navbar' value="default" disabled>FICTION</option>
+          <form >
+            <div className='flex flex-navbar'>
+              <select name="FICTION" className='navbar-select' onChange={handleFictionChange} value={fictionValue} style={{ width: '4.1875rem' }}>
+                <option className='option-navbar' value='' disabled>FICTION</option>
                 <option className='option-navbar' value="combined-print-and-e-book-fiction">Combined Print and E-Book Fiction</option>
                 <option className='option-navbar' value="hardcover-fiction">Hardcover Fiction</option>
                 <option className='option-navbar' value="trade-fiction-paperback">Paperback Trade Fiction</option>
-            </select>
-            <select className='navbar-select' onChange={handleChangeList} defaultValue='default' style={{ width: '5.85rem' }}>
-              <option className='option-navbar' value="default" disabled >NONFICTION</option>
-              <option className='option-navbar' value="combined-print-and-e-book-nonfiction">Combined Print and E-Book Nonfiction</option>
-              <option className='option-navbar' value="hardcover-nonfiction">Hardcover Nonfiction</option>
-              <option className='option-navbar' value="paperback-nonfiction">Paperback Nonfiction</option>
-              <option className='option-navbar' value="e-book-nonfiction">E-Book Nonfiction</option>
-            </select>
-            <select className='navbar-select' onChange={handleChangeList} defaultValue='default' style={{ width: '5.8rem' }}>
-              <option className='option-navbar' value="default" disabled >CHILDREN’S</option>
-              <option className='option-navbar' value="childrens-middle-grade">Children’s Middle Grade</option>
-              <option className='option-navbar' value="picture-books">Children’s Picture Books</option>
-              <option className='option-navbar' value="series-books">Children’s Series</option>
-              <option className='option-navbar' value="young-adult">Young Adult</option>
-            </select>
-            <select className='navbar-select' onChange={handleChange} defaultValue='default' style={{ width: '7.2rem' }}>
-              <option className='option-navbar' value="default" disabled >MONTHLY LISTS</option>
-              <MenuItems categories={this.state.categories} />
-            </select>
-          </div>
+              </select>
+              <select name="NONFICTION" className='navbar-select' onChange={handleNonFictionChange} value={nonFictionValue} style={{ width: '5.85rem' }}>
+                <option className='option-navbar' value='' disabled>NONFICTION</option>
+                <option className='option-navbar' value="combined-print-and-e-book-nonfiction">Combined Print and E-Book Nonfiction</option>
+                <option className='option-navbar' value="hardcover-nonfiction">Hardcover Nonfiction</option>
+                <option className='option-navbar' value="paperback-nonfiction">Paperback Nonfiction</option>
+                <option className='option-navbar' value="e-book-nonfiction">E-Book Nonfiction</option>
+              </select>
+              <select name="CHILDRENS" className='navbar-select' onChange={handleChildrensChange} value={childrensValue} style={{ width: '5.8rem' }}>
+                <option className='option-navbar' value='' disabled>CHILDREN’S</option>
+                <option className='option-navbar' value="childrens-middle-grade">Children’s Middle Grade</option>
+                <option className='option-navbar' value="picture-books">Children’s Picture Books</option>
+                <option className='option-navbar' value="series-books">Children’s Series</option>
+                <option className='option-navbar' value="young-adult">Young Adult</option>
+              </select>
+              <select name="MONTHLY-LISTS" className='navbar-select' onChange={handleMonthlyListsChange} value={monthlyListsValue} style={{ width: '7.2rem' }}>
+                <option className='option-navbar' value='' disabled>MONTHLY LISTS</option>
+                <MenuItems categories={categories} />
+              </select>
+            </div>
+          </form>
         </div>
       </>
     );
@@ -138,6 +186,7 @@ export default class Navbar extends React.Component {
 }
 
 function MenuItems(props) {
+  if (!props.categories) return;
   return (
     props.categories.map((category, index) => {
       return <Category key={index} category={category} />;
