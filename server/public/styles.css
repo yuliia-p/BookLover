@@ -486,12 +486,6 @@ input {
   width: calc(100% / 5);
 }
 
-.category-p {
-  font-size: 0.8rem;
-  text-decoration: underline;
-  margin: 1rem 0 0;
-}
-
 .mobile-view {
   display: contents;
 }
@@ -508,6 +502,20 @@ input {
 }
 
 @media screen and (min-width: 700px) {
+  .fa-angle-right {
+    font-size: 0.8rem;
+    margin-left: 0.3rem;
+  }
+
+  .category-a {
+    font-size: 1rem;
+    font-weight: 800;
+  }
+
+  .category-a:hover {
+    text-decoration: underline;
+  }
+
   .content-holder {
     margin: 0 0.8rem;
     text-align: center;
@@ -515,6 +523,7 @@ input {
 
   .desktop-view {
     display: contents;
+    margin-top: 1rem;
   }
 
   .mobile-view {
@@ -548,8 +557,6 @@ input {
   }
 
   .more-details-img {
-    /* height: 23.394rem;
-    width: 15rem; */
     height: 31.25rem;
     width: 20.563rem;
   }
