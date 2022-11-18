@@ -130,14 +130,14 @@ export default class Home extends React.Component {
           ? <LoadingSpinner />
           : <div className='desktop-view'>
             <a href='#list?category=combined-print-and-e-book-fiction' className='category-a'>
-              Combined Print and E-Book Fiction<span><i className="fa fa-solid fa-angle-right"></i></span></a>
+              Combined Print &amp; E-Book Fiction<span><i className="fa fa-solid fa-angle-right"></i></span></a>
             <div style={{ maxWidth: 1200, marginLeft: 'auto', marginRight: 'auto' }}>
               <BookCarousel show={5}>
                 <BookListCarousel books={fictionBooks}/>
               </BookCarousel>
             </div>
             <a href='#list?category=combined-print-and-e-book-nonfiction' className='category-a'>
-              Combined Print and E-Book Nonfiction<span><i className="fa fa-solid fa-angle-right"></i></span></a>
+              Combined Print &amp; E-Book Nonfiction<span><i className="fa fa-solid fa-angle-right"></i></span></a>
             <div style={{ maxWidth: 1200, marginLeft: 'auto', marginRight: 'auto' }}>
               <BookCarousel show={5}>
                 <BookListCarousel books={nonFictionBooks} />
