@@ -27,7 +27,19 @@ ___
 
 ### Preview 
 <p align="middle">
-  <img src="server/public/images/book-lover-preview.gif" width="800">
+  <img src="server/public/images/Home_Page.gif" width="800">
+</p>
+My Books Page
+<p align="middle">
+  <img src="server/public/images/My_Books.png" width="800">
+</p>
+Sign Up Modal
+<p align="middle">
+  <img src="server/public/images/Sign_Up.png" width="800">
+</p>
+Log In Modal
+<p align="middle">
+  <img src="server/public/images/Log_In.png" width="800">
 </p>
 <p align="middle">
   <img src="server/public/images/sign-up-preview.png" width="200">
