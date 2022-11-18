@@ -502,6 +502,15 @@ input {
 }
 
 @media screen and (min-width: 700px) {
+  .h4-footer {
+    border-bottom: 1px solid #ccc;
+  }
+
+  .column-third {
+    border-right: 1px solid #ccc;
+    padding-left: 1rem;
+  }
+
   .fa-angle-right {
     font-size: 0.8rem;
     margin-left: 0.3rem;
@@ -512,6 +521,7 @@ input {
     font-weight: 800;
   }
 
+  .a-footer:hover,
   .category-a:hover {
     text-decoration: underline;
   }
@@ -541,10 +551,6 @@ input {
 
   .navbar-p {
     margin: 0 0.5rem 0.5rem 0;
-
-    /* color: rgba(118, 120, 119, 1);
-    font-weight: 100;
-    font-size: 0.95rem; */
   }
 
   .header {
@@ -765,10 +771,6 @@ input {
   .description-overflow {
     padding: 0;
     font-size: 0.65rem;
-  }
-
-  ul {
-    justify-content: space-between;
   }
 
   .content-holder {

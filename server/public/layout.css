@@ -6,15 +6,6 @@
   flex-basis: 65%;
 }
 
-/* .book-carousel-div {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.a-book {
-  flex-basis: 50%;
-} */
-
 @media screen and (min-width: 700px) {
   .container {
     margin-top: 1rem;
@@ -69,6 +60,10 @@
 @media (min-width: 1024px) {
   .a-book {
     flex-basis: 20%;
+  }
+
+  ul {
+    justify-content: space-evenly;
   }
 
   a.flex {

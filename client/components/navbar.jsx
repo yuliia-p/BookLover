@@ -105,7 +105,7 @@ export default class Navbar extends React.Component {
       categoryToShow = this.state.categoryToShow;
     } else if (category && categories.length > 0) {
       const displayNameObj = this.state.categories.find(o => o.list_name_encoded === category);
-      categoryToShow = displayNameObj.list_name;
+      categoryToShow = displayNameObj.display_name;
     } else {
       categoryToShow = 'The New York Times Best Sellers';
     }
@@ -134,13 +134,13 @@ export default class Navbar extends React.Component {
             <div className='flex flex-navbar'>
               <select name="FICTION" className='navbar-select' onChange={handleFictionChange} value='' style={{ width: '4.1875rem' }}>
                 <option className='option-navbar' value='' disabled>FICTION</option>
-                <option className='option-navbar' value="combined-print-and-e-book-fiction">Combined Print and E-Book Fiction</option>
+                <option className='option-navbar' value="combined-print-and-e-book-fiction">Combined Print &amp; E-Book Fiction</option>
                 <option className='option-navbar' value="hardcover-fiction">Hardcover Fiction</option>
                 <option className='option-navbar' value="trade-fiction-paperback">Paperback Trade Fiction</option>
               </select>
               <select name="NONFICTION" className='navbar-select' onChange={handleNonFictionChange} value='' style={{ width: '5.85rem' }}>
                 <option className='option-navbar' value='' disabled>NONFICTION</option>
-                <option className='option-navbar' value="combined-print-and-e-book-nonfiction">Combined Print and E-Book Nonfiction</option>
+                <option className='option-navbar' value="combined-print-and-e-book-nonfiction">Combined Print &amp; E-Book Nonfiction</option>
                 <option className='option-navbar' value="hardcover-nonfiction">Hardcover Nonfiction</option>
                 <option className='option-navbar' value="paperback-nonfiction">Paperback Nonfiction</option>
                 <option className='option-navbar' value="e-book-nonfiction">E-Book Nonfiction</option>
