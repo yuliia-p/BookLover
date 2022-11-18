@@ -143,7 +143,7 @@ export default class Home extends React.Component {
                 <BookListCarousel books={nonFictionBooks} />
               </BookCarousel>
             </div>
-            <a href='#list?category=cchildrens-middle-grade' className='category-a'>
+            <a href='#list?category=childrens-middle-grade' className='category-a'>
               Children’s Middle Grade<span><i className="fa fa-solid fa-angle-right"></i></span></a>
             <div style={{ maxWidth: 1200, marginLeft: 'auto', marginRight: 'auto' }}>
               <BookCarousel show={5}>
