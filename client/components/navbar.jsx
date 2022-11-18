@@ -96,12 +96,18 @@ export default class Navbar extends React.Component {
   }
 
   render() {
-    const { user } = this.context;
+    const { user, route } = this.context;
     const { searchInput, hashChange, searchClick, handleFictionChange, handleNonFictionChange, handleChildrensChange, handleMonthlyListsChange } = this;
     const { categories } = this.state;
+    const category = route.params.get('category');
     let categoryToShow;
     if (this.state.categoryToShow) {
       categoryToShow = this.state.categoryToShow;
+    } else if (category && categories.length > 0) {
+      const displayNameObj = this.state.categories.find(o => o.list_name_encoded === category);
+      categoryToShow = displayNameObj.list_name;
+    } else {
+      categoryToShow = 'The New York Times Best Sellers';
     }
     const classToShowInput = this.state.searchIsClicked ? 'show' : 'hidden';
     return (
@@ -122,9 +128,7 @@ export default class Navbar extends React.Component {
             </div>
           </div>
         <div className='navbar-div'>
-          {
-            categoryToShow ? <h1 className='navbar-h1' >{categoryToShow}</h1> : <h1 className='navbar-h1' >The New York Times Best Sellers</h1>
-          }
+          <h1 className='navbar-h1' >{categoryToShow}</h1>
           <h4 className='navbar-h4'>Authoritatively ranked lists of books sold in the United States, sorted by format and genre.</h4>
           <form >
             <div className='flex flex-navbar'>

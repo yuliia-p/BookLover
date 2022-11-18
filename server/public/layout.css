@@ -16,6 +16,10 @@
 } */
 
 @media screen and (min-width: 700px) {
+  .container {
+    margin-top: 1rem;
+  }
+
   .column-third {
     flex-basis: calc(100% / 3);
   }
