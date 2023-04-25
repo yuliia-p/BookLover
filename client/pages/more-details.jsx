@@ -32,6 +32,9 @@ export default class MoreDetails extends React.Component {
           book: resultByTitle[0],
           isLoading: false
         });
+        if (!resultByTitle[0]) {
+          this.getBookByAthorAndTitile();
+        }
       })
       .catch(error => {
         console.error('Error:', error);
@@ -94,6 +97,9 @@ export default class MoreDetails extends React.Component {
     fetch(url, req)
       .then(response => response.json())
       .then(data => {
+        if (data.totalItems === 0) {
+          this.getBookByTitle();
+        }
         if (data.items[0].id) {
           const urlById = `https://www.googleapis.com/books/v1/volumes/${data.items[0].id}?key=${process.env.GOOGLE_BOOKS_API_KEY}`;
           const reqById = {
@@ -134,10 +140,10 @@ export default class MoreDetails extends React.Component {
 
   componentDidMount() {
     this.setState({ isLoading: true });
-    const titleToSearch = this.props.title.replaceAll("'", '+').replaceAll(' ', '+');
+    const titleToSearch = this.props.title.replaceAll("'", '').replaceAll(' ', '+');
     let authorToSerach;
     if (this.props.author !== 'Magazine' || this.props.author !== 'Unkown') {
-      authorToSerach = this.props.author.replace(/^and /, '').replace(/^by /, '').replaceAll(' ', '+');
+      authorToSerach = this.props.author.replace('and ', '').replace(/^and /, '').replace(/^by /, '').replaceAll(' ', '+');
     } else {
       authorToSerach = this.props.author;
     }
@@ -243,7 +249,7 @@ export default class MoreDetails extends React.Component {
                 <p className='number-of-weeks'>{this.props.number} WEEKS ON THE LIST</p>
                 }
               <h2 className='title-more-details no-padding '>{title}</h2>
-              <p className='author'>by {this.props.author}</p>
+            <p className='author'><span style={{ fontWeight: '100' }}>by </span>{this.props.author}</p>
               <div className='rating no-margin'>
                 {ShowRating(averageRating)}
                 <p className='rating no-margin'>Rating: {averageRating}</p>

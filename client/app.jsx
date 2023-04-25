@@ -13,6 +13,8 @@ import Search from './components/search';
 import NotFound from './pages/not-found';
 import DeleteModal from './components/delete-modal';
 import ProfileMenu from './components/profile-menu';
+import AllBooks from './pages/all-books-list';
+import Footer from './components/footer';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -83,13 +85,21 @@ export default class App extends React.Component {
   renderPage() {
     const { route } = this.state;
     if (route.path === '') {
-      const category = route.params.get('category');
       return (
         <div className='container'>
-          <Home category={category}/>
+          <Home />
         </div>
       );
     }
+    if (route.path === 'list') {
+      const category = route.params.get('category');
+      return (
+        <div className='container'>
+          <AllBooks category={category} />
+        </div>
+      );
+    }
+
     if (route.path === 'details') {
       const isbn = route.params.get('isbn');
       const author = route.params.get('author');
@@ -132,6 +142,9 @@ export default class App extends React.Component {
           {this.state.showModal === 'signIn' && <SignInModal onSignIn={handleSignIn} onComplete={hideModal} onSignUp={showModal}/>}
           {this.state.showModal === 'profile-menu' && <ProfileMenu onClick={handleSignOut} onComplete={hideModal}/>}
           {this.state.deleteModal === true && <DeleteModal onClick={deleteModal}/> }
+        <div className='container'>
+          <Footer />
+        </div>
       </AppContext.Provider>
     );
   }

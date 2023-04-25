@@ -9,12 +9,13 @@ a {
 }
 
 .header {
-  background-color: rgba(17, 17, 24, 1);
-  color: white;
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
   padding: 0.8rem 0.5rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  border-bottom: solid #333;
 }
 
 .my-books {
@@ -36,7 +37,6 @@ h2 {
 
 .content-holder {
   margin-left: 0.8rem;
-  position: relative;
 }
 
 .header-lover {
@@ -101,41 +101,7 @@ div.rating {
 
 .header-lover-h2 {
   flex-basis: 100%;
-  color: white;
-}
-
-.dropdown {
-  font-weight: 100;
-  cursor: pointer;
-  color: white;
-}
-
-.dropdown:hover {
-  text-decoration: underline;
-}
-
-.dropdown-content {
-  margin: 0.19rem 0 0;
-  position: absolute;
-}
-
-.dropdown-list-holder {
-  flex-basis: 100%;
-  margin-top: 0.6rem;
-}
-
-.span-category {
-  text-decoration: underline;
-  margin-left: 0.5rem;
-  font-size: smaller;
-}
-
-select {
-  border: none;
-  padding: 0.1rem 0.3rem;
-  border-radius: 0.99rem;
-  font-family: inherit;
-  cursor: inherit;
+  color: rgb(0, 0, 0);
 }
 
 .position-sticky {
@@ -178,7 +144,7 @@ div.full-description {
 
 .fa-circle-user {
   font-size: 2.3rem;
-  color: white;
+  color: rgb(0, 0, 0);
 }
 
 .modal {
@@ -329,11 +295,11 @@ input {
 
 .fa-search {
   font-size: 1.2rem;
-  color: white;
+  color: rgb(0, 0, 0);
 }
 
 .search-submit {
-  background-color: rgba(17, 17, 24, 1);
+  background-color: rgb(255, 255, 255);
   border: none;
 }
 
@@ -430,7 +396,163 @@ input {
   animation-delay: 0;
 }
 
-@media screen and (min-width: 740px) {
+.navbar-h1 {
+  font-size: 1.35rem;
+  font-weight: 100;
+  margin: 1rem 0 0;
+  padding: 0 1rem;
+}
+
+.navbar-h4 {
+  color: rgba(118, 120, 119, 1);
+  font-weight: 100;
+  padding: 0 1rem;
+  margin: 0.5rem 0 0;
+  font-size: 0.8rem;
+}
+
+.select-monthly-list {
+  border: none;
+  font-family: inherit;
+}
+
+.flex-navbar {
+  padding: 0 1rem;
+}
+
+.navbar-select {
+  color: #333;
+  font-size: 0.6875rem;
+  font-weight: 400;
+  font-family: inherit;
+  border: none;
+  width: 6.6rem;
+  padding: 0.5rem 0;
+}
+
+.navbar-p:hover {
+  cursor: pointer;
+  color: black;
+}
+
+.carousel-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.carousel-wrapper {
+  display: flex;
+  width: 100%;
+  position: relative;
+}
+
+.carousel-content-wrapper {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-content {
+  display: flex;
+  transition: all 250ms linear;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.carousel-content::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-content > * {
+  width: 100%;
+  flex-shrink: 0;
+  flex-grow: 1;
+}
+
+.carousel-content.show-2 > * {
+  width: 50%;
+}
+
+.carousel-content.show-3 > * {
+  width: calc(100% / 3);
+}
+
+.carousel-content.show-4 > * {
+  width: calc(100% / 4);
+}
+
+.carousel-content.show-5 > * {
+  width: calc(100% / 5);
+}
+
+.mobile-view {
+  display: contents;
+}
+
+.desktop-view {
+  display: none;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .fa-chevron-right,
+  .fa-chevron-left {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .h4-footer {
+    border-bottom: 1px solid #ccc;
+  }
+
+  .column-third {
+    border-right: 1px solid #ccc;
+    padding-left: 1rem;
+  }
+
+  .fa-angle-right {
+    font-size: 0.8rem;
+    margin-left: 0.3rem;
+  }
+
+  .category-a {
+    font-size: 1rem;
+    font-weight: 800;
+  }
+
+  .a-footer:hover,
+  .category-a:hover {
+    text-decoration: underline;
+  }
+
+  .content-holder {
+    margin: 0 0.8rem;
+    text-align: center;
+  }
+
+  .desktop-view {
+    display: contents;
+    margin-top: 1rem;
+  }
+
+  .mobile-view {
+    display: none;
+  }
+
+  .flex-navbar {
+    padding: 0;
+    border-top: 1px solid #ccc;
+  }
+
+  .navbar-select {
+    width: 7rem;
+  }
+
+  .navbar-p {
+    margin: 0 0.5rem 0.5rem 0;
+  }
+
   .header {
     padding: 0;
     align-items: baseline;
@@ -441,8 +563,6 @@ input {
   }
 
   .more-details-img {
-    /* height: 23.394rem;
-    width: 15rem; */
     height: 31.25rem;
     width: 20.563rem;
   }
@@ -457,22 +577,21 @@ input {
   }
 
   .title {
-    font-size: 1rem;
+    font-size: 0.75rem;
     cursor: pointer;
   }
 
   .author {
-    font-size: 0.8rem;
+    font-size: 0.65rem;
     font-weight: 600;
   }
 
   .description {
     font-size: 0.5rem;
-    padding-right: 2rem;
   }
 
   .number-of-weeks {
-    font-size: 0.8rem;
+    font-size: 0.65rem;
   }
 
   .my-books {
@@ -534,6 +653,7 @@ input {
   .fa-circle-user {
     font-size: 2.4rem;
     margin-right: 1rem;
+    color: black;
   }
 
   .add-button,
@@ -594,12 +714,85 @@ input {
 
   .input {
     width: 80%;
+    border: solid;
+  }
+
+  .navbar-h1 {
+    font-size: 1.7rem;
+    font-weight: 100;
+    margin: 1rem 0 0;
+    padding: 0;
+  }
+
+  .navbar-h4 {
+    padding: 0 0 1rem;
+    margin: 0;
+  }
+
+  .navbar-div {
+    border-bottom: solid 0.15rem rgb(75, 75, 75);
+  }
+
+  .fa-chevron-left,
+  .fa-chevron-right {
+    font-size: 1.5rem;
+    position: absolute;
+    z-index: 1;
+    top: 35%;
+    transform: translateY(-50%);
+  }
+
+  .fa-chevron-left {
+    left: 0;
+  }
+
+  .fa-chevron-right {
+    right: 0;
   }
 }
 
 @media (min-width: 1024px) {
+  .author {
+    font-size: 0.75rem;
+  }
+
+  .title {
+    font-size: 1rem;
+  }
+
+  .number-of-weeks {
+    font-size: 0.8rem;
+  }
+
+  div.full-description {
+    padding: 1rem 0;
+  }
+
+  .description-overflow {
+    padding: 0;
+    font-size: 0.65rem;
+  }
+
+  .content-holder {
+    text-align: center;
+  }
+
+  .book-list-img {
+    height: 16.601rem;
+    max-width: 11.9rem;
+  }
+
   .description {
     font-size: 0.7rem;
+    margin: 0.8rem 0 0;
+    padding: 0;
+    text-align: center;
+  }
+
+  .full-description {
+    margin: 0.8rem 0;
+    padding: 0;
+    text-align: justify;
   }
 
   .search-submit {
@@ -608,26 +801,11 @@ input {
 
   .more-details-img {
     height: 31.25rem;
-    width: 20.563rem;
-  }
-
-  .book-list-img {
-    height: 14.601rem;
-    max-width: 10rem;
+    width: 21.563rem;
   }
 
   .input {
     width: auto;
   }
-
-  .fa-chevron-left,
-  .fa-chevron-right {
-    font-size: 3rem;
-  }
-
-  .flex-carousel {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
   }
 }

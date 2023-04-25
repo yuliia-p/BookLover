@@ -55,11 +55,12 @@ function MyBook(props) {
       <li onClick={props.onClick} className='flex margin-top'>
         <img className='book-list-img' src={imageLink} alt={title} />
         <div className='content-holder'>
-          <p className='number-of-weeks'>{weeks} WEEKS ON THE LIST</p>
+          {
+            weeks && <p className='number-of-weeks'>{weeks} WEEKS ON THE LIST</p>
+          }
           <p className='title margin-top'>{title.toUpperCase()}</p>
-          <p className='author margin-top'>by {authors}</p>
+          <p className='author margin-top'><span style={{ fontWeight: '100' }}>by </span>{authors}</p>
           <p className='description margin-top'>{cutDescription}</p>
-          <p className='more-details-p'>More Details...</p>
         </div>
       </li>
     </a>
