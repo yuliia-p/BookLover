@@ -807,9 +807,5 @@ input {
   .input {
     width: auto;
   }
-
-  .navbar-h1 {
-    font-size: 2.2rem;
-    font-weight: 100;
   }
 }
