@@ -1,6 +1,7 @@
 import React from 'react';
 import { BookList, BookListCarousel } from '../components/books-list';
 import LoadingSpinner from '../components/loading-spinner';
+import BookCarousel from '../components/book-list-by-category';
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -120,6 +121,37 @@ export default class Home extends React.Component {
     const { books, isLoading, nonFictionBooks, fictionBooks, childrensBooks } = this.state;
     return (
       <>
+        {isLoading
+          ? <LoadingSpinner />
+          : <div className='mobile-view'>
+            <BookList books={books} />
+          </div>}
+        {isLoading
+          ? <LoadingSpinner />
+          : <div className='desktop-view'>
+            <a href='#list?category=combined-print-and-e-book-fiction' className='category-a'>
+              Combined Print &amp; E-Book Fiction<span><i className="fa fa-solid fa-angle-right"></i></span></a>
+            <div style={{ maxWidth: 1200, marginLeft: 'auto', marginRight: 'auto' }}>
+              <BookCarousel show={5}>
+                <BookListCarousel books={fictionBooks}/>
+              </BookCarousel>
+            </div>
+            <a href='#list?category=combined-print-and-e-book-nonfiction' className='category-a'>
+              Combined Print &amp; E-Book Nonfiction<span><i className="fa fa-solid fa-angle-right"></i></span></a>
+            <div style={{ maxWidth: 1200, marginLeft: 'auto', marginRight: 'auto' }}>
+              <BookCarousel show={5}>
+                <BookListCarousel books={nonFictionBooks} />
+              </BookCarousel>
+            </div>
+            <a href='#list?category=childrens-middle-grade' className='category-a'>
+              Children’s Middle Grade<span><i className="fa fa-solid fa-angle-right"></i></span></a>
+            <div style={{ maxWidth: 1200, marginLeft: 'auto', marginRight: 'auto' }}>
+              <BookCarousel show={5}>
+                <BookListCarousel books={childrensBooks} />
+              </BookCarousel>
+            </div>
+          </div>
+        }
       </>
     );
   }

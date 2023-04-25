@@ -233,6 +233,7 @@ export default class MoreDetails extends React.Component {
     if (this.state.isNotFound) return <NotFound />;
 
     const { volumeInfo } = this.state.book;
+
     const { imageLinks, title, description, averageRating, categories } = volumeInfo;
     const cleanDescription = description.replaceAll('<p>', ' ').replaceAll('</p>', ' ').replaceAll('<b>', ' ').replaceAll('<br></i></b><br>', ' ').replaceAll('<br>', ' ').replaceAll('<i>', ' ').replaceAll('</i>', ' ').replaceAll('</b>', ' ');
 
