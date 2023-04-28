@@ -45,9 +45,6 @@ export default class BookCarousel extends React.Component {
       nextImg();
     } else if (e.target.dataset.left) {
       prevImg();
-    } else if (e.target.classList.contains('fa-circle')) {
-      const index = Number(e.target.dataset.icon);
-      this.setState({ currentIndex: index });
     }
     this.intervalId = setInterval(this.nextImg, 3000);
   }
