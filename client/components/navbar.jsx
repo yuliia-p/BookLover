@@ -17,6 +17,7 @@ export default class Navbar extends React.Component {
     this.handleNonFictionChange = this.handleNonFictionChange.bind(this);
     this.handleChildrensChange = this.handleChildrensChange.bind(this);
     this.handleMonthlyListsChange = this.handleMonthlyListsChange.bind(this);
+    this.handleCategoryChange = this.handleCategoryChange.bind(this);
   }
 
   componentDidMount() {
@@ -39,34 +40,56 @@ export default class Navbar extends React.Component {
       });
   }
 
-  handleFictionChange(event) {
-    const displayNameObj = this.state.categories.find(o => o.list_name_encoded === event.target.value);
-    const displayName = displayNameObj.display_name;
-    this.setState({
-      categoryToShow: displayName
-    });
-    window.location.hash = '#list?category=' + event.target.value;
-
-  }
-
-  handleNonFictionChange(event) {
-    const displayNameObj = this.state.categories.find(o => o.list_name_encoded === event.target.value);
-    const displayName = displayNameObj.display_name;
-    this.setState({
-      categoryToShow: displayName
-    });
-    window.location.hash = '#list?category=' + event.target.value;
-  }
-
-  handleChildrensChange(event) {
+  handleCategoryChange(event, specificValue) {
     const displayNameObj = this.state.categories.find(o => o.list_name_encoded === event.target.value);
     const displayName = displayNameObj.display_name;
     this.setState({
       categoryToShow: displayName,
-      childrensValue: event.target.value
+      [specificValue]: event.target.value
     });
     window.location.hash = '#list?category=' + event.target.value;
   }
+
+  handleFictionChange(event) {
+    this.handleCategoryChange(event, 'fictionValue');
+  }
+
+  handleNonFictionChange(event) {
+    this.handleCategoryChange(event, 'nonFictionValue');
+  }
+
+  handleChildrensChange(event) {
+    this.handleCategoryChange(event, 'childrensValue');
+  }
+
+  // handleFictionChange(event) {
+  //   const displayNameObj = this.state.categories.find(o => o.list_name_encoded === event.target.value);
+  //   const displayName = displayNameObj.display_name;
+  //   this.setState({
+  //     categoryToShow: displayName
+  //   });
+  //   window.location.hash = '#list?category=' + event.target.value;
+
+  // }
+
+  // handleNonFictionChange(event) {
+  //   const displayNameObj = this.state.categories.find(o => o.list_name_encoded === event.target.value);
+  //   const displayName = displayNameObj.display_name;
+  //   this.setState({
+  //     categoryToShow: displayName
+  //   });
+  //   window.location.hash = '#list?category=' + event.target.value;
+  // }
+
+  // handleChildrensChange(event) {
+  //   const displayNameObj = this.state.categories.find(o => o.list_name_encoded === event.target.value);
+  //   const displayName = displayNameObj.display_name;
+  //   this.setState({
+  //     categoryToShow: displayName,
+  //     childrensValue: event.target.value
+  //   });
+  //   window.location.hash = '#list?category=' + event.target.value;
+  // }
 
   handleMonthlyListsChange(event) {
     const encodedObj = this.state.categories.find(o => o.display_name === event.target.value);
@@ -79,7 +102,9 @@ export default class Navbar extends React.Component {
   }
 
   searchClick(event) {
-    this.setState({ searchIsClicked: !this.state.searchIsClicked });
+    this.setState(prevState => ({
+      searchIsClicked: !prevState.searchIsClicked
+    }));
   }
 
   searchInput(event) {
@@ -163,6 +188,78 @@ export default class Navbar extends React.Component {
     );
   }
 }
+
+// import React, { useState, useEffect } from 'react';
+
+// function Navbar(props) {
+//   const [categories, setCategories] = useState([]);
+//   const [categoryToShow, setCategoryToShow] = useState('The New York Times Best Sellers');
+//   const [userInputValue, setUserInputValue] = useState('');
+//   const [searchIsClicked, setSearchIsClicked] = useState(false);
+
+//   useEffect(() => {
+//     const url = `https://api.nytimes.com/svc/books/v3/lists/names.json?api-key=${process.env.BOOKS_API_KEY}`;
+//     fetch(url)
+//       .then(response => response.json())
+//       .then(data => {
+//         setCategories(data.results);
+//         const category = props.route.params.get('category');
+//         if (category) {
+//           const displayNameObj = data.results.find(o => o.list_name_encoded === category);
+//           setCategoryToShow(displayNameObj.display_name);
+//         }
+//       })
+//       .catch(error => {
+//         console.error('Error:', error);
+//       });
+//   }, [props.route.params]);
+
+//   function handleCategoryChange(value) {
+//     const displayNameObj = categories.find(o => o.list_name_encoded === value);
+//     const displayName = displayNameObj.display_name;
+//     setCategoryToShow(displayName);
+//     window.location.hash = `#list?category=${value}`;
+//   }
+
+//   function handleSearchClick() {
+//     setSearchIsClicked(prevState => !prevState);
+//   }
+
+//   function handleSearchInput(event) {
+//     setUserInputValue(event.target.value);
+//   }
+
+//   function handleHashChange(event) {
+//     event.preventDefault();
+//     window.location.hash = `#search?txt=${userInputValue}`;
+//     setUserInputValue('');
+//     setSearchIsClicked(false);
+//   }
+
+//   const classToShowInput = searchIsClicked ? 'show' : 'hidden';
+
+//   return (
+//     <>
+//       <div className='header position-sticky'>
+//         <a href="#" className='header-lover-h2' ><h2>BOOK<span className='header-lover'>LOVER</span></h2></a>
+//         {props.user !== null && <a className='dropdown my-books' href='#my-books'>My Books</a>}
+//         <div className="box">
+//           <form className="search flex" onSubmit={handleHashChange}>
+//             <input placeholder="Search" type="text" className={`input ${classToShowInput}`} value={userInputValue} onChange={handleSearchInput} required />
+//             <button className="search-submit" type="submit"><i className="fa fa-search"></i></button>
+//             <button className="search-btn" type="button" onClick={handleSearchClick}><i className="fa fa-search"></i></button>
+//           </form>
+//           <select value={categoryToShow} onChange={event => handleCategoryChange(event.target.value)}>
+//             {categories.map(category => (
+//               <option key={category.list_name_encoded} value={category.list_name_encoded}>{category.display_name}</option>
+//             ))}
+//           </select>
+//       </div>
+//     </div>
+// </>
+//   );
+// }
+// export default Navbar;
 
 function MenuItems(props) {
   if (!props.categories) return;
