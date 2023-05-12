@@ -43,13 +43,19 @@ export default class MyBooks extends React.Component {
 MyBooks.contextType = AppContext;
 
 function MyBook(props) {
-  const { title, authors, imageLink, shortDescription, bookId, description, weeks } = props.book;
-  let cutDescription;
-  if (shortDescription === '') {
-    cutDescription = description.split(' ', 24).join().replaceAll(',', ' ');
-  } else {
-    cutDescription = shortDescription;
-  }
+  const {
+    title, authors, imageLink,
+    // shortDescription,
+    bookId,
+    // description,
+    weeks
+  } = props.book;
+  // let cutDescription;
+  // if (shortDescription === '') {
+  //   cutDescription = description.split(' ', 24).join().replaceAll(',', ' ');
+  // } else {
+  //   cutDescription = shortDescription;
+  // }
   return (
     <a href={`#my-book-details?bookId=${bookId}`} className='flex margin-top a-book'>
       <li onClick={props.onClick} className='flex margin-top'>
@@ -60,7 +66,7 @@ function MyBook(props) {
           }
           <p className='title margin-top'>{title.toUpperCase()}</p>
           <p className='author margin-top'><span style={{ fontWeight: '100' }}>by </span>{authors}</p>
-          <p className='description margin-top'>{cutDescription}</p>
+          {/* <p className='description margin-top'>{cutDescription}</p> */}
         </div>
       </li>
     </a>
