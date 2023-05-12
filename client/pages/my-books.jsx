@@ -29,14 +29,13 @@ export default class MyBooks extends React.Component {
   render() {
     const { books } = this.state;
     return (
-            <div className='container'>
+          <div className='container'>
               <ul>
                 {
                   books.map(book => <MyBook key={book.bookId} book={book} />)
                 }
               </ul>
-             </div>
-
+           </div>
     );
   }
 }
