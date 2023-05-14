@@ -18,6 +18,7 @@ export default class MyBooks extends React.Component {
     };
     fetch('/api/saved-books/', req)
       .then(response => response.json())
+
       .then(data => {
         this.setState({ books: data });
       })
@@ -28,13 +29,21 @@ export default class MyBooks extends React.Component {
 
   render() {
     const { books } = this.state;
+    const { user } = this.context;
     return (
           <div className='container'>
+        <h3>Hi, {user.username}</h3>
+        {
+          books.length > 0
+            ? (
               <ul>
-                {
-                  books.map(book => <MyBook key={book.bookId} book={book} />)
-                }
+                {books.map(book => <MyBook key={book.bookId} book={book} />)}
               </ul>
+              )
+            : (
+              <p style={{ margin: '2rem 0' }}>Your saved books collection is currently empty.</p>
+              )
+        }
            </div>
     );
   }
