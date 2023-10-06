@@ -32,7 +32,7 @@ export default class MyBooks extends React.Component {
     const { user } = this.context;
     return (
           <div className='container'>
-        <h3>Hi, {user.username}</h3>
+        <h3>Welcome, {user.username}</h3>
         {
           books.length > 0
             ? (
