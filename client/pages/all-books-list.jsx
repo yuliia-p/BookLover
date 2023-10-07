@@ -34,10 +34,14 @@ export default class AllBooks extends React.Component {
     fetch(url, request)
       .then(response => response.json())
       .then(data => {
-        this.setState({
-          books: data.results.books,
-          isLoading: false
-        });
+        if (data && data.results.books) {
+          this.setState({
+            books: data.results.books,
+            isLoading: false
+          });
+        } else {
+          console.error('Invalid data structure:', data);
+        }
       })
       .catch(error => {
         console.error('Error:', error);
