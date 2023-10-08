@@ -18,9 +18,9 @@ export default class Home extends React.Component {
 
   componentDidMount() {
     this.loadBooks();
-    this.loadNonFictionBooks();
+    // this.loadNonFictionBooks();
     this.loadFictionBooks();
-    this.loadChildrensBooks();
+    // this.loadChildrensBooks();
   }
 
   componentDidUpdate(prevProps) {
@@ -42,10 +42,14 @@ export default class Home extends React.Component {
     fetch(url, request)
       .then(response => response.json())
       .then(data => {
-        this.setState({
-          books: data.results.books,
-          isLoading: false
-        });
+        if (data.results && data.results.books) {
+          this.setState({
+            books: data.results.books,
+            isLoading: false
+          });
+        } else {
+          console.error('Invalid data structure:', data);
+        }
       })
       .catch(error => {
         console.error('Error:', error);
@@ -78,53 +82,56 @@ export default class Home extends React.Component {
       });
   }
 
-  loadNonFictionBooks() {
-    this.setState({ isLoading: true });
-    const url = `https://api.nytimes.com/svc/books/v3/lists/current/combined-print-and-e-book-nonfiction.json?api-key=${process.env.BOOKS_API_KEY}`;
-    const request = {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json'
-      }
-    };
-    fetch(url, request)
-      .then(response => response.json())
-      .then(data => {
-        this.setState({
-          nonFictionBooks: data.results.books,
-          isLoading: false
-        });
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
-  }
+  // loadNonFictionBooks() {
+  //   this.setState({ isLoading: true });
+  //   const url = `https://api.nytimes.com/svc/books/v3/lists/current/combined-print-and-e-book-nonfiction.json?api-key=${process.env.BOOKS_API_KEY}`;
+  //   const request = {
+  //     method: 'GET',
+  //     headers: {
+  //       Accept: 'application/json'
+  //     }
+  //   };
+  //   fetch(url, request)
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       this.setState({
+  //         nonFictionBooks: data.results.books,
+  //         isLoading: false
+  //       });
+  //     })
+  //     .catch(error => {
+  //       console.error('Error:', error);
+  //     });
+  // }
 
-  loadChildrensBooks() {
-    this.setState({ isLoading: true });
-    const url = `https://api.nytimes.com/svc/books/v3/lists/current/childrens-middle-grade.json?api-key=${process.env.BOOKS_API_KEY}`;
-    const request = {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json'
-      }
-    };
-    fetch(url, request)
-      .then(response => response.json())
-      .then(data => {
-        this.setState({
-          childrensBooks: data.results.books,
-          isLoading: false
-        });
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
-  }
+  // loadChildrensBooks() {
+  //   this.setState({ isLoading: true });
+  //   const url = `https://api.nytimes.com/svc/books/v3/lists/current/childrens-middle-grade.json?api-key=${process.env.BOOKS_API_KEY}`;
+  //   const request = {
+  //     method: 'GET',
+  //     headers: {
+  //       Accept: 'application/json'
+  //     }
+  //   };
+  //   fetch(url, request)
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       this.setState({
+  //         childrensBooks: data.results.books,
+  //         isLoading: false
+  //       });
+  //     })
+  //     .catch(error => {
+  //       console.error('Error:', error);
+  //     });
+  // }
 
   render() {
     const {
-      books, isLoading, nonFictionBooks, fictionBooks, childrensBooks
+      books, isLoading,
+      // nonFictionBooks,
+      fictionBooks
+      // childrensBooks
     } = this.state;
     return (
       <>
@@ -143,7 +150,7 @@ export default class Home extends React.Component {
                 <BookListCarousel books={fictionBooks} />
               </BookCarousel>
             </div>
-            <a href='#list?category=combined-print-and-e-book-nonfiction' className='category-a'>
+            {/* <a href='#list?category=combined-print-and-e-book-nonfiction' className='category-a'>
               Combined Print &amp; E-Book Nonfiction<span><i className="fa fa-solid fa-angle-right"></i></span></a>
             <div style={{ maxWidth: 1200, marginLeft: 'auto', marginRight: 'auto' }}>
               <BookCarousel show={5}>
@@ -156,7 +163,7 @@ export default class Home extends React.Component {
               <BookCarousel show={5}>
                 <BookListCarousel books={childrensBooks} />
               </BookCarousel>
-            </div>
+            </div> */}
           </div>
         }
       </>
