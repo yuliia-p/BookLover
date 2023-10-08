@@ -54,7 +54,7 @@ export default class SignUpModal extends React.Component {
 
             <div className="button-holder">
               <button type="submit" className="auth-button" >Sign Up</button>
-              <p className='sing-up-text no-margin'>Already have an account?<a onClick={this.props.onSignIn} className='log-in-a' data-click="to-sing-in">Logn in</a></p>
+              <p className='sing-up-text no-margin'>Already have an account?<a onClick={this.props.onSignIn} className='log-in-a' data-click="to-sing-in">Log in</a></p>
             </div>
           </div>
         </form>
